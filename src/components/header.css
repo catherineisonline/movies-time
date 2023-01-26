@@ -1,0 +1,31 @@
+header {
+    padding: 1rem;
+}
+nav,
+header {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+    list-style: none;
+}
+
+.upcoming-movies {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.upcoming-movie {
+    display: flex;
+    object-fit: cover;
+    flex-direction: column;
+    /* gap: 1rem; */
+    /* align-items: center; */
+    list-style: none;
+    max-width: 8rem;
+}
