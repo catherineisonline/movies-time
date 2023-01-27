@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import { Carousel } from 'react-responsive-carousel'
 
-const Hero = ({ trendingMovies }) => {
+const Hero = ({ trendingMovies, getMovie }) => {
   return (
     <Carousel autoPlay="true" showArrows="true" infiniteLoop="true">
       {trendingMovies.map((movie) => (
@@ -16,10 +16,8 @@ const Hero = ({ trendingMovies }) => {
             <h3>
               {movie.title} <span> - {movie.release_date.slice(0, 4)}</span>
             </h3>
-            <section className="trending-movie-meta-title">
-              <p>{movie.overview}</p>
-            </section>
             <Link
+              onClick={() => getMovie(movie.id)}
               to={`/movies/${movie.title.toLowerCase().replace(/ /g, '-')}`}
             >
               Watch now

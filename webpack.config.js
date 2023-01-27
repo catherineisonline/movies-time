@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
-
+// import path from 'path'
+// const __dirname = path.dirname(new URL(import.meta.url).pathname)
 module.exports = {
   devtool: 'inline-cheap-module-source-map',
   entry: './index.js',
@@ -24,11 +25,11 @@ module.exports = {
     extensions: ['', '.js', '.jsx', '.json', '.css'],
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
-        include: path.join(_dirname, 'app'),
+        include: path.join(__dirname, 'app'),
       },
       {
         test: /\.css$/,
@@ -49,6 +50,13 @@ module.exports = {
         test: /\.js$/,
         enforce: 'pre',
         use: ['source-map-loader'],
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loader: 'file-loader',
+        options: {
+          name: 'src/assets/images/[name].[ext]',
+        },
       },
     ],
   },

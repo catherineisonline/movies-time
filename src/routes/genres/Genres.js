@@ -1,13 +1,24 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-const Genres = ({ genreListMovies, currentGenre, PaginatedItems }) => {
+import './genres.css'
+
+const Genres = ({
+  genreListMovies,
+  currentGenre,
+  PaginatedItems,
+  getMovie,
+}) => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+  }, [])
   return (
-    <section>
+    <main className="genres-route">
       <h2>{currentGenre}</h2>
-      <ul className="homepage-movies">
+      <ul className="genres-grid">
         {genreListMovies.map((movie) => (
           <li key={movie.id} className="homepage-movie">
             <Link
+              onClick={() => getMovie(movie.id)}
               to={`/movies/${movie.title.toLowerCase().replace(/ /g, '-')}`}
             >
               <img
@@ -25,7 +36,7 @@ const Genres = ({ genreListMovies, currentGenre, PaginatedItems }) => {
         ))}
       </ul>
       {PaginatedItems}
-    </section>
+    </main>
   )
 }
 

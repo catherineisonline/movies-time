@@ -1,14 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Upcoming = ({ upcomingMovies }) => {
+const Upcoming = ({ upcomingMovies, getMovie }) => {
   return (
-    <section>
+    <section className="upcoming-movies-section">
       <h3>Upcoming movies</h3>
       <ul className="upcoming-movies">
         {upcomingMovies.map((movie) => (
           <li key={movie.id} className="upcoming-movie">
             <Link
+              onClick={() => getMovie(movie.id)}
               to={`/movies/${movie.title.toLowerCase().replace(/ /g, '-')}`}
             >
               <img

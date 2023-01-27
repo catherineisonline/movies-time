@@ -1,0 +1,14 @@
+.pictures-route {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.pictures-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    background: linear-gradient(180deg, transparent, var(--lighter-blue) 5%, var(--dark-blue));
+    padding: 1rem;
+}

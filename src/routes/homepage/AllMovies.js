@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const AllMovies = ({ movieList, PaginatedItems, getMovie }) => {
   return (
-    <>
+    <section>
       <ul className="homepage-movies">
         {movieList.map((movie) => (
           <li key={movie.id} className="homepage-movie">
@@ -26,7 +26,7 @@ const AllMovies = ({ movieList, PaginatedItems, getMovie }) => {
         ))}
       </ul>
       {PaginatedItems}
-    </>
+    </section>
   )
 }
 

@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  BrowserRouter,
+} from 'react-router-dom'
 import React, { useState, useEffect } from 'react'
 import Homepage from './routes/homepage/Homepage.js'
 import About from './routes/about.js'
@@ -9,6 +14,8 @@ import SingleMovie from './routes/single-movie/SingleMovie.js'
 import Genres from './routes/genres/Genres.js'
 import ReactPaginate from 'react-paginate'
 import Hero from './routes/homepage/Hero.js'
+import Videos from './routes/videos/Videos.js'
+import Pictures from './routes/pictures/Pictures.js'
 
 const App = () => {
   const [movieList, setMovieList] = useState([])
@@ -19,6 +26,10 @@ const App = () => {
   const [genreListMovies, setGenreListMovies] = useState([])
   const [genreId, setGenreId] = useState(0)
   const [trendingMovies, setTrendingMovies] = useState([])
+  const [videos, setVideos] = useState({ id: [], size: 0 })
+  const [videosPreview, setVideosPreview] = useState({ id: [] })
+  const [pictures, setPictures] = useState({ id: [], size: 0 })
+  const [picturesPreview, setPicturesPreview] = useState({ id: [] })
   const [singleMovie, setSingleMovie] = useState({
     title: '',
     cover: '',
@@ -85,21 +96,60 @@ const App = () => {
           ...singleMovie,
           title: data.title,
           cover: data.poster_path,
-          budget: data.budget,
-          revenue: data.revenue,
+          budget: data.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
+          revenue: data.revenue
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
           overview: data.overview,
           tagline: data.tagline,
           release_year: data.release_date.slice(0, 4),
           release: data.release_date,
           imdb_id: data.imdb_id,
           votes: data.vote_count,
-          voteavg: data.vote_average,
+          voteavg: data.vote_average.toFixed(1),
           genres: [...data.genres],
           countries: [...data.production_countries],
           duration: data.runtime,
           original_lang: data.original_language.toUpperCase(),
+          status: data.status,
+          backdrop_path: data.backdrop_path,
+          // videos: data.
         })
-        console.log(data)
+        // console.log(data)
+      })
+
+    fetch(
+      `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=b71bcab3d07039b32d23c21d747e9d40&language=en-US`,
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        const splitVids = data.results.filter((key, index) => index <= 1)
+        setVideos({
+          ...videos,
+          id: [...data.results],
+          size: [...data.results].length,
+        })
+        setVideosPreview({
+          ...videos,
+          id: splitVids,
+        })
+      })
+
+    fetch(
+      `https://api.themoviedb.org/3/movie/${movieId}/images?api_key=b71bcab3d07039b32d23c21d747e9d40`,
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        const splitVids = data.backdrops.filter((key, index) => index <= 1)
+        setPictures({
+          ...pictures,
+          id: [...data.backdrops],
+          size: [...data.backdrops].length,
+        })
+        setPicturesPreview({
+          ...pictures,
+          id: splitVids,
+        })
       })
   }
 
@@ -111,11 +161,12 @@ const App = () => {
     getTrending()
   }, [genreId, currentPage])
   return (
-    <Router>
+    <BrowserRouter>
       <Header
         genreList={genreList}
         setGenreId={setGenreId}
         setCurrentGenre={setCurrentGenre}
+        getMovie={getMovie}
       />
       <Routes>
         <Route
@@ -136,7 +187,9 @@ const App = () => {
                   }
                 />
               }
-              hero={<Hero trendingMovies={trendingMovies} />}
+              hero={
+                <Hero trendingMovies={trendingMovies} getMovie={getMovie} />
+              }
             />
           }
         />
@@ -146,6 +199,7 @@ const App = () => {
             <Genres
               genreListMovies={genreListMovies}
               currentGenre={currentGenre}
+              getMovie={getMovie}
               PaginatedItems={
                 <PaginatedItems
                   setCurrentPage={setCurrentPage}
@@ -157,11 +211,27 @@ const App = () => {
         />
         <Route
           path={`/movies/:id`}
-          element={<SingleMovie singleMovie={singleMovie} />}
+          element={
+            <SingleMovie
+              singleMovie={singleMovie}
+              videosPreview={videosPreview}
+              videos={videos}
+              picturesPreview={picturesPreview}
+              pictures={pictures}
+            />
+          }
+        />
+        <Route
+          path={`/movies/:id/videos`}
+          element={<Videos videos={videos} />}
+        />
+        <Route
+          path={`/movies/:id/pictures`}
+          element={<Pictures pictures={pictures} />}
         />
         <Route path="/about" element={<About />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   )
 }
 

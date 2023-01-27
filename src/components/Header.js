@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import './header.css'
 import Upcoming from './Upcoming'
+import Icon from '../assets/images/icon.png'
 
-const Header = ({ genreList, setGenreId, setCurrentGenre }) => {
+const Header = ({ genreList, setGenreId, setCurrentGenre, getMovie }) => {
   const [upcomingMovies, setUpcomingMovies] = useState([])
   const getUpcoming = () => {
     fetch(
@@ -11,7 +12,6 @@ const Header = ({ genreList, setGenreId, setCurrentGenre }) => {
     )
       .then((response) => response.json())
       .then((data) => {
-        // console.log([...data.results])
         setUpcomingMovies([...data.results].slice(0, 6))
       })
   }
@@ -21,7 +21,10 @@ const Header = ({ genreList, setGenreId, setCurrentGenre }) => {
   return (
     <header>
       <h1>
-        <Link to="/">Movies Time</Link>
+        <Link to="/">
+          <img src={Icon} />
+          Movies Time
+        </Link>
       </h1>
       <nav>
         <ul>
@@ -46,7 +49,7 @@ const Header = ({ genreList, setGenreId, setCurrentGenre }) => {
           ))}
         </ul>
       </nav>
-      <Upcoming upcomingMovies={upcomingMovies} />
+      <Upcoming upcomingMovies={upcomingMovies} getMovie={getMovie} />
     </header>
   )
 }
