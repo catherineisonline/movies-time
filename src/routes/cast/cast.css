@@ -1,0 +1,31 @@
+.cast-route {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.cast-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    background: linear-gradient(180deg, transparent, var(--lighter-blue) 5%, var(--dark-blue));
+    padding: 1rem;
+}
+
+.cast-grid-item {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    align-items: center;
+}
+.cast-grid-item-desc {
+    display: flex;
+    flex-direction: column;
+}
+.cast-grid-item img {
+    border-radius: 50%;
+    height: 7rem;
+    width: 7rem;
+    object-fit: cover;
+}

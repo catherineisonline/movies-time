@@ -12,9 +12,11 @@ const SingleMovie = ({
   pictures,
   keywords,
   similarMovies,
+  castPreview,
   cast,
 }) => {
   useEffect(() => {
+    // console.log(castPreview)
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [])
   return (
@@ -93,8 +95,8 @@ const SingleMovie = ({
         {keywords && keywords.keyword.length > 0 ? (
           <ul>
             <h3>Tags: </h3>
-            {keywords.keyword.map((keyword) => (
-              <li>{keyword.name}</li>
+            {keywords.keyword.map((keyword, index) => (
+              <li key={index}>{keyword.name}</li>
             ))}
           </ul>
         ) : null}
@@ -156,20 +158,33 @@ const SingleMovie = ({
                   src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
                 />
               </Link>
-              {/* <section className="homepage-movie-meta"> */}
               <h5>{movie.title}</h5>
-              {/* </section> */}
             </li>
           ))}
         </ul>
       </section>
-      <section className="reviews-section">
-        <ul>
-          {cast.map((person) => (
-            <li>{person.name}</li>
-          ))}
-        </ul>
-      </section>
+      {cast.length > 0 ? (
+        <section className="cast-section">
+          <Link
+            to={`/cast/${singleMovie.title.toLowerCase().replace(/ /g, '-')}`}
+          >
+            See cast ({cast.length})<img src={ArrowRight} />
+          </Link>
+          <ul className="cast-preview-grid">
+            {castPreview.map((person, index) => (
+              <li key={index}>
+                <img
+                  key={index}
+                  className="cast-preview"
+                  src={`https://image.tmdb.org/t/p/original/${person.profile_path}`}
+                />
+                <p>{person.name}</p>
+                <em>{person.character}</em>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
     </section>
   )
 }

@@ -17,6 +17,8 @@ import Hero from './routes/homepage/Hero.js'
 import Videos from './routes/videos/Videos.js'
 import Pictures from './routes/pictures/Pictures.js'
 import HeaderTwo from './components/HeaderTwo.js'
+import Cast from './routes/cast/Cast.js'
+import SingleCast from './routes/single-cast/SingleCast.js'
 
 const App = () => {
   const [movieList, setMovieList] = useState([])
@@ -28,11 +30,12 @@ const App = () => {
   const [genreId, setGenreId] = useState(0)
   const [trendingMovies, setTrendingMovies] = useState([])
   const [similarMovies, setSimilarMovies] = useState([])
-  const [cast, setCast] = useState([])
   const [videos, setVideos] = useState({ id: [], size: 0 })
   const [videosPreview, setVideosPreview] = useState({ id: [] })
   const [pictures, setPictures] = useState({ id: [], size: 0 })
   const [picturesPreview, setPicturesPreview] = useState({ id: [] })
+  const [cast, setCast] = useState([])
+  const [castPreview, setCastPreview] = useState([])
   const [keywords, setKeywords] = useState({ keyword: [] })
   const [singleMovie, setSingleMovie] = useState({
     title: '',
@@ -159,7 +162,7 @@ const App = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
+        // console.log(data)
         setKeywords({ ...keywords, keyword: [...data.keywords] })
       })
     fetch(
@@ -167,7 +170,7 @@ const App = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
+        // console.log(data)
         setSimilarMovies([...data.results].slice(0, 6))
       })
 
@@ -176,8 +179,10 @@ const App = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
+        // console.log(data)
         setCast([...data.cast])
+        setCastPreview([...data.cast].slice(0, 4))
+        console.log([...data.cast].slice(0, 4))
       })
   }
 
@@ -248,9 +253,15 @@ const App = () => {
               pictures={pictures}
               keywords={keywords}
               similarMovies={similarMovies}
+              castPreview={castPreview}
               cast={cast}
             />
           }
+        />
+        <Route path={`/cast/:id`} element={<Cast cast={cast} />} />
+        <Route
+          path={`/actors/:id`}
+          element={<SingleCast cast={cast} singleMovie={singleMovie} />}
         />
         <Route
           path={`/movies/:id/videos`}
