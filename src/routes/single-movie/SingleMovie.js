@@ -156,12 +156,9 @@ const SingleMovie = ({
                   src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
                 />
               </Link>
-              <section className="homepage-movie-meta">
-                <h5>{movie.title}</h5>
-                <section className="homepage-movie-meta-title">
-                  <p>{movie.release_date.slice(0, 4)}</p>
-                </section>
-              </section>
+              {/* <section className="homepage-movie-meta"> */}
+              <h5>{movie.title}</h5>
+              {/* </section> */}
             </li>
           ))}
         </ul>

@@ -1,6 +1,8 @@
 import React from 'react'
 import './header.css'
 import { Link } from 'react-router-dom'
+import DarkWhite from '../assets/images/dark-theme-white.png'
+import LightWhite from '../assets/images/light-theme-white.png'
 
 const HeaderTwo = () => {
   return (
@@ -68,13 +70,11 @@ const HeaderTwo = () => {
       </section>
       <section className="theme-btns">
         <button>
-          <img
-            fill="#e4e4e4"
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACyUlEQVR4nO2au2vTURTHP/iISgW1PgZ1swURrPWJUAU79D8QBx111E1xk3ZUowWfzaarj0bR2lVHHWqxGl2UggiibaoVqm2kkQPfH/zI5L0JPUnJBwJZvuHce86599xzAk2aNPFmBdAN9AF5oAAUgTlgFpgE3gEPgV7gMLCcOmIPkAOmgHLgpwjcBHZ4LqATGK4wbATIAkeBDmCddr0FaAO6gNPyyveU7qvHAlYB/cBfGTENXAK2B/xGDzAu/QxwngWmHRiVAXPafdv1/yUDDADzQElhtZkF5kAqHCyRdwXq1wMvpP8EHMQBW8QvGZFXzIewUYs3/RCwBgfaU564AywN1K8GXkn/QOHlktijKU+ELgLpTP8UWIYT/amcCA0n45T0HwMPhZrfEyV9QhPb2Kq8smN6L44MazftiI0hJ/1tnMuOMvAzMiTadM/80InlRk4LuRypvyj9NZyr2CkZElJ2JCwBPksfk1s1oztVAMZwSPo3ONNXZZKfk97qKFceyRArxWO4L/1xnCnIkJ2R+rF6yA9jQoa0EscX6e1CdGVWhsQWd7+ltzqtoRcyUy8LmZAh9hBq6NAqLJZkz1d5/N6T/gQNfiGerZcL8YgMeR2p75LeQgzvorFYo6LRHmeuDNSojL+OM7vVRJuOvOG36WFlD7NNODOkXb1a5ePMvOtKR6r50Fll82EfzlzRrr5Xoy2Uk6kWaWwRWhNW6hgu650S02AblP6ZZ4Mu6Yh8kzF3I4wxT76UftCrZZqwXyeYGfM4Isw2pGo488xanBeTeOaDjugQLEeeSz+uCsA1zEZkTEm94ZByP6PO47z09n0LjgdAVoYko7ds4ECzx3v0lsbeK0+0u+VUL8u8dEx3T6u80KI5i/W8ztTLMLQSM/iW5uih4+lJ4Ib3eLqSjP4E0Ksdf6tns/UA/sgDY5paXZB3XO+VJk0WI/8AKhnz90p8KLcAAAAASUVORK5CYII="
-          ></img>
+          <img src={DarkWhite} />
           <span>dark</span>
         </button>
         <button>
+          <img src={LightWhite} />
           <span>light</span>
         </button>
       </section>

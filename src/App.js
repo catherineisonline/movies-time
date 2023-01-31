@@ -168,7 +168,7 @@ const App = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data)
-        setSimilarMovies([...data.results])
+        setSimilarMovies([...data.results].slice(0, 6))
       })
 
     fetch(

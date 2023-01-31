@@ -73,6 +73,7 @@ nav ul li a {
     display: flex;
     flex-direction: row;
     align-items: center;
+    gap: 15rem;
     justify-content: flex-end;
     width: 100%;
     height: 3rem;
@@ -132,18 +133,33 @@ nav ul li a {
 .nav-socials a {
     border-radius: 50%;
     background-color: var(--light-grey);
-    padding: 0.4rem;
+    border-radius: 25px;
+    padding: 10px;
 }
 
 .theme-btns {
     display: flex;
     flex-direction: row;
-    gap: 1rem;
+    gap: 5px;
+    background-color: var(--light-grey);
+    border-radius: 25px;
+    padding: 5px;
 }
 .theme-btns span {
     display: none;
 }
 .theme-btns button {
-    background-color: transparent;
     border: none;
+    border-radius: 50%;
+    background-color: transparent;
+    padding: 5px;
+    cursor: pointer;
+}
+.theme-btns button:first-child {
+    background-color: var(--orange);
+}
+
+.theme-btns img {
+    width: 1.3rem;
+    height: 1.3rem;
 }
