@@ -3,6 +3,7 @@ import './singleMovie.css'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import ArrowRight from '../../assets/images/arrow-right.png'
+import NoImage from '../../assets/images/no-image.png'
 
 const SingleMovie = ({
   singleMovie,
@@ -16,7 +17,6 @@ const SingleMovie = ({
   cast,
 }) => {
   useEffect(() => {
-    // console.log(castPreview)
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [])
   return (
@@ -173,11 +173,15 @@ const SingleMovie = ({
           <ul className="cast-preview-grid">
             {castPreview.map((person, index) => (
               <li key={index}>
-                <img
-                  key={index}
-                  className="cast-preview"
-                  src={`https://image.tmdb.org/t/p/original/${person.profile_path}`}
-                />
+                {person.profile_path ? (
+                  <img
+                    key={index}
+                    className="cast-preview"
+                    src={`https://image.tmdb.org/t/p/original/${person.profile_path}`}
+                  />
+                ) : (
+                  <img key={index} className="cast-preview" src={NoImage} />
+                )}
                 <p>{person.name}</p>
                 <em>{person.character}</em>
               </li>

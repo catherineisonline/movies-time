@@ -2,8 +2,10 @@ import React from 'react'
 import './cast.css'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import NoImage from '../../assets/images/no-image.png'
 
-const Cast = ({ cast, singleMovie }) => {
+const Cast = ({ cast }) => {
+  console.log(cast)
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [])
@@ -16,11 +18,15 @@ const Cast = ({ cast, singleMovie }) => {
             <Link
               to={`/actors/${person.name.toLowerCase().replace(/ /g, '-')}`}
             >
-              <img
-                key={index}
-                className="cast-preview"
-                src={`https://image.tmdb.org/t/p/original/${person.profile_path}`}
-              />
+              {person.profile_path ? (
+                <img
+                  key={index}
+                  className="cast-preview"
+                  src={`https://image.tmdb.org/t/p/original/${person.profile_path}`}
+                />
+              ) : (
+                <img key={index} className="cast-preview" src={NoImage} />
+              )}
             </Link>
             <section className="cast-grid-item-desc">
               <p>{person.name}</p>
