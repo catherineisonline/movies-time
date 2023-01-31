@@ -10,16 +10,22 @@ const SingleMovie = ({
   picturesPreview,
   videos,
   pictures,
+  keywords,
+  similarMovies,
+  cast,
 }) => {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [])
   return (
     <section className="single-movie">
-      <img
-        className="header-bg"
-        src={`https://image.tmdb.org/t/p/original/${singleMovie.backdrop_path}`}
-      />
+      {singleMovie.backdrop_path ? (
+        <img
+          className="header-bg"
+          src={`https://image.tmdb.org/t/p/original/${singleMovie.backdrop_path}`}
+        />
+      ) : null}
+
       <section className="single-movie-header">
         <img
           className="movie-cover"
@@ -42,13 +48,16 @@ const SingleMovie = ({
             <h3 className="votes">{singleMovie.voteavg}</h3>
             <p>({singleMovie.votes} votes)</p>
           </section>
-          <section>
-            <ul className="countries">
-              {singleMovie.countries.map((country) => (
-                <li key={country.name}>Production countries: {country.name}</li>
-              ))}
-            </ul>
-          </section>
+          {singleMovie && singleMovie.countries ? (
+            <section>
+              <h4>Production countries:</h4>
+              <ul className="countries">
+                {singleMovie.countries.map((country) => (
+                  <li key={country.name}>{country.name}</li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
         </section>
         <section className="additional-info">
           <h4>
@@ -77,48 +86,92 @@ const SingleMovie = ({
       </section>
 
       <section className="overview">
-        <h3>Overview</h3>
-        <p>{singleMovie.overview}</p>
-      </section>
-      <section className="videos">
-        <Link
-          to={`/movies/${singleMovie.title
-            .toLowerCase()
-            .replace(/ /g, '-')}/videos`}
-        >
-          Watch videos ({videos.size})<img src={ArrowRight} />
-        </Link>
-        <section className="videos-preview-grid">
-          {videosPreview.id.map((id) => (
-            <iframe
-              key={id.name}
-              className="video-frame"
-              src={`https://www.youtube.com/embed/${id.key}`}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              title={id.name}
-            />
-          ))}
+        <section>
+          <h3>Overview</h3>
+          <p>{singleMovie.overview}</p>
         </section>
+        {keywords && keywords.keyword.length > 0 ? (
+          <ul>
+            <h3>Tags: </h3>
+            {keywords.keyword.map((keyword) => (
+              <li>{keyword.name}</li>
+            ))}
+          </ul>
+        ) : null}
       </section>
-      <section className="pictures">
-        <Link
-          to={`/movies/${singleMovie.title
-            .toLowerCase()
-            .replace(/ /g, '-')}/pictures`}
-        >
-          See pictures ({pictures.size})<img src={ArrowRight} />
-        </Link>
-        <section className="pictures-preview-grid">
-          {picturesPreview.id.map((img, index) => (
-            <img
-              width={450}
-              key={index}
-              className="pictures-preview"
-              src={`https://image.tmdb.org/t/p/original/${img.file_path}`}
-            />
-          ))}
+      {videos.size && videos.size > 0 ? (
+        <section className="videos">
+          <Link
+            to={`/movies/${singleMovie.title
+              .toLowerCase()
+              .replace(/ /g, '-')}/videos`}
+          >
+            Watch videos ({videos.size})<img src={ArrowRight} />
+          </Link>
+          <section className="videos-preview-grid">
+            {videosPreview.id.map((id) => (
+              <iframe
+                key={id.name}
+                className="video-frame"
+                src={`https://www.youtube.com/embed/${id.key}`}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title={id.name}
+              />
+            ))}
+          </section>
         </section>
+      ) : null}
+      {pictures.size && pictures.size > 0 ? (
+        <section className="pictures">
+          <Link
+            to={`/movies/${singleMovie.title
+              .toLowerCase()
+              .replace(/ /g, '-')}/pictures`}
+          >
+            See pictures ({pictures.size})<img src={ArrowRight} />
+          </Link>
+          <section className="pictures-preview-grid">
+            {picturesPreview.id.map((img, index) => (
+              <img
+                width={450}
+                key={index}
+                className="pictures-preview"
+                src={`https://image.tmdb.org/t/p/original/${img.file_path}`}
+              />
+            ))}
+          </section>
+        </section>
+      ) : null}
+      <section className="similar-movies-section">
+        <h3>Similar movies</h3>
+        <ul className="similar-movies">
+          {similarMovies.map((movie) => (
+            <li key={movie.id} className="similar-movie">
+              <Link
+                onClick={() => getMovie(movie.id)}
+                to={`/movies/${movie.title.toLowerCase().replace(/ /g, '-')}`}
+              >
+                <img
+                  src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                />
+              </Link>
+              <section className="homepage-movie-meta">
+                <h5>{movie.title}</h5>
+                <section className="homepage-movie-meta-title">
+                  <p>{movie.release_date.slice(0, 4)}</p>
+                </section>
+              </section>
+            </li>
+          ))}
+        </ul>
+      </section>
+      <section className="reviews-section">
+        <ul>
+          {cast.map((person) => (
+            <li>{person.name}</li>
+          ))}
+        </ul>
       </section>
     </section>
   )

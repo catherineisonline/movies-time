@@ -1,7 +1,7 @@
 .all-movies {
     display: flex;
     flex-direction: column;
-    max-width: 1000px;
+    max-width: 1100px;
     width: 100%;
     margin: 0 auto;
     margin-top: 5rem;
@@ -21,7 +21,8 @@
 .homepage-movie {
     display: flex;
     flex-direction: column;
-    width: 13rem;
+    width: 15rem;
+    /* height: 28rem; */
     gap: 1rem;
 }
 .homepage-movie a {
@@ -44,10 +45,10 @@
 .homepage-movie-meta {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 3rem;
     overflow: hidden;
 }
-.homepage-movie-meta h3 {
+.homepage-movie-meta .movie-title {
     width: 30rem;
 }
 .homepage-movie-meta-title {
@@ -63,6 +64,7 @@
     height: 20rem;
     position: relative;
     z-index: 1;
+    margin-top: 2.5rem;
 }
 
 .movie-section::before {

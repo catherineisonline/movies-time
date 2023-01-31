@@ -23,7 +23,8 @@ const Header = ({ genreList, setGenreId, setCurrentGenre, getMovie }) => {
       <h1>
         <Link to="/">
           <img src={Icon} />
-          Movies Time
+          Movies <br />
+          Time
         </Link>
       </h1>
       <nav>

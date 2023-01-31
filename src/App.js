@@ -16,6 +16,7 @@ import ReactPaginate from 'react-paginate'
 import Hero from './routes/homepage/Hero.js'
 import Videos from './routes/videos/Videos.js'
 import Pictures from './routes/pictures/Pictures.js'
+import HeaderTwo from './components/HeaderTwo.js'
 
 const App = () => {
   const [movieList, setMovieList] = useState([])
@@ -26,10 +27,13 @@ const App = () => {
   const [genreListMovies, setGenreListMovies] = useState([])
   const [genreId, setGenreId] = useState(0)
   const [trendingMovies, setTrendingMovies] = useState([])
+  const [similarMovies, setSimilarMovies] = useState([])
+  const [cast, setCast] = useState([])
   const [videos, setVideos] = useState({ id: [], size: 0 })
   const [videosPreview, setVideosPreview] = useState({ id: [] })
   const [pictures, setPictures] = useState({ id: [], size: 0 })
   const [picturesPreview, setPicturesPreview] = useState({ id: [] })
+  const [keywords, setKeywords] = useState({ keyword: [] })
   const [singleMovie, setSingleMovie] = useState({
     title: '',
     cover: '',
@@ -113,9 +117,7 @@ const App = () => {
           original_lang: data.original_language.toUpperCase(),
           status: data.status,
           backdrop_path: data.backdrop_path,
-          // videos: data.
         })
-        // console.log(data)
       })
 
     fetch(
@@ -151,6 +153,32 @@ const App = () => {
           id: splitVids,
         })
       })
+
+    fetch(
+      `https://api.themoviedb.org/3/movie/${movieId}/keywords?api_key=b71bcab3d07039b32d23c21d747e9d40`,
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data)
+        setKeywords({ ...keywords, keyword: [...data.keywords] })
+      })
+    fetch(
+      `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=b71bcab3d07039b32d23c21d747e9d40&language=en-US&page=1`,
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data)
+        setSimilarMovies([...data.results])
+      })
+
+    fetch(
+      `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=b71bcab3d07039b32d23c21d747e9d40&language=en-US`,
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data)
+        setCast([...data.cast])
+      })
   }
 
   useEffect(() => {
@@ -168,6 +196,7 @@ const App = () => {
         setCurrentGenre={setCurrentGenre}
         getMovie={getMovie}
       />
+      <HeaderTwo />
       <Routes>
         <Route
           path="/"
@@ -177,7 +206,6 @@ const App = () => {
                 <AllMovies
                   movieList={movieList}
                   findByGenres={findByGenres}
-                  // setMovieId={setMovieId}
                   getMovie={getMovie}
                   PaginatedItems={
                     <PaginatedItems
@@ -218,6 +246,9 @@ const App = () => {
               videos={videos}
               picturesPreview={picturesPreview}
               pictures={pictures}
+              keywords={keywords}
+              similarMovies={similarMovies}
+              cast={cast}
             />
           }
         />

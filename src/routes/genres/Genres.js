@@ -26,10 +26,10 @@ const Genres = ({
               />
             </Link>
             <section className="homepage-movie-meta">
-              <h3>{movie.title}</h3>
+              <h3 className="movie-title">{movie.title}</h3>
               <section className="homepage-movie-meta-title">
                 <p>{movie.release_date.slice(0, 4)}</p>
-                <p className="avg-rating">{movie.vote_average}</p>
+                <h3 className="avg-rating">{movie.vote_average}</h3>
               </section>
             </section>
           </li>
