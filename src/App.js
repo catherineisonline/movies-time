@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom'
 import React, { useState, useEffect } from 'react'
 import Homepage from './routes/homepage/Homepage.js'
-import About from './routes/about.js'
+import About from './routes/about/About.js'
 import Header from './components/Header.js'
 import AllMovies from './routes/homepage/AllMovies.js'
 import './core-ui/index.css'

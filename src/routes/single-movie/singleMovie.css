@@ -126,7 +126,8 @@
 }
 .videos a,
 .pictures a,
-.cast-section a {
+.cast-section a,
+.similar-movies-section h3 {
     text-decoration: none;
     color: var(--white);
     letter-spacing: 1px;
@@ -136,6 +137,7 @@
     flex-direction: row;
     gap: 1rem;
     align-items: center;
+    font-size: 1rem;
 }
 .videos a img,
 .pictures a img,
@@ -177,7 +179,9 @@
 }
 
 .similar-movies li h5 {
-    width: 30rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .cast-preview-grid li {
