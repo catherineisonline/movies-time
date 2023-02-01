@@ -9,7 +9,7 @@
     "build": "webpack ."
   },
   "keywords": [],
-  "homepage": "https://movies-time.vercel.app/",
+  "homepage": "/",
   "author": "",
   "license": "ISC",
   "devDependencies": {
