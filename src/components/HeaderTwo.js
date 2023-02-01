@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './header.css'
 import { Link } from 'react-router-dom'
 import DarkWhite from '../assets/images/dark-theme-white.png'
@@ -8,21 +8,36 @@ import GitLight from '../assets/images/github-dark.png'
 import MovieLight from '../assets/images/movie-light.png'
 import HamLight from '../assets/images/ham-light.png'
 import Icon from '../assets/images/icon.png'
-const HeaderTwo = ({ query, setQuery, searchResults, toggleMenu }) => {
+import CloseLight from '../assets/images/close-light.png'
+
+const HeaderTwo = ({
+  query,
+  setQuery,
+  searchResults,
+  toggleMenu,
+  disabled,
+}) => {
   searchResults.map((result, index) => {
     console.log(result.first_air_date)
     console.log(typeof result.release_date)
   })
+
   return (
     <nav className="navigation-two">
-      {/* <h1>
+      {disabled ? (
+        <img className="ham" src={HamLight} onClick={toggleMenu} />
+      ) : (
+        <img className="ham" src={CloseLight} onClick={toggleMenu} />
+      )}
+
+      {/* <section> */}
+      <h1>
         <Link to="/">
           <img src={Icon} />
-          Movies <br />
-          Time
+          Movies Time
         </Link>
-      </h1> */}
-      <img className="ham" src={HamLight} onClick={toggleMenu} />
+      </h1>
+      {/* </section> */}
       <section className="search">
         <input
           type="text"
@@ -43,6 +58,7 @@ const HeaderTwo = ({ query, setQuery, searchResults, toggleMenu }) => {
             <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z"></path>
           </svg>
         </button>
+
         {searchResults && searchResults.length > 0 ? (
           <ul className="search-results">
             {searchResults.map((result, index) => (

@@ -76,6 +76,7 @@ const App = () => {
     )
       .then((response) => response.json())
       .then((data) => {
+        console.log(data)
         setGenreList([...data.genres])
       })
   }
@@ -219,12 +220,14 @@ const App = () => {
         setCurrentGenre={setCurrentGenre}
         getMovie={getMovie}
         disabled={disabled}
+        setDisabled={setDisabled}
       />
       <HeaderTwo
         setQuery={setQuery}
         query={query}
         searchResults={searchResults}
         toggleMenu={toggleMenu}
+        disabled={disabled}
       />
       <Routes>
         <Route
