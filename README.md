@@ -15,6 +15,7 @@ I am not done with the project yet and it's not the final version!
 ## Project Goals
 The main goals of this project are to:
 
+Learn to manually create React without the CRA
 Learn how to handle different types of data received from an API.
 Practice working with React, CSS, and API's.
 Enhance my skills in creating dynamic and responsive user interfaces.
