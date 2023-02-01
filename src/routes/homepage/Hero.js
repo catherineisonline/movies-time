@@ -14,8 +14,10 @@ const Hero = ({ trendingMovies, getMovie }) => {
           />
           <section className="trending-link">
             <h3>
-              {movie.title} <span> - {movie.release_date.slice(0, 4)}</span>
+              {movie.title}
+              <br /> <span> {movie.release_date.slice(0, 4)}</span>
             </h3>
+            <p>{movie.overview}</p>
             <Link
               onClick={() => getMovie(movie.id)}
               to={`/movies/${movie.title.toLowerCase().replace(/ /g, '-')}`}

@@ -37,6 +37,8 @@ const App = () => {
   const [cast, setCast] = useState([])
   const [castPreview, setCastPreview] = useState([])
   const [keywords, setKeywords] = useState({ keyword: [] })
+  const [query, setQuery] = useState('')
+  const [searchResults, setSearchResults] = useState([])
   const [singleMovie, setSingleMovie] = useState({
     title: '',
     cover: '',
@@ -51,6 +53,12 @@ const App = () => {
     genres: [],
     countries: [],
   })
+
+  const [disabled, setDisabled] = useState(true)
+
+  const toggleMenu = () => {
+    disabled ? setDisabled(false) : setDisabled(true)
+  }
 
   const findMovies = (currentPage) => {
     fetch(
@@ -162,7 +170,6 @@ const App = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data)
         setKeywords({ ...keywords, keyword: [...data.keywords] })
       })
     fetch(
@@ -170,7 +177,6 @@ const App = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data)
         setSimilarMovies([...data.results].slice(0, 6))
       })
 
@@ -179,11 +185,22 @@ const App = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data)
         setCast([...data.cast])
         setCastPreview([...data.cast].slice(0, 4))
         console.log([...data.cast].slice(0, 4))
       })
+  }
+
+  const getSearch = (query) => {
+    if (query === '') setSearchResults([])
+    fetch(
+      `https://api.themoviedb.org/3/search/multi?api_key=b71bcab3d07039b32d23c21d747e9d40&language=en-US&query=${query}&page=1`,
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setSearchResults([...data.results].slice(0, 4))
+      })
+      .catch((err) => setSearchResults([]))
   }
 
   useEffect(() => {
@@ -192,7 +209,8 @@ const App = () => {
     findGenres()
     findByGenres(genreId)
     getTrending()
-  }, [genreId, currentPage])
+    getSearch(query)
+  }, [genreId, currentPage, query])
   return (
     <BrowserRouter>
       <Header
@@ -200,8 +218,14 @@ const App = () => {
         setGenreId={setGenreId}
         setCurrentGenre={setCurrentGenre}
         getMovie={getMovie}
+        disabled={disabled}
       />
-      <HeaderTwo />
+      <HeaderTwo
+        setQuery={setQuery}
+        query={query}
+        searchResults={searchResults}
+        toggleMenu={toggleMenu}
+      />
       <Routes>
         <Route
           path="/"
@@ -285,6 +309,7 @@ function PaginatedItems({ setCurrentPage, pageAmount }) {
   return (
     <>
       <ReactPaginate
+        className="movies-pagination"
         breakLabel="..."
         nextLabel="next >"
         onPageChange={(e) => {

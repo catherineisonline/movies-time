@@ -16,8 +16,8 @@
     border: 1px solid var(--orange);
     color: var(--orange);
     border-radius: 50%;
-    width: 2.9rem;
-    height: 2.8rem;
+    width: 2.5rem;
+    height: 2.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;

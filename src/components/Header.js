@@ -2,9 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import './header.css'
 import Upcoming from './Upcoming'
-import Icon from '../assets/images/icon.png'
 
-const Header = ({ genreList, setGenreId, setCurrentGenre, getMovie }) => {
+const Header = ({
+  genreList,
+  setGenreId,
+  setCurrentGenre,
+  getMovie,
+  disabled,
+}) => {
   const [upcomingMovies, setUpcomingMovies] = useState([])
   const getUpcoming = () => {
     fetch(
@@ -19,39 +24,36 @@ const Header = ({ genreList, setGenreId, setCurrentGenre, getMovie }) => {
     getUpcoming()
   }, [])
   return (
-    <header>
-      <h1>
-        <Link to="/">
-          <img src={Icon} />
-          Movies <br />
-          Time
-        </Link>
-      </h1>
-      <nav>
-        <ul>
-          <li>
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li>
-            <NavLink to="about">About</NavLink>
-          </li>
-          {genreList.map((genre) => (
-            <li key={genre.id}>
-              <NavLink
-                onClick={() => {
-                  setGenreId(genre.id)
-                  setCurrentGenre(genre.name)
-                }}
-                to={`/genres/${genre.name.toLowerCase()}`}
-              >
-                {genre.name}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-      </nav>
-      <Upcoming upcomingMovies={upcomingMovies} getMovie={getMovie} />
-    </header>
+    <>
+      {!disabled ? (
+        <header className="sidebar">
+          <nav>
+            <ul>
+              <li>
+                <NavLink to="/">Home</NavLink>
+              </li>
+              <li>
+                <NavLink to="about">About</NavLink>
+              </li>
+              {genreList.map((genre) => (
+                <li key={genre.id}>
+                  <NavLink
+                    onClick={() => {
+                      setGenreId(genre.id)
+                      setCurrentGenre(genre.name)
+                    }}
+                    to={`/genres/${genre.name.toLowerCase()}`}
+                  >
+                    {genre.name}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <Upcoming upcomingMovies={upcomingMovies} getMovie={getMovie} />
+        </header>
+      ) : null}
+    </>
   )
 }
 
