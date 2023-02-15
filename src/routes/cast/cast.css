@@ -33,6 +33,5 @@
     border-radius: 50%;
     height: 5rem;
     width: 100%;
-    /* width: 5rem; */
     object-fit: cover;
 }

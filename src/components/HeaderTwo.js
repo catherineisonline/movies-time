@@ -1,12 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './header.css'
 import { Link } from 'react-router-dom'
 import DarkWhite from '../assets/images/dark-theme-white.png'
 import LightWhite from '../assets/images/light-theme-white.png'
-// import WebIcon from '../assets/images/website-icon-dark.png'
-// import GitLight from '../assets/images/github-dark.png'
-// import MovieLight from '../assets/images/movie-light.png'
-// import Icon from '../assets/images/icon.png'
 import HamLight from '../assets/images/ham-light.png'
 
 import CloseLight from '../assets/images/close-light.png'

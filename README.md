@@ -28,6 +28,9 @@ Clone or download the repository.
 Run npm install to install the necessary dependencies.
 Run npm start to start the development server.
 
+## Dependencies
+- [Framer Motion](https://www.framer.com/motion/)
+
 ##  License
 This project is open source and available under [the MIT License](https://opensource.org/licenses/MIT).
 

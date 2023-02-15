@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import {  NavLink } from 'react-router-dom'
 import './header.css'
 import Upcoming from './Upcoming'
 import ChevronLight from '../assets/images/chevron-light.png'
 import WebIcon from '../assets/images/website-icon-dark.png'
 import GitLight from '../assets/images/github-dark.png'
 import MovieLight from '../assets/images/movie-light.png'
-import Icon from '../assets/images/icon.png'
 import { motion } from "framer-motion"
 
 
@@ -46,7 +45,6 @@ const Header = ({
       transition={{ duration: 1}}
       className="sidebar"
     >
-        {/* <header className="sidebar"> */}
           <nav>
             <ul className="sidebar-menu">
               <li>

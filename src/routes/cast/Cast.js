@@ -4,8 +4,9 @@ import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import NoImage from '../../assets/images/no-image.png'
 import { motion } from 'framer-motion'
+
+
 const Cast = ({ cast }) => {
-  console.log(cast)
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [])
