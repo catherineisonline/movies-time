@@ -3,7 +3,7 @@ import './cast.css'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import NoImage from '../../assets/images/no-image.png'
-
+import { motion } from 'framer-motion'
 const Cast = ({ cast }) => {
   console.log(cast)
   useEffect(() => {
@@ -14,25 +14,27 @@ const Cast = ({ cast }) => {
       <h2>Cast</h2>
       <section className="cast-grid">
         {cast.map((person, index) => (
-          <section className="cast-grid-item" key={index}>
+          <motion.div  whileHover={{ scale: 1.1 }}  key={index}>
             <Link
+            className="cast-grid-item"
               to={`/actors/${person.name.toLowerCase().replace(/ /g, '-')}`}
             >
               {person.profile_path ? (
                 <img
                   key={index}
-                  className="cast-preview"
+                 
                   src={`https://image.tmdb.org/t/p/original/${person.profile_path}`}
                 />
               ) : (
-                <img key={index} className="cast-preview" src={NoImage} />
+                <img key={index} src={NoImage} />
               )}
-            </Link>
+          
             <section className="cast-grid-item-desc">
               <p>{person.name}</p>
               <em>{person.character}</em>
             </section>
-          </section>
+            </Link>
+          </motion.div>
         ))}
       </section>
     </main>

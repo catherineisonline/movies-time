@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './genres.css'
+import { motion } from 'framer-motion'
 
 const Genres = ({
   genreListMovies,
@@ -16,6 +17,7 @@ const Genres = ({
       <h2>{currentGenre}</h2>
       <ul className="genres-grid">
         {genreListMovies.map((movie) => (
+          <motion.div  whileHover={{ scale: 1.1 }}>
           <li key={movie.id} className="homepage-movie">
             <Link
               onClick={() => getMovie(movie.id)}
@@ -33,6 +35,7 @@ const Genres = ({
               </section>
             </section>
           </li>
+          </motion.div>
         ))}
       </ul>
       {PaginatedItems}

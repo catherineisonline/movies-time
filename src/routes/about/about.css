@@ -1,0 +1,16 @@
+.about {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 4rem;
+    margin: 0 auto;
+    max-width: 1000px;
+}
+.about h2 {
+    font-size: 3rem;
+}
+
+.about p {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}

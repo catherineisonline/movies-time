@@ -1,8 +1,9 @@
 import React from 'react'
+import './about.css'
 
 const About = () => {
   return (
-    <section>
+    <section className='about'>
       <h2>About us</h2>
       <p>
         Welcome to Movie Time, founded in 2023 with the goal of providing
