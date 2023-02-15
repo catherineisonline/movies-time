@@ -154,9 +154,15 @@ const SingleMovie = ({
                 onClick={() => getMovie(movie.id)}
                 to={`/movies/${movie.title.toLowerCase().replace(/ /g, '-')}`}
               >
-                <img
+                
+
+{movie.poster_path ? (
+  <img
                   src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
                 />
+                ) : (
+                  <img  src={NoImage} />
+                )}
               </Link>
               <h5>{movie.title}</h5>
             </li>

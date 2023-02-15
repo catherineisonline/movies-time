@@ -7,8 +7,8 @@ const AllMovies = ({ movieList, PaginatedItems, getMovie }) => {
     <section>
       <ul className="homepage-movies">
         {movieList.map((movie) => (
-          <motion.div  whileHover={{ scale: 1.1 }}>
-          <li key={movie.id} className="homepage-movie">
+          <motion.div  whileHover={{ scale: 1.1 }} key={movie.id}>
+          <li  className="homepage-movie">
             <Link
               onClick={() => getMovie(movie.id)}
               to={`/movies/${movie.title.toLowerCase().replace(/ /g, '-')}`}
