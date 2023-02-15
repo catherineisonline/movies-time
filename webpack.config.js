@@ -13,13 +13,19 @@ module.exports = {
 
   target: 'web',
   devServer: {
+    client: {
+      logging: 'none'
+    },
     port: '3000',
     static: {
       directory: path.join(__dirname, 'public'),
     },
+    
     open: true,
     hot: true,
     liveReload: true,
+    
+    
   },
   resolve: {
     extensions: ['', '.js', '.jsx', '.json', '.css'],

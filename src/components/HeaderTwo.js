@@ -3,11 +3,12 @@ import './header.css'
 import { Link } from 'react-router-dom'
 import DarkWhite from '../assets/images/dark-theme-white.png'
 import LightWhite from '../assets/images/light-theme-white.png'
-import WebIcon from '../assets/images/website-icon-dark.png'
-import GitLight from '../assets/images/github-dark.png'
-import MovieLight from '../assets/images/movie-light.png'
+// import WebIcon from '../assets/images/website-icon-dark.png'
+// import GitLight from '../assets/images/github-dark.png'
+// import MovieLight from '../assets/images/movie-light.png'
+// import Icon from '../assets/images/icon.png'
 import HamLight from '../assets/images/ham-light.png'
-import Icon from '../assets/images/icon.png'
+
 import CloseLight from '../assets/images/close-light.png'
 
 const HeaderTwo = ({
@@ -29,15 +30,12 @@ const HeaderTwo = ({
       ) : (
         <img className="ham" src={CloseLight} onClick={toggleMenu} />
       )}
-
-      {/* <section> */}
       <h1>
         <Link to="/">
-          <img src={Icon} />
           Movies Time
         </Link>
       </h1>
-      {/* </section> */}
+      <section className='header-actions'>
       <section className="search">
         <input
           type="text"
@@ -95,18 +93,6 @@ const HeaderTwo = ({
           </ul>
         ) : null}
       </section>
-
-      <section className="nav-socials">
-        <Link to="https://ekaterine-mitagvaria.vercel.app/">
-          <img src={WebIcon} />
-        </Link>
-        <Link to="https://github.com/catherineisonline/movies-time">
-          <img src={GitLight} />
-        </Link>
-        <Link to="https://developers.themoviedb.org/4/getting-started/authorization">
-          <img src={MovieLight} />
-        </Link>
-      </section>
       <section className="theme-btns">
         <button>
           <img src={DarkWhite} />
@@ -117,6 +103,7 @@ const HeaderTwo = ({
           <span>light</span>
         </button>
       </section>
+</section>
     </nav>
   )
 }

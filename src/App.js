@@ -76,7 +76,7 @@ const App = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
+        // console.log(data)
         setGenreList([...data.genres])
       })
   }
