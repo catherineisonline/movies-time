@@ -102,8 +102,7 @@ const Header = ({
           <img src={MovieLight} />
         </a>
       </section>
-          <Upcoming upcomingMovies={upcomingMovies} getMovie={getMovie} />
-        {/* </header> */}
+          <Upcoming upcomingMovies={upcomingMovies} getMovie={getMovie} setDisabled={setDisabled}/>
         </motion.nav>
       ) : <motion.nav
         animate={{ opacity: 0, x: "-100%" }}
@@ -112,7 +111,6 @@ const Header = ({
       transition={{ duration: 1}}
       className="sidebar"
     >
-        {/* <header className="sidebar"> */}
           <nav>
             <ul className="sidebar-menu">
               <li>
@@ -168,8 +166,8 @@ const Header = ({
           <img src={MovieLight} />
         </a>
       </section>
-          <Upcoming upcomingMovies={upcomingMovies} getMovie={getMovie} />
-        {/* </header> */}
+   
+          <Upcoming upcomingMovies={upcomingMovies} getMovie={getMovie} setDisabled={setDisabled}/>
         </motion.nav>}
     </>
   )

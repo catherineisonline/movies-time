@@ -20,7 +20,7 @@ const Hero = ({ trendingMovies, getMovie }) => {
             <p>{movie.overview}</p>
             <Link
               onClick={() => getMovie(movie.id)}
-              to={`/movies/${movie.title.toLowerCase().replace(/ /g, '-')}`}
+              to={`/movies/${movie.title.toLowerCase().replace(/ |\/|#/g, '-')}`}
             >
               Watch now
             </Link>
