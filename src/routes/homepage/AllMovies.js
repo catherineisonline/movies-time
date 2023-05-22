@@ -14,7 +14,7 @@ const AllMovies = ({ movieList, PaginatedItems, getMovie }) => {
               to={`/movies/${movie.title.toLowerCase().replace(/ /g, '-')}`}
             >
               <img
-              alt=''
+               alt={`${movie.title}`}
                 src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
               />
             </Link>

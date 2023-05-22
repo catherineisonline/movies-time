@@ -7,10 +7,8 @@ main {
 .all-movies {
     display: flex;
     flex-direction: column;
-    /* max-width: 1100px; */
     width: 100%;
     margin: 0 auto;
-    /* margin-top: 5rem; */
     gap: 2rem;
     background: linear-gradient(180deg, transparent, var(--lighter-blue) 5%, var(--dark-blue));
     padding: 1rem;
@@ -23,9 +21,11 @@ main {
     grid-template-columns: repeat(4, 1fr);
     gap: 3rem;
 }
+
 .all-movies h2 {
     font-size: 3rem;
 }
+
 .homepage-movie {
     display: flex;
     flex-direction: column;
@@ -33,6 +33,7 @@ main {
     position: relative;
     gap: 1rem;
 }
+
 .homepage-movie a {
     display: flex;
     flex-direction: column;
@@ -41,6 +42,7 @@ main {
     width: 100%;
     position: relative;
 }
+
 .homepage-movie img {
     position: absolute;
     width: inherit;
@@ -54,17 +56,20 @@ main {
     display: flex;
     flex-direction: column;
 }
+
 .homepage-movie-meta .movie-title {
     width: inherit;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
 }
+
 .homepage-movie-meta-title {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
+
 .all-movies-rating {
     font-size: 1rem;
     border: 1px solid var(--orange);
@@ -100,14 +105,17 @@ main {
 .carousel.carousel-slider .control-arrow {
     display: none;
 }
+
 .carousel .control-dots .dot {
     width: 1rem !important;
     height: 1rem !important;
 }
+
 .slider-img {
     height: 100%;
     object-fit: cover;
 }
+
 .trending-link {
     display: flex;
     flex-direction: column;
@@ -119,13 +127,13 @@ main {
     color: white;
     text-align: left;
     z-index: 2;
-    /* padding: 1rem; */
     width: 75%;
 }
 
 .trending-link h3 {
     font-size: 3rem;
 }
+
 .trending-link a {
     background-color: var(--orange);
     border-radius: 10px;

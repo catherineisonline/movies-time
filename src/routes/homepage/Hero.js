@@ -9,6 +9,7 @@ const Hero = ({ trendingMovies, getMovie }) => {
       {trendingMovies.map((movie) => (
         <section key={movie.id} className="movie-section">
           <img
+            alt={`${movie.title}`}
             className="slider-img"
             src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
           />
