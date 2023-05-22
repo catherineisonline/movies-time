@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {  NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import './header.css'
 import Upcoming from './Upcoming'
 import ChevronLight from '../assets/images/chevron-light.png'
@@ -39,12 +39,12 @@ const Header = ({
     <>
       {!disabled ? (
         <motion.nav
-        initial={{ opacity: 0, x: "-100%" }}
-        animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: "-100%"  }}
-      transition={{ duration: 1}}
-      className="sidebar"
-    >
+          initial={{ opacity: 0, x: "-100%" }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: "-100%" }}
+          transition={{ duration: 0.5 }}
+          className="sidebar"
+        >
           <nav>
             <ul className="sidebar-menu">
               <li>
@@ -60,11 +60,11 @@ const Header = ({
               <li>
                 {enabled ? (
                   <button onClick={toggleGenres} className="enabled-chevron">
-                    Genres <img src={ChevronLight} />
+                    Genres <img alt="toggle off genres menu button" src={ChevronLight} />
                   </button>
                 ) : (
                   <button onClick={toggleGenres}>
-                    Genres <img src={ChevronLight} />
+                    Genres <img alt="toggle genres menu button" src={ChevronLight} />
                   </button>
                 )}
               </li>
@@ -90,83 +90,83 @@ const Header = ({
             ) : null}
           </nav>
           <section className="nav-socials">
-        <a target="_blank" href="https://ekaterine-mitagvaria.vercel.app/">
-          <img src={WebIcon} />
-        </a>
-        <a target="_blank"  href="https://github.com/catherineisonline/movies-time">
-          <img src={GitLight} />
-        </a>
-        <a target="_blank"  href="https://developers.themoviedb.org/4/getting-started/authorization">
-          <img src={MovieLight} />
-        </a>
-      </section>
-          <Upcoming upcomingMovies={upcomingMovies} getMovie={getMovie} setDisabled={setDisabled}/>
+            <a rel="noreferrer" target="_blank" href="https://ekaterine-mitagvaria.vercel.app/">
+              <img src={WebIcon} alt='Vercel icon' />
+            </a>
+            <a rel="noreferrer" target="_blank" href="https://github.com/catherineisonline/movies-time">
+              <img src={GitLight} alt='Github icon' />
+            </a>
+            <a rel="noreferrer" target="_blank" href="https://developers.themoviedb.org/4/getting-started/authorization">
+              <img src={MovieLight} alt='Movie API icon' />
+            </a>
+          </section>
+          <Upcoming upcomingMovies={upcomingMovies} getMovie={getMovie} setDisabled={setDisabled} />
         </motion.nav>
       ) : <motion.nav
         animate={{ opacity: 0, x: "-100%" }}
         initial={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: "-100%"  }}
-      transition={{ duration: 1}}
-      className="sidebar"
-    >
-          <nav>
-            <ul className="sidebar-menu">
-              <li>
-                <NavLink to="/" onClick={() => setDisabled(true)}>
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="about" onClick={() => setDisabled(true)}>
-                  About
-                </NavLink>
-              </li>
-              <li>
-                {enabled ? (
-                  <button onClick={toggleGenres} className="enabled-chevron">
-                    Genres <img src={ChevronLight} />
-                  </button>
-                ) : (
-                  <button onClick={toggleGenres}>
-                    Genres <img src={ChevronLight} />
-                  </button>
-                )}
-              </li>
+        exit={{ opacity: 0, x: "-100%" }}
+        transition={{ duration: 1 }}
+        className="sidebar"
+      >
+        <nav>
+          <ul className="sidebar-menu">
+            <li>
+              <NavLink to="/" onClick={() => setDisabled(true)}>
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="about" onClick={() => setDisabled(true)}>
+                About
+              </NavLink>
+            </li>
+            <li>
+              {enabled ? (
+                <button onClick={toggleGenres} className="enabled-chevron">
+                  Genres <img src={ChevronLight} alt="toggle off genres menu button" />
+                </button>
+              ) : (
+                <button onClick={toggleGenres}>
+                  Genres <img src={ChevronLight} alt="toggle genres menu button" />
+                </button>
+              )}
+            </li>
+          </ul>
+          {enabled ? (
+            <ul className="genres-menu">
+              {genreList.map((genre) => (
+                <li key={genre.id}>
+                  <NavLink
+                    onClick={() => {
+                      setGenreId(genre.id)
+                      setCurrentGenre(genre.name)
+                      setDisabled(true)
+                      setEnabled(false)
+                    }}
+                    to={`/genres/${genre.name.toLowerCase()}`}
+                  >
+                    {genre.name}
+                  </NavLink>
+                </li>
+              ))}
             </ul>
-            {enabled ? (
-              <ul className="genres-menu">
-                {genreList.map((genre) => (
-                  <li key={genre.id}>
-                    <NavLink
-                      onClick={() => {
-                        setGenreId(genre.id)
-                        setCurrentGenre(genre.name)
-                        setDisabled(true)
-                        setEnabled(false)
-                      }}
-                      to={`/genres/${genre.name.toLowerCase()}`}
-                    >
-                      {genre.name}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-          </nav>
-          <section className="nav-socials">
-        <a target="_blank" href="https://ekaterine-mitagvaria.vercel.app/">
-          <img src={WebIcon} />
-        </a>
-        <a target="_blank"  href="https://github.com/catherineisonline/movies-time">
-          <img src={GitLight} />
-        </a>
-        <a target="_blank"  href="https://developers.themoviedb.org/4/getting-started/authorization">
-          <img src={MovieLight} />
-        </a>
-      </section>
-   
-          <Upcoming upcomingMovies={upcomingMovies} getMovie={getMovie} setDisabled={setDisabled}/>
-        </motion.nav>}
+          ) : null}
+        </nav>
+        <section className="nav-socials">
+          <a rel="noreferrer" target="_blank" href="https://ekaterine-mitagvaria.vercel.app/">
+            <img src={WebIcon} alt='Vercel icon' />
+          </a>
+          <a rel="noreferrer" target="_blank" href="https://github.com/catherineisonline/movies-time">
+            <img src={GitLight} alt='Github icon' />
+          </a>
+          <a rel="noreferrer" target="_blank" href="https://developers.themoviedb.org/4/getting-started/authorization">
+            <img src={MovieLight} alt='Movie API icon' />
+          </a>
+        </section>
+
+        <Upcoming upcomingMovies={upcomingMovies} getMovie={getMovie} setDisabled={setDisabled} />
+      </motion.nav>}
     </>
   )
 }
