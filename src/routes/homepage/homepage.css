@@ -142,4 +142,14 @@ main {
     padding: 0.5rem 1rem;
     width: max-content;
     letter-spacing: 1px;
+    transition: all ease-in-out 0.2s;
+}
+
+@media (hover: hover) {
+    .trending-link a:hover {
+        transition: all ease-in-out 0.2s;
+    }
+    .trending-link a:hover {
+        opacity: 0.8;
+    }
 }

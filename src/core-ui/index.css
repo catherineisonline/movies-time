@@ -80,7 +80,6 @@ h6 {
 #root {
     display: flex;
     flex-direction: column;
-    /* gap: 6rem; */
     position: relative;
 }
 
@@ -109,6 +108,8 @@ h6 {
     display: flex;
     flex-direction: row;
     font-size: 1.1rem;
+    transition: all ease-in-out 0.2s;
+    color: white;
 }
 .movies-pagination li:first-child,
 .movies-pagination li:last-child {
@@ -119,4 +120,13 @@ h6 {
 .movies-pagination li.selected {
     background-color: var(--orange);
     border-radius: 50%;
+}
+
+@media (hover: hover) {
+    .movies-pagination li a:hover {
+        transition: all ease-in-out 0.2s;
+    }
+    .movies-pagination li a:hover {
+        color: var(--orange);
+    }
 }
