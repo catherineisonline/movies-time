@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import ArrowRight from '../../assets/images/arrow-right.png'
 import NoImage from '../../assets/images/no-image.png'
+import NoImageCover from '../../assets/images/no-image-two.png'
 
 const SingleMovie = ({
   singleMovie,
@@ -29,14 +30,23 @@ const SingleMovie = ({
           alt=''
           src={`https://image.tmdb.org/t/p/original/${singleMovie.backdrop_path ? singleMovie.backdrop_path : singleMovie.cover}`}
         />
-      ) : null}
+      ) : <img
+        className="header-bg"
+        alt=''
+        src={NoImageCover}
+      />
+      }
 
       <section className="single-movie-header">
-        <img
+        {singleMovie.backdrop_path ? <img
           alt=''
           className="movie-cover"
           src={`https://image.tmdb.org/t/p/original/${singleMovie.cover ? singleMovie.cover : singleMovie.backdrop_path}`}
-        />
+        /> : <img
+          className="header-bg"
+          alt=''
+          src={NoImageCover}
+        />}
         <section className="header-description">
           <section className="title-section">
             <h3 className="title">
@@ -105,51 +115,55 @@ const SingleMovie = ({
           </ul>
         ) : null}
       </section>
-      {videos.size && videos.size > 0 ? (
-        <section className="videos">
-          <Link
-            to={`/movies/${singleMovie.title
-              .toLowerCase()
-              .replace(/ /g, '-')}/videos`}
-          >
-            Watch videos ({videos.size})<img src={ArrowRight} alt='' />
-          </Link>
-          <section className="videos-preview-grid">
-            {videosPreview.id.map((id) => (
-              <iframe
-                key={id.name}
-                className="video-frame"
-                src={`https://www.youtube.com/embed/${id.key}`}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                title={id.name}
-              />
-            ))}
+      {
+        videos.size && videos.size > 0 ? (
+          <section className="videos">
+            <Link
+              to={`/movies/${singleMovie.title
+                .toLowerCase()
+                .replace(/ /g, '-')}/videos`}
+            >
+              Watch videos ({videos.size})<img src={ArrowRight} alt='' />
+            </Link>
+            <section className="videos-preview-grid">
+              {videosPreview.id.map((id) => (
+                <iframe
+                  key={id.name}
+                  className="video-frame"
+                  src={`https://www.youtube.com/embed/${id.key}`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  title={id.name}
+                />
+              ))}
+            </section>
           </section>
-        </section>
-      ) : null}
-      {pictures.size && pictures.size > 0 ? (
-        <section className="pictures">
-          <Link
-            to={`/movies/${singleMovie.title
-              .toLowerCase()
-              .replace(/ /g, '-')}/pictures`}
-          >
-            See pictures ({pictures.size})<img alt="" src={ArrowRight} />
-          </Link>
-          <section className="pictures-preview-grid">
-            {picturesPreview.id.map((img, index) => (
-              <img
-                alt=''
-                width={450}
-                key={index}
-                className="pictures-preview"
-                src={`https://image.tmdb.org/t/p/original/${img.file_path}`}
-              />
-            ))}
+        ) : null
+      }
+      {
+        pictures.size && pictures.size > 0 ? (
+          <section className="pictures">
+            <Link
+              to={`/movies/${singleMovie.title
+                .toLowerCase()
+                .replace(/ /g, '-')}/pictures`}
+            >
+              See pictures ({pictures.size})<img alt="" src={ArrowRight} />
+            </Link>
+            <section className="pictures-preview-grid">
+              {picturesPreview.id.map((img, index) => (
+                <img
+                  alt=''
+                  width={450}
+                  key={index}
+                  className="pictures-preview"
+                  src={`https://image.tmdb.org/t/p/original/${img.file_path}`}
+                />
+              ))}
+            </section>
           </section>
-        </section>
-      ) : null}
+        ) : null
+      }
       <section className="similar-movies-section">
         <h3>Similar movies</h3>
         <ul className="similar-movies">
@@ -173,33 +187,35 @@ const SingleMovie = ({
           ))}
         </ul>
       </section>
-      {cast.length > 0 ? (
-        <section className="cast-section">
-          <Link
-            to={`/cast/${singleMovie.title.toLowerCase().replace(/ /g, '-')}`}
-          >
-            See cast ({cast.length})<img src={ArrowRight} />
-          </Link>
-          <ul className="cast-preview-grid">
-            {castPreview.map((person, index) => (
-              <li key={index}>
-                {person.profile_path ? (
-                  <img
-                    key={index}
-                    className="cast-preview"
-                    src={`https://image.tmdb.org/t/p/original/${person.profile_path}`}
-                  />
-                ) : (
-                  <img key={index} className="cast-preview" src={NoImage} />
-                )}
-                <p>{person.name}</p>
-                <em>{person.character}</em>
-              </li>
-            ))}
-          </ul>
-        </section>
-      ) : null}
-    </section>
+      {
+        cast.length > 0 ? (
+          <section className="cast-section">
+            <Link
+              to={`/cast/${singleMovie.title.toLowerCase().replace(/ /g, '-')}`}
+            >
+              See cast ({cast.length})<img src={ArrowRight} />
+            </Link>
+            <ul className="cast-preview-grid">
+              {castPreview.map((person, index) => (
+                <li key={index}>
+                  {person.profile_path ? (
+                    <img
+                      key={index}
+                      className="cast-preview"
+                      src={`https://image.tmdb.org/t/p/original/${person.profile_path}`}
+                    />
+                  ) : (
+                    <img key={index} className="cast-preview" src={NoImage} />
+                  )}
+                  <p>{person.name}</p>
+                  <em>{person.character}</em>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null
+      }
+    </section >
   )
 }
 
