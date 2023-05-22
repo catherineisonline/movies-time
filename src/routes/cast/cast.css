@@ -1,0 +1,37 @@
+.cast-route {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+    background: linear-gradient(180deg, transparent, var(--lighter-blue) 45%, var(--dark-blue));
+}
+
+.cast-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 2rem;
+    row-gap: 3rem;
+    max-width: 1300px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.cast-grid-item {
+    display: grid;
+    grid-template-columns: 5rem 1fr;
+    align-items: center;
+    text-decoration: none;
+    color: var(--white);
+    gap: 1rem;
+}
+.cast-grid-item-desc {
+    display: flex;
+    flex-direction: column;
+}
+.cast-grid-item img {
+    border-radius: 50%;
+    height: 5rem;
+    width: 100%;
+    object-fit: cover;
+}

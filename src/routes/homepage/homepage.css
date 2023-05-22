@@ -1,0 +1,137 @@
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.all-movies {
+    display: flex;
+    flex-direction: column;
+    /* max-width: 1100px; */
+    width: 100%;
+    margin: 0 auto;
+    /* margin-top: 5rem; */
+    gap: 2rem;
+    background: linear-gradient(180deg, transparent, var(--lighter-blue) 5%, var(--dark-blue));
+    padding: 1rem;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.homepage-movies {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+}
+.all-movies h2 {
+    font-size: 3rem;
+}
+.homepage-movie {
+    display: flex;
+    flex-direction: column;
+    width: 15rem;
+    position: relative;
+    gap: 1rem;
+}
+.homepage-movie a {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 20rem;
+    width: 100%;
+    position: relative;
+}
+.homepage-movie img {
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    top: 0;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.homepage-movie-meta {
+    display: flex;
+    flex-direction: column;
+}
+.homepage-movie-meta .movie-title {
+    width: inherit;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.homepage-movie-meta-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.all-movies-rating {
+    font-size: 1rem;
+    border: 1px solid var(--orange);
+    color: var(--white);
+    background-color: var(--orange);
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 400;
+    position: absolute;
+    bottom: 6rem;
+    right: -1.2rem;
+}
+
+/** Slider**/
+
+.movie-section {
+    width: 50%;
+    height: 33rem;
+    position: relative;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.551);
+    backdrop-filter: blur(2px);
+}
+
+.carousel .carousel-status,
+.carousel .thumbs,
+.carousel.carousel-slider .control-arrow {
+    display: none;
+}
+.carousel .control-dots .dot {
+    width: 1rem !important;
+    height: 1rem !important;
+}
+.slider-img {
+    height: 100%;
+    object-fit: cover;
+}
+.trending-link {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: max-content;
+    gap: 1.5rem;
+    top: 1rem;
+    right: -35rem;
+    color: white;
+    text-align: left;
+    z-index: 2;
+    /* padding: 1rem; */
+    width: 75%;
+}
+
+.trending-link h3 {
+    font-size: 3rem;
+}
+.trending-link a {
+    background-color: var(--orange);
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    width: max-content;
+    letter-spacing: 1px;
+}

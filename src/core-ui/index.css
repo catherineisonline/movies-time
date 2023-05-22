@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap");
+
+:root {
+    --dark-blue: #080b10;
+    --lighter-blue: #1b2936;
+    --blue: hsl(191, 49%, 32%);
+    --orange: #db5c07;
+    --light-grey: #414d59;
+    --whitesh: #e4e4e4;
+    --rubik-font: "Montserrat", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+html,
+body {
+    height: 100%;
+}
+body {
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    background-color: var(--dark-blue);
+    color: var(--whitesh);
+    font-family: var(--rubik-font);
+}
+body::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+img {
+    display: block;
+}
+
+ul,
+ol,
+li {
+    padding: 0;
+    margin: 0;
+}
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+#root,
+#__next {
+    isolation: isolate;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    /* gap: 6rem; */
+    position: relative;
+}
+
+.movies-pagination {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    width: max-content;
+    gap: 3rem;
+    padding: 2rem;
+    margin: 0 auto;
+    margin-top: 3rem;
+}
+.movies-pagination li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    width: 2.7rem;
+    height: 2.7rem;
+    cursor: pointer;
+    padding: 15px;
+}
+.movies-pagination li a {
+    display: flex;
+    flex-direction: row;
+    font-size: 1.1rem;
+}
+.movies-pagination li:first-child,
+.movies-pagination li:last-child {
+    display: flex;
+    flex-direction: row;
+    width: max-content;
+}
+.movies-pagination li.selected {
+    background-color: var(--orange);
+    border-radius: 50%;
+}

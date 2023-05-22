@@ -1,0 +1,32 @@
+.genres-route {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+}
+.genres-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    background: linear-gradient(180deg, transparent, var(--lighter-blue) 5%, var(--dark-blue));
+    padding: 1rem;
+}
+
+.avg-rating {
+    border: 1px solid var(--orange);
+    color: var(--orange);
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+.homepage-movie-meta-title {
+    font-weight: 400;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
