@@ -7,9 +7,9 @@ const Upcoming = ({ upcomingMovies, getMovie, setDisabled }) => {
       <h3>Upcoming movies</h3>
       <ul className="upcoming-movies">
         {upcomingMovies.map((movie) => (
-          <li key={movie.id} className="upcoming-movie"  onClick={() => setDisabled(true)} >
+          <li key={movie.id} className="upcoming-movie" onClick={() => setDisabled(true)} >
             <Link
-              onClick={() => { getMovie(movie.id); }} 
+              onClick={() => { getMovie(movie.id); }}
               to={`/movies/${movie.title.toLowerCase().replace(/ /g, '-')}`}
             >
               <img

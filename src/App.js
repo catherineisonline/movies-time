@@ -2,7 +2,7 @@ import {
   Routes,
   Route,
   BrowserRouter,
-  
+
 } from 'react-router-dom'
 import React, { useState, useEffect } from 'react'
 import Homepage from './routes/homepage/Homepage.js'
@@ -45,7 +45,6 @@ const App = () => {
     budget: '',
     overview: '',
     tagline: '',
-    release: '',
     release: '',
     imdb_id: '',
     votes: '',
@@ -189,7 +188,7 @@ const App = () => {
       .then((data) => {
         setCast([...data.cast])
         setCastPreview([...data.cast].slice(0, 4))
-        console.log([...data.cast].slice(0, 4))
+        // console.log([...data.cast].slice(0, 4))
       })
   }
 
@@ -200,7 +199,8 @@ const App = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        setSearchResults([...data.results].slice(0, 4))
+        setSearchResults([...data.results].slice(0, 4));
+        console.log([...data.results].slice(0, 4))
       })
       .catch((err) => setSearchResults([]))
   }
@@ -229,6 +229,9 @@ const App = () => {
         searchResults={searchResults}
         toggleMenu={toggleMenu}
         disabled={disabled}
+        getMovie={getMovie}
+        setSearchResults={setSearchResults}
+      // setQuery={setQuery}
       />
       <Routes>
         <Route
