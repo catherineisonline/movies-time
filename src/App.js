@@ -200,7 +200,7 @@ const App = () => {
       .then((response) => response.json())
       .then((data) => {
         setSearchResults([...data.results].slice(0, 4));
-        console.log([...data.results].slice(0, 4))
+        // console.log([...data.results].slice(0, 4))
       })
       .catch((err) => setSearchResults([]))
   }

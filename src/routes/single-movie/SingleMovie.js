@@ -19,6 +19,7 @@ const SingleMovie = ({
 }) => {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+    console.log(singleMovie)
   }, [])
   return (
     <section className="single-movie">
@@ -26,15 +27,15 @@ const SingleMovie = ({
         <img
           className="header-bg"
           alt=''
-          src={`https://image.tmdb.org/t/p/original/${singleMovie.backdrop_path}`}
+          src={`https://image.tmdb.org/t/p/original/${singleMovie.backdrop_path ? singleMovie.backdrop_path : singleMovie.cover}`}
         />
       ) : null}
 
       <section className="single-movie-header">
         <img
-           alt=''
+          alt=''
           className="movie-cover"
-          src={`https://image.tmdb.org/t/p/original/${singleMovie.cover}`}
+          src={`https://image.tmdb.org/t/p/original/${singleMovie.cover ? singleMovie.cover : singleMovie.backdrop_path}`}
         />
         <section className="header-description">
           <section className="title-section">
@@ -111,7 +112,7 @@ const SingleMovie = ({
               .toLowerCase()
               .replace(/ /g, '-')}/videos`}
           >
-            Watch videos ({videos.size})<img src={ArrowRight}    alt=''/>
+            Watch videos ({videos.size})<img src={ArrowRight} alt='' />
           </Link>
           <section className="videos-preview-grid">
             {videosPreview.id.map((id) => (
@@ -134,12 +135,12 @@ const SingleMovie = ({
               .toLowerCase()
               .replace(/ /g, '-')}/pictures`}
           >
-            See pictures ({pictures.size})<img src={ArrowRight} />
+            See pictures ({pictures.size})<img alt="" src={ArrowRight} />
           </Link>
           <section className="pictures-preview-grid">
             {picturesPreview.id.map((img, index) => (
               <img
-                 alt=''
+                alt=''
                 width={450}
                 key={index}
                 className="pictures-preview"
@@ -160,7 +161,7 @@ const SingleMovie = ({
               >
                 {movie.poster_path ? (
                   <img
-                     alt=''
+                    alt=''
                     src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
                   />
                 ) : (
