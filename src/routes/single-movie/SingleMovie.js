@@ -64,7 +64,7 @@ const SingleMovie = ({
             <h3 className="votes">{singleMovie.voteavg}</h3>
             <p>({singleMovie.votes} votes)</p>
           </section>
-          {singleMovie && singleMovie.countries ? (
+          {singleMovie && singleMovie.countries && singleMovie.countries.length > 0 ? (
             <section>
               <h4>Production countries:</h4>
               <ul className="countries">
@@ -77,35 +77,36 @@ const SingleMovie = ({
         </section>
         <section className="additional-info">
           <h4>
-            Status: <span>{singleMovie.status}</span>
+            Status: {singleMovie.status ? <span>{singleMovie.status}</span> : <span>N/A</span>}
           </h4>
           <h4>
-            Release date: <span> {singleMovie.release}</span>
-          </h4>
-
-          <h4>
-            Duration: <span>{singleMovie.duration}</span>
+            Release date:  {singleMovie.release ? <span>{singleMovie.release}</span> : <span>N/A</span>}
           </h4>
 
           <h4>
-            Budget: <span>${singleMovie.budget}</span>
+            Duration: {singleMovie.duration ? <span>{singleMovie.duration}</span> : <span>N/A</span>}
           </h4>
 
           <h4>
-            Revenue: <span>${singleMovie.revenue}</span>
+            Budget: {singleMovie.budget ? <span>${singleMovie.budget}</span> : <span>N/A</span>}
           </h4>
 
           <h4>
-            Language: <span>{singleMovie.original_lang}</span>
+            Revenue: {singleMovie.revenue ? <span>${singleMovie.revenue}</span> : <span>N/A</span>}
+          </h4>
+
+          <h4>
+            Language: {singleMovie.original_lang ? <span>{singleMovie.original_lang}</span> : <span>N/A</span>}
           </h4>
         </section>
       </section>
 
       <section className="overview">
-        <section>
+
+        {singleMovie.overview ? <section>
           <h3>Overview</h3>
           <p>{singleMovie.overview}</p>
-        </section>
+        </section> : <section>No review available</section>}
         {keywords && keywords.keyword.length > 0 ? (
           <ul>
             <h3>Tags: </h3>
