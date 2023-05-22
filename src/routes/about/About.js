@@ -15,8 +15,8 @@ const About = () => {
         new movies. You can check ratings, read detailed information about
         movies, and search for movies by title, genre or even by the release
         date. Our website offers a wide range of genres, including action,
-        adventure, comedy, drama, fantasy, horror, romance, and science fiction.
-        We understand that movie lovers have different preferences, that's why
+        adventure, comedy, drama, fantasy, horror, romance, and science fiction.    </p>
+        <p> We understand that movie lovers have different preferences, that's why
         we have dedicated sections for each genre, where you can find the latest
         releases, upcoming movies and even the classics. You can also find the
         top rated movies of all time, which are updated regularly to keep you
@@ -30,7 +30,8 @@ const About = () => {
         events. We know that our visitors are always looking for new and
         exciting content, that's why we have a section dedicated to movie
         reviews, where you can find reviews of the latest releases, as well as
-        the classics, written by our team of experienced movie critics. Our
+        the classics, written by our team of experienced movie critics.   </p>
+        <p>Our
         website is designed to be accessible and easy to use, and we are
         constantly working to improve and update the website to ensure that you
         have access to the most accurate and relevant information about the

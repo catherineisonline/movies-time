@@ -22,9 +22,9 @@ const HeaderTwo = ({
   return (
     <nav className="navigation-two">
       {disabled ? (
-        <img className="ham" src={HamLight} onClick={toggleMenu} />
+        <img alt='open menu button' className="ham" src={HamLight} onClick={toggleMenu} />
       ) : (
-        <img className="ham" src={CloseLight} onClick={toggleMenu} />
+        <img alt='close menu button' className="ham" src={CloseLight} onClick={toggleMenu} />
       )}
       <h1>
         <Link to="/">

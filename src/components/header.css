@@ -132,6 +132,7 @@ nav ul li button img {
     flex-direction: row;
     gap: 2rem;
     align-items: center;
+    position: relative;
 }
 .upcoming-movie-meta {
     display: flex;
@@ -142,21 +143,21 @@ nav ul li button img {
 .search-section {
     display: flex;
     flex-direction: row;
+    position: relative;
     height: 40.8px;
+    width: 20rem;
+}
+.search {
     position: relative;
 }
 
 .search input {
-    position: relative;
-    width: 20rem;
-    height: inherit;
+    width: inherit;
+    height: auto;
     background-color: var(--light-grey);
     border: 1px solid var(--light-grey);
     border-radius: 25px;
     padding: 1rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
 }
 .search input::placeholder,
 .search input {
@@ -169,15 +170,15 @@ nav ul li button img {
     align-items: center;
     background-color: transparent;
     position: absolute;
-    top: 5px;
-    right: 0;
+    top: 25%;
+    right: 10px;
     z-index: 3;
     cursor: pointer;
 }
 .search-btn svg {
     width: 1.3rem;
     max-width: 1.3rem;
-    height: 1.3rem;
+    height: auto;
 }
 
 .search-results {
@@ -188,11 +189,11 @@ nav ul li button img {
     background-color: var(--light-grey);
     padding: 1rem;
     border-radius: 10px;
-    margin-top: 10px;
+    margin-top: 2%;
     list-style: none;
     gap: 1.5rem;
-    position: relative;
-    z-index: 2;
+    position: absolute;
+    z-index: 999;
 }
 .search-results li a {
     display: flex;
