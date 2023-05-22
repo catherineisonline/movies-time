@@ -20,31 +20,30 @@ const SingleMovie = ({
 }) => {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-    console.log(singleMovie)
   }, [])
   return (
     <section className="single-movie">
       {singleMovie.backdrop_path ? (
         <img
           className="header-bg"
-          alt=''
+          alt='' aria-hidden="true"
           src={`https://image.tmdb.org/t/p/original/${singleMovie.backdrop_path ? singleMovie.backdrop_path : singleMovie.cover}`}
         />
       ) : <img
         className="header-bg"
-        alt=''
+        alt='' aria-hidden="true"
         src={NoImageCover}
       />
       }
 
       <section className="single-movie-header">
         {singleMovie.backdrop_path ? <img
-          alt=''
+          alt='' aria-hidden="true"
           className="movie-cover"
           src={`https://image.tmdb.org/t/p/original/${singleMovie.cover ? singleMovie.cover : singleMovie.backdrop_path}`}
         /> : <img
           className="header-bg"
-          alt=''
+          alt='' aria-hidden="true"
           src={NoImageCover}
         />}
         <section className="header-description">
@@ -102,11 +101,12 @@ const SingleMovie = ({
       </section>
 
       <section className="overview">
-
-        {singleMovie.overview ? <section>
-          <h3>Overview</h3>
-          <p>{singleMovie.overview}</p>
-        </section> : <section>No review available</section>}
+        {singleMovie.overview ?
+          <section>
+            <h3>Overview</h3>
+            <p>{singleMovie.overview}</p>
+          </section> :
+          <section>No review available</section>}
         {keywords && keywords.keyword.length > 0 ? (
           <ul>
             <h3>Tags: </h3>
@@ -116,56 +116,53 @@ const SingleMovie = ({
           </ul>
         ) : null}
       </section>
-      {
-        videos.size && videos.size > 0 ? (
-          <section className="videos">
-            <Link
-              to={`/movies/${singleMovie.title
-                .toLowerCase()
-                .replace(/ /g, '-')}/videos`}
-            >
-              Watch videos ({videos.size})<img src={ArrowRight} alt='' />
-            </Link>
-            <section className="videos-preview-grid">
-              {videosPreview.id.map((id) => (
-                <iframe
-                  key={id.name}
-                  className="video-frame"
-                  src={`https://www.youtube.com/embed/${id.key}`}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  title={id.name}
-                />
-              ))}
-            </section>
+      {videos.size && videos.size > 0 ? (
+        <section className="videos">
+          <Link
+            to={`/movies/${singleMovie.title
+              .toLowerCase()
+              .replace(/ /g, '-')}/videos`}>
+            Watch videos ({videos.size})<img src={ArrowRight} alt='' aria-hidden="true" />
+          </Link>
+          <section className="videos-preview-grid">
+            {videosPreview.id.map((id) => (
+              <iframe
+                key={id.name}
+                className="video-frame"
+                src={`https://www.youtube.com/embed/${id.key}`}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title={id.name}
+              />
+            ))}
           </section>
-        ) : null
+        </section>
+      ) : null
       }
-      {
-        pictures.size && pictures.size > 0 ? (
-          <section className="pictures">
-            <Link
-              to={`/movies/${singleMovie.title
-                .toLowerCase()
-                .replace(/ /g, '-')}/pictures`}
-            >
-              See pictures ({pictures.size})<img alt="" src={ArrowRight} />
-            </Link>
-            <section className="pictures-preview-grid">
-              {picturesPreview.id.map((img, index) => (
-                <img
-                  alt=''
-                  width={450}
-                  key={index}
-                  className="pictures-preview"
-                  src={`https://image.tmdb.org/t/p/original/${img.file_path}`}
-                />
-              ))}
-            </section>
+      {pictures.size && pictures.size > 0 ? (
+        <section className="pictures">
+          <Link
+            to={`/movies/${singleMovie.title
+              .toLowerCase()
+              .replace(/ /g, '-')}/pictures`}
+          >
+            See pictures ({pictures.size})<img alt='' aria-hidden="true" src={ArrowRight} />
+          </Link>
+          <section className="pictures-preview-grid">
+            {picturesPreview.id.map((img, index) => (
+              <img
+                alt=''
+                width={450}
+                key={index}
+                className="pictures-preview"
+                src={`https://image.tmdb.org/t/p/original/${img.file_path}`}
+              />
+            ))}
           </section>
-        ) : null
+        </section>
+      ) : null
       }
-      <section className="similar-movies-section">
+      {similarMovies && similarMovies.length > 0 ? <section className="similar-movies-section">
         <h3>Similar movies</h3>
         <ul className="similar-movies">
           {similarMovies.map((movie) => (
@@ -180,41 +177,42 @@ const SingleMovie = ({
                     src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
                   />
                 ) : (
-                  <img src={NoImage} />
+                  <img src={NoImage} alt='' aria-hidden="true" />
                 )}
               </Link>
               <h5>{movie.title}</h5>
             </li>
           ))}
         </ul>
-      </section>
-      {
-        cast.length > 0 ? (
-          <section className="cast-section">
-            <Link
-              to={`/cast/${singleMovie.title.toLowerCase().replace(/ /g, '-')}`}
-            >
-              See cast ({cast.length})<img src={ArrowRight} />
-            </Link>
-            <ul className="cast-preview-grid">
-              {castPreview.map((person, index) => (
-                <li key={index}>
-                  {person.profile_path ? (
-                    <img
-                      key={index}
-                      className="cast-preview"
-                      src={`https://image.tmdb.org/t/p/original/${person.profile_path}`}
-                    />
-                  ) : (
-                    <img key={index} className="cast-preview" src={NoImage} />
-                  )}
-                  <p>{person.name}</p>
-                  <em>{person.character}</em>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ) : null
+      </section> : null}
+
+      {cast.length > 0 ? (
+        <section className="cast-section">
+          <Link
+            to={`/cast/${singleMovie.title.toLowerCase().replace(/ /g, '-')}`}
+          >
+            See cast ({cast.length})<img src={ArrowRight} alt='' aria-hidden="true" />
+          </Link>
+          <ul className="cast-preview-grid">
+            {castPreview.map((person, index) => (
+              <li key={index}>
+                {person.profile_path ? (
+                  <img
+                    key={index}
+                    className="cast-preview"
+                    src={`https://image.tmdb.org/t/p/original/${person.profile_path}`}
+                    alt={`${person.name}`}
+                  />
+                ) : (
+                  <img key={index} className="cast-preview" src={NoImage} alt='' aria-hidden="true" />
+                )}
+                <p>{person.name}</p>
+                <em>{person.character}</em>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null
       }
     </section >
   )
