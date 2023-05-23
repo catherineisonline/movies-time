@@ -11,7 +11,7 @@ const Cast = ({ cast, getCastDetails }) => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [])
   return (
-    <main className="cast-route">
+    <main className="cast-route" >
       <h2>Cast</h2>
       <section className="cast-grid">
         {cast.map((person, index) => (

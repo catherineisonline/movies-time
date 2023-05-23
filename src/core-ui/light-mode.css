@@ -1,0 +1,73 @@
+.light,
+.light .navigation-two {
+    background-color: white;
+    color: black;
+}
+
+.light .movies-pagination li a {
+    color: black !important;
+}
+.light main {
+    color: var(--black);
+    background-color: transparent;
+}
+
+.light .all-movies {
+    background: transparent;
+}
+
+.light .search-section input {
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+}
+.light .search-section input::placeholder {
+    color: black;
+}
+
+.light .search-results,
+.light .single-movie,
+.light .single-movie-header,
+.light .additional-info {
+    color: black;
+    background-color: white;
+}
+
+.light .videos-grid,
+.light .pictures-grid,
+.light .genres-grid,
+.light .cast-route {
+    background: white;
+}
+
+.light .theme-btns {
+    color: black;
+    background-color: var(--white);
+    border: 1px solid black;
+}
+
+.light .ham {
+    content: url("../assets/images/ham-dark.png");
+}
+
+.light .ham.opened {
+    content: url("../assets/images/close-dark.png");
+}
+
+.light .sidebar {
+    background-color: rgba(255, 255, 255, 0.657);
+    backdrop-filter: blur(5px);
+    color: black;
+}
+.light .sidebar .active {
+    color: black;
+}
+
+.light .nav-socials a {
+    background-color: var(--orange);
+}
+
+.light .chevron img,
+.light .enabled-chevron img {
+    content: url("../assets/images/chevron-dark.png");
+}

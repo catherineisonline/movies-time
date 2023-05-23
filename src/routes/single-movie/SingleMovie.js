@@ -24,7 +24,7 @@ const SingleMovie = ({
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [])
   return (
-    <section className="single-movie">
+    <section className="single-movie" >
       {singleMovie.backdrop_path ? (
         <img
           className="header-bg"

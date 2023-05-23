@@ -16,6 +16,7 @@ const Header = ({
   getMovie,
   disabled,
   setDisabled,
+  theme
 }) => {
   const [upcomingMovies, setUpcomingMovies] = useState([])
 
@@ -45,7 +46,7 @@ const Header = ({
           transition={{ duration: 0.5 }}
           className="sidebar"
         >
-          <nav>
+          <nav >
             <ul className="sidebar-menu">
               <li>
                 <NavLink to="/" onClick={() => setDisabled(true)}>
@@ -59,11 +60,11 @@ const Header = ({
               </li>
               <li>
                 {enabled ? (
-                  <button onClick={toggleGenres} className="enabled-chevron">
+                  <button onClick={toggleGenres} className=" enabled-chevron">
                     Genres <img alt="toggle off genres menu button" src={ChevronLight} />
                   </button>
                 ) : (
-                  <button onClick={toggleGenres}>
+                  <button onClick={toggleGenres} className='chevron'>
                     Genres <img alt="toggle genres menu button" src={ChevronLight} />
                   </button>
                 )}
@@ -91,7 +92,7 @@ const Header = ({
           </nav>
           <section className="nav-socials">
             <a rel="noreferrer" target="_blank" href="https://ekaterine-mitagvaria.vercel.app/">
-              <img src={WebIcon} alt='Vercel icon' />
+              <img src={WebIcon} alt='Vercel icon' className='web-icon' />
             </a>
             <a rel="noreferrer" target="_blank" href="https://github.com/catherineisonline/movies-time">
               <img src={GitLight} alt='Github icon' />

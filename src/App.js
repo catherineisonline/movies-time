@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom'
 import React, { useState, useEffect } from 'react'
 import './core-ui/index.css'
+import './core-ui/light-mode.css'
 import Homepage from './routes/homepage/Homepage.js'
 import About from './routes/about/About.js'
 import Header from './components/Header.js'
@@ -21,6 +22,7 @@ import Cast from './routes/cast/Cast.js'
 import SingleCast from './routes/single-cast/SingleCast.js'
 
 const App = () => {
+  const [theme, setTheme] = useState('dark');
   const [movieList, setMovieList] = useState([])
   const [genreList, setGenreList] = useState([])
   const [currentGenre, setCurrentGenre] = useState('')
@@ -67,6 +69,18 @@ const App = () => {
   const toggleMenu = () => {
     disabled ? setDisabled(false) : setDisabled(true)
   }
+
+  const setThemeMode = () => {
+    if (theme === 'light') {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  };
+
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
 
   const findMovies = (currentPage) => {
     fetch(
@@ -272,6 +286,8 @@ const App = () => {
         getMovie={getMovie}
         disabled={disabled}
         setDisabled={setDisabled}
+        theme={theme}
+
       />
       <HeaderTwo
         setQuery={setQuery}
@@ -282,12 +298,15 @@ const App = () => {
         getMovie={getMovie}
         setSearchResults={setSearchResults}
         getCastDetails={getCastDetails}
+        theme={theme}
+        setThemeMode={setThemeMode}
       />
       <Routes>
         <Route
           path="/"
           element={
             <Homepage
+              theme={theme}
               allMovies={
                 <AllMovies
                   movieList={movieList}
@@ -314,6 +333,7 @@ const App = () => {
               genreListMovies={genreListMovies}
               currentGenre={currentGenre}
               getMovie={getMovie}
+              theme={theme}
               PaginatedItems={
                 <PaginatedItems
                   setCurrentPage={setCurrentPage}
@@ -338,23 +358,24 @@ const App = () => {
               cast={cast}
               getMovie={getMovie}
               getCastDetails={getCastDetails}
+              theme={theme}
             />
           }
         />
-        <Route path={`/cast/:id`} element={<Cast cast={cast} getCastDetails={getCastDetails} />} />
+        <Route path={`/cast/:id`} element={<Cast cast={cast} getCastDetails={getCastDetails} theme={theme} />} />
         <Route
           path={`/actors/:id`}
-          element={<SingleCast cast={cast} singleMovie={singleMovie} castDetails={castDetails} actedIn={actedIn} getMovie={getMovie} />}
+          element={<SingleCast cast={cast} singleMovie={singleMovie} castDetails={castDetails} actedIn={actedIn} getMovie={getMovie} theme={theme} />}
         />
         <Route
           path={`/movies/:id/videos`}
-          element={<Videos videos={videos} />}
+          element={<Videos videos={videos} theme={theme} />}
         />
         <Route
           path={`/movies/:id/pictures`}
-          element={<Pictures pictures={pictures} />}
+          element={<Pictures pictures={pictures} theme={theme} />}
         />
-        <Route path="/about" element={<About />} />
+        <Route path="/about" element={<About theme={theme} />} />
       </Routes>
     </BrowserRouter>
   )

@@ -15,16 +15,18 @@ const HeaderTwo = ({
   disabled,
   getMovie,
   setSearchResults,
-  getCastDetails
+  getCastDetails,
+  theme,
+  setThemeMode
 }) => {
 
 
   return (
-    <nav className="navigation-two">
+    <nav className={`navigation-two `}>
       {disabled ? (
         <img alt='open menu button' className="ham" src={HamLight} onClick={toggleMenu} />
       ) : (
-        <img alt='close menu button' className="ham" src={CloseLight} onClick={toggleMenu} />
+        <img alt='close menu button' className="ham opened" src={CloseLight} onClick={toggleMenu} />
       )}
       <h1>
         <Link to="/">
@@ -103,11 +105,11 @@ const HeaderTwo = ({
           ) : null}
         </section>
         <section className="theme-btns">
-          <button>
+          <button onClick={() => { if (theme === 'light') { setThemeMode() } }} className={theme === 'light' ? 'dark-mode-off' : 'dark-mode-on'}>
             <img src={DarkWhite} alt='toggle dark mode' />
             <span>dark</span>
           </button>
-          <button>
+          <button onClick={() => { if (theme === 'dark') { setThemeMode(); } }} className={theme === 'dark' ? 'light-mode-off' : 'light-mode-on'}>
             <img src={LightWhite} alt='toggle light mode' />
             <span>light</span>
           </button>

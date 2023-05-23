@@ -13,7 +13,7 @@ const Genres = ({
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [])
   return (
-    <main className="genres-route">
+    <main className="genres-route" >
       <h2>{currentGenre}</h2>
       <ul className="genres-grid">
         {genreListMovies.map((movie) => (

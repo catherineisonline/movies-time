@@ -7,7 +7,7 @@ const Pictures = ({ pictures }) => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [])
   return (
-    <main className="pictures-route">
+    <main className="pictures-route" >
       <h2>Pictures</h2>
       <section className="pictures-grid">
         {pictures.id.map((img, index) => (

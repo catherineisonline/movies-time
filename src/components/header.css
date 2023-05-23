@@ -244,12 +244,28 @@ nav ul li button img {
 .theme-btns button {
     border: none;
     border-radius: 50%;
-    background-color: transparent;
     padding: 5px;
     cursor: pointer;
+    transition: all ease-in-out 0.4s;
 }
-.theme-btns button:first-child {
-    background-color: var(--orange);
+
+.dark-mode-on {
+    background-color: var(--orange) !important;
+    transition: all ease-in-out 0.4s;
+}
+.dark-mode-off {
+    background-color: transparent;
+}
+.light-mode-on {
+    background-color: var(--orange) !important;
+    transition: all ease-in-out 0.4s;
+}
+.dark-mode-off img {
+    content: url("../assets//images/dark-theme-black.png");
+}
+
+.light-mode-off {
+    background-color: transparent;
 }
 
 .theme-btns img {

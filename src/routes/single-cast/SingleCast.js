@@ -11,7 +11,7 @@ const SingleCast = ({ castDetails, actedIn, getMovie }) => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [])
   return (
-    <section className='single-cast'>
+    <section className='single-cast' >
       <section className='single-cast-section'>
         {/* cast image */}
         {castDetails.profile_path ? <img alt={castDetails.name} src={`https://image.tmdb.org/t/p/original/${castDetails.profile_path}`} /> :

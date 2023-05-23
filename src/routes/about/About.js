@@ -1,9 +1,9 @@
 import React from 'react'
 import './about.css'
 
-const About = () => {
+const About = ({ theme }) => {
   return (
-    <section className='about'>
+    <section className={`about ${theme}`}>
       <h2>About us</h2>
       <p>
         Welcome to Movies Time, founded in 2023 with the goal of providing
