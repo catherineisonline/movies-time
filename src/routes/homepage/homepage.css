@@ -7,8 +7,6 @@ main {
 .all-movies {
     display: flex;
     flex-direction: column;
-    /* width: 100%; */
-    /* margin: 0 auto; */
     gap: 2rem;
     background: linear-gradient(180deg, transparent, var(--lighter-blue) 5%, var(--dark-blue));
     padding: 1rem;
@@ -16,17 +14,12 @@ main {
     border-radius: 5px;
 }
 
-/* .all-movies section {
-    width: inherit;
-} */
-
 .homepage-movies {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 3rem;
     justify-items: center;
     width: 100%;
-    /* max-width: 900px;     */
 }
 
 .all-movies h2 {

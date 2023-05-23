@@ -140,8 +140,6 @@ h6 {
 
 @media (max-width: 800px) {
     .movies-pagination {
-        /* gap: 1rem; */
         flex-wrap: wrap !important;
-        /* padding: 0; */
     }
 }
