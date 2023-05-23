@@ -35,6 +35,15 @@ const App = () => {
   const [pictures, setPictures] = useState({ id: [], size: 0 })
   const [picturesPreview, setPicturesPreview] = useState({ id: [] })
   const [cast, setCast] = useState([])
+  const [castDetails, setCastDetails] = useState({
+    name: '',
+    biography: '',
+    birthday: '',
+    known_for_department: '',
+    place_of_birth: '',
+    profile_path: '',
+  })
+  const [actedIn, setActedIn] = useState([])
   const [castPreview, setCastPreview] = useState([])
   const [keywords, setKeywords] = useState({ keyword: [] })
   const [query, setQuery] = useState('')
@@ -109,7 +118,7 @@ const App = () => {
       .then((response) => response.json())
       .then((data) => {
         setSingleMovie({
-          ...singleMovie,
+          ...data,
           title: data.title,
           cover: data.poster_path,
           budget: data.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
@@ -187,9 +196,41 @@ const App = () => {
       .then((response) => response.json())
       .then((data) => {
         setCast([...data.cast])
+
         setCastPreview([...data.cast].slice(0, 4))
+
         // console.log([...data.cast].slice(0, 4))
       })
+  }
+  const getCastDetails = (personId) => {
+    fetch(
+      `https://api.themoviedb.org/3/person/${personId}?api_key=b71bcab3d07039b32d23c21d747e9d40&language=en-US`,
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log(data)
+        setCastDetails({
+          ...data,
+          name: data.name,
+          biography: data.biography,
+          birthday: data.birthday,
+          known_for_department: data.known_for_department,
+          place_of_birth: data.place_of_birth,
+          profile_path: data.profile_path,
+        })
+      })
+      .catch((err) => setSearchResults([]))
+
+
+    fetch(
+      `https://api.themoviedb.org/3/person/${personId}/movie_credits?api_key=b71bcab3d07039b32d23c21d747e9d40&language=en-US`,
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log([...data.cast].slice(0, 19))
+        setActedIn([...data.cast].slice(0, 19))
+      })
+      .catch((err) => setSearchResults([]))
   }
 
   const getSearch = (query) => {
@@ -200,7 +241,6 @@ const App = () => {
       .then((response) => response.json())
       .then((data) => {
         setSearchResults([...data.results].slice(0, 4));
-        // console.log([...data.results].slice(0, 4))
       })
       .catch((err) => setSearchResults([]))
   }
@@ -212,6 +252,7 @@ const App = () => {
     findByGenres(genreId)
     getTrending()
     getSearch(query)
+
   }, [genreId, currentPage, query])
   return (
     <BrowserRouter>
@@ -231,7 +272,7 @@ const App = () => {
         disabled={disabled}
         getMovie={getMovie}
         setSearchResults={setSearchResults}
-      // setQuery={setQuery}
+        getCastDetails={getCastDetails}
       />
       <Routes>
         <Route
@@ -287,13 +328,14 @@ const App = () => {
               castPreview={castPreview}
               cast={cast}
               getMovie={getMovie}
+              getCastDetails={getCastDetails}
             />
           }
         />
-        <Route path={`/cast/:id`} element={<Cast cast={cast} />} />
+        <Route path={`/cast/:id`} element={<Cast cast={cast} getCastDetails={getCastDetails} />} />
         <Route
           path={`/actors/:id`}
-          element={<SingleCast cast={cast} singleMovie={singleMovie} />}
+          element={<SingleCast cast={cast} singleMovie={singleMovie} castDetails={castDetails} actedIn={actedIn} getMovie={getMovie} />}
         />
         <Route
           path={`/movies/:id/videos`}

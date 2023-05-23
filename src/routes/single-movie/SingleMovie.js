@@ -16,9 +16,11 @@ const SingleMovie = ({
   similarMovies,
   castPreview,
   cast,
-  getMovie
+  getMovie,
+  getCastDetails
 }) => {
   useEffect(() => {
+    // console.log({ similarMovies })
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [])
   return (
@@ -37,15 +39,17 @@ const SingleMovie = ({
       }
 
       <section className="single-movie-header">
-        {singleMovie.backdrop_path ? <img
-          alt='' aria-hidden="true"
-          className="movie-cover"
-          src={`https://image.tmdb.org/t/p/original/${singleMovie.cover ? singleMovie.cover : singleMovie.backdrop_path}`}
-        /> : <img
-          className="header-bg"
-          alt='' aria-hidden="true"
-          src={NoImageCover}
-        />}
+        {singleMovie.backdrop_path ?
+          <img
+            alt='' aria-hidden="true"
+            className="movie-cover"
+            src={`https://image.tmdb.org/t/p/original/${singleMovie.cover ? singleMovie.cover : singleMovie.backdrop_path}`}
+          /> :
+          <img
+            className="header-bg"
+            alt='' aria-hidden="true"
+            src={NoImageCover}
+          />}
         <section className="header-description">
           <section className="title-section">
             <h3 className="title">
@@ -83,7 +87,7 @@ const SingleMovie = ({
           </h4>
 
           <h4>
-            Duration: {singleMovie.duration ? <span>{singleMovie.duration}</span> : <span>N/A</span>}
+            Duration: {singleMovie.duration ? <span>{singleMovie.duration} mins</span> : <span>N/A</span>}
           </h4>
 
           <h4>
@@ -174,7 +178,7 @@ const SingleMovie = ({
                 {movie.poster_path ? (
                   <img
                     alt=''
-                    src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                    src={`https://image.tmdb.org/t/p/original/${movie.poster_path ? movie.poster_path : movie.backdrop_path}`}
                   />
                 ) : (
                   <img src={NoImage} alt='' aria-hidden="true" />
@@ -196,18 +200,23 @@ const SingleMovie = ({
           <ul className="cast-preview-grid">
             {castPreview.map((person, index) => (
               <li key={index}>
-                {person.profile_path ? (
-                  <img
-                    key={index}
-                    className="cast-preview"
-                    src={`https://image.tmdb.org/t/p/original/${person.profile_path}`}
-                    alt={`${person.name}`}
-                  />
-                ) : (
-                  <img key={index} className="cast-preview" src={NoImage} alt='' aria-hidden="true" />
-                )}
-                <p>{person.name}</p>
-                <em>{person.character}</em>
+                <Link
+                  onClick={() => getCastDetails(person.id)}
+                  to={`/actors/${person.name.toLowerCase().replace(/ /g, '-')}`}
+                >
+                  {person.profile_path ? (
+                    <img
+                      key={index}
+                      className="cast-preview"
+                      src={`https://image.tmdb.org/t/p/original/${person.profile_path}`}
+                      alt={`${person.name}`}
+                    />
+                  ) : (
+                    <img key={index} className="cast-preview" src={NoImage} alt='' aria-hidden="true" />
+                  )}
+                  <p>{person.name}</p>
+                  <em>{person.character}</em>
+                </Link>
               </li>
             ))}
           </ul>

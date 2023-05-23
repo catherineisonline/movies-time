@@ -15,6 +15,7 @@ const HeaderTwo = ({
   disabled,
   getMovie,
   setSearchResults,
+  getCastDetails
 }) => {
 
 
@@ -61,7 +62,7 @@ const HeaderTwo = ({
                 <li key={index}>
                   <Link onClick={() => {
                     if (result.media_type === 'movie') { getMovie(result.id); } if (result.media_type === 'person') {
-                      console.log(`it's a person`)
+                      getCastDetails(result.id)
                     } setSearchResults([]); setQuery('')
                   }}
                     to={result.media_type === 'movie' ? `/movies/${result.title?.toLowerCase().replace(/ /g, '-')}` : `/actors/${result.name?.toLowerCase().replace(/ /g, '-')}`}
