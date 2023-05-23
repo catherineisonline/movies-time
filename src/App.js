@@ -21,6 +21,7 @@ import Cast from './routes/cast/Cast.js'
 import SingleCast from './routes/single-cast/SingleCast.js'
 
 const App = () => {
+  // const [apiData, setApiData] = useState();
   const [movieList, setMovieList] = useState([])
   const [genreList, setGenreList] = useState([])
   const [currentGenre, setCurrentGenre] = useState('')
@@ -116,6 +117,8 @@ const App = () => {
     )
       .then((response) => response.json())
       .then((data) => {
+        localStorage.setItem('apiData', JSON.stringify(data));
+        // setApiData(data);
         setSingleMovie({
           ...data,
           title: data.title,
@@ -198,6 +201,20 @@ const App = () => {
         setCastPreview([...data.cast].slice(0, 5))
       })
   }
+
+
+  // Saving movie in local to keep API call persistent
+  useEffect(() => {
+    if (window.localStorage !== undefined) {
+      //getting data from the stoarge, transofrming back to json and calling getMovie api again
+      const data = { ...JSON.parse(window.localStorage.getItem('apiData')) };
+      getMovie(data.id);
+    }
+  }, []);
+
+
+
+
   const getCastDetails = (personId) => {
     fetch(
       `https://api.themoviedb.org/3/person/${personId}?api_key=b71bcab3d07039b32d23c21d747e9d40&language=en-US`,
