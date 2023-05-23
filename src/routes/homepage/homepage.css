@@ -102,21 +102,24 @@ main {
     .homepage-movies {
         grid-template-columns: repeat(3, 1fr);
         gap: 1rem;
-        /* width: 1000px; */
     }
 }
 
 @media (max-width: 1000px) {
     .homepage-movies {
         grid-template-columns: repeat(2, 1fr);
-        /* width: 900px; */
     }
 }
 
 @media (max-width: 800px) {
     .homepage-movies {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
 
-        /* width: 900px; */
+@media (max-width: 570px) {
+    .homepage-movies {
+        grid-template-columns: 1fr;
+        justify-items: center;
     }
 }

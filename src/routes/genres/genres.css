@@ -30,3 +30,29 @@
     flex-direction: row;
     align-items: center;
 }
+
+@media (max-width: 1200px) {
+    .genres-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 1000px) {
+    .genres-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 800px) {
+    .genres-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 570px) {
+    .genres-grid {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+}
