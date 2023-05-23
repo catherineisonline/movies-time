@@ -11,3 +11,15 @@
     background: linear-gradient(180deg, transparent, var(--lighter-blue) 5%, var(--dark-blue));
     padding: 1rem;
 }
+
+.videos-grid .video {
+    width: 100%;
+    max-width: 300px;
+}
+
+@media (max-width: 1050px) {
+    .videos-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+}

@@ -12,3 +12,16 @@
     background: linear-gradient(180deg, transparent, var(--lighter-blue) 5%, var(--dark-blue));
     padding: 1rem;
 }
+
+@media (max-width: 700px) {
+    .pictures-grid {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 450px) {
+    .pictures-grid {
+        grid-template-columns: 1fr;
+    }
+}

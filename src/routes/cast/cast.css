@@ -35,3 +35,16 @@
     width: 100%;
     object-fit: cover;
 }
+
+@media (max-width: 700px) {
+    .cast-grid {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 450px) {
+    .cast-grid {
+        grid-template-columns: 1fr;
+    }
+}
