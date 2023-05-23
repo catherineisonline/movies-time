@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom'
 
 const SingleCast = ({ castDetails, actedIn, getMovie }) => {
   useEffect(() => {
-    console.log({ castDetails })
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [])
   return (
@@ -57,7 +56,7 @@ const SingleCast = ({ castDetails, actedIn, getMovie }) => {
                 >
                   {movie.poster_path ? (
                     <img
-                      alt=''
+                      alt={`${movie.title}`}
                       src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
                     />
                   ) : (

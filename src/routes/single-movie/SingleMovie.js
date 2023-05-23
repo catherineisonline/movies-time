@@ -20,7 +20,6 @@ const SingleMovie = ({
   getCastDetails
 }) => {
   useEffect(() => {
-    // console.log({ similarMovies })
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [])
   return (
@@ -155,8 +154,7 @@ const SingleMovie = ({
           <section className="pictures-preview-grid">
             {picturesPreview.id.map((img, index) => (
               <img
-                alt=''
-                // width={490}
+                alt={`${singleMovie.title}`}
                 key={index}
                 className="pictures-preview"
                 src={`https://image.tmdb.org/t/p/original/${img.file_path}`}
@@ -225,7 +223,7 @@ const SingleMovie = ({
         </section>
       ) : null
       }
-    </section >
+    </section>
   )
 }
 

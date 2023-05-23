@@ -124,7 +124,7 @@ main {
     gap: 1.5rem;
     top: 1rem;
     right: -35rem;
-    color: white;
+    color: var(--white);
     text-align: left;
     z-index: 2;
     width: 75%;
@@ -138,7 +138,7 @@ main {
     background-color: var(--orange);
     border-radius: 10px;
     text-decoration: none;
-    color: white;
+    color: var(--white);
     padding: 0.5rem 1rem;
     width: max-content;
     letter-spacing: 1px;

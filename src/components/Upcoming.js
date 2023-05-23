@@ -13,6 +13,7 @@ const Upcoming = ({ upcomingMovies, getMovie, setDisabled }) => {
               to={`/movies/${movie.title.toLowerCase().replace(/ /g, '-')}`}
             >
               <img
+                alt={`${movie.title}`}
                 src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
               />
             </Link>

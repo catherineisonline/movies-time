@@ -5,11 +5,11 @@ import {
 
 } from 'react-router-dom'
 import React, { useState, useEffect } from 'react'
+import './core-ui/index.css'
 import Homepage from './routes/homepage/Homepage.js'
 import About from './routes/about/About.js'
 import Header from './components/Header.js'
 import AllMovies from './routes/homepage/AllMovies.js'
-import './core-ui/index.css'
 import SingleMovie from './routes/single-movie/SingleMovie.js'
 import Genres from './routes/genres/Genres.js'
 import ReactPaginate from 'react-paginate'
@@ -84,7 +84,6 @@ const App = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data)
         setGenreList([...data.genres])
       })
   }
@@ -196,10 +195,7 @@ const App = () => {
       .then((response) => response.json())
       .then((data) => {
         setCast([...data.cast])
-
         setCastPreview([...data.cast].slice(0, 5))
-
-        // console.log([...data.cast].slice(0, 4))
       })
   }
   const getCastDetails = (personId) => {
@@ -208,7 +204,6 @@ const App = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data)
         setCastDetails({
           ...data,
           name: data.name,
@@ -227,7 +222,6 @@ const App = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        // console.log([...data.cast].slice(0, 19))
         setActedIn([...data.cast].slice(0, 19))
       })
       .catch((err) => setSearchResults([]))
