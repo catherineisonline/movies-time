@@ -128,19 +128,6 @@ nav ul li button img {
     padding: 2rem 4rem;
 }
 
-@media (max-width: 1000px) {
-    .navigation-two {
-        padding: 2rem 1rem;
-    }
-}
-
-@media (max-width: 800px) {
-    .navigation-two {
-        flex-direction: column;
-        height: max-content;
-        gap: 1rem;
-    }
-}
 .header-actions {
     display: flex;
     flex-direction: row;
@@ -268,4 +255,29 @@ nav ul li button img {
 .theme-btns img {
     width: 1.3rem;
     height: 1.3rem;
+}
+
+@media (max-width: 1000px) {
+    .navigation-two {
+        padding: 2rem 1rem;
+    }
+}
+
+@media (max-width: 800px) {
+    .navigation-two {
+        flex-direction: column;
+        height: max-content;
+        gap: 1rem;
+    }
+
+    h1 a {
+        font-size: 2.2rem;
+        margin-left: 0;
+    }
+    .sidebar {
+        top: 9.8rem;
+        max-width: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.694);
+    }
 }
