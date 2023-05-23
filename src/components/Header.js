@@ -15,8 +15,7 @@ const Header = ({
   setCurrentGenre,
   getMovie,
   disabled,
-  setDisabled,
-  theme
+  setDisabled
 }) => {
   const [upcomingMovies, setUpcomingMovies] = useState([])
 

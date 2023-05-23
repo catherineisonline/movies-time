@@ -12,6 +12,8 @@ const Pictures = ({ pictures }) => {
       <section className="pictures-grid">
         {pictures.id.map((img, index) => (
           <img
+            alt=''
+            aria-hidden="true"
             key={index}
             className="pictures-preview"
             src={`https://image.tmdb.org/t/p/original/${img.file_path}`}
