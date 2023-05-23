@@ -2,6 +2,11 @@
 
 Welcome to the Movies Time project! This project was created as a way for me to showcase my skills as a Junior Web Developer. The project uses React to build a movie database application, styled with CSS, and utilizing the MovieDB API.
 
+![Movies Time](https://github.com/catherineisonline/movies-time/blob/main/src/assets/images/project-previews/project-preview-1.png?raw=true)
+![Movies Time](https://github.com/catherineisonline/movies-time/blob/main/src/assets/images/project-previews/project-preview-2.png?raw=true)
+![Movies Time](https://github.com/catherineisonline/movies-time/blob/main/src/assets/images/project-previews/project-preview-3.png?raw=true)
+![Movies Time](https://github.com/catherineisonline/movies-time/blob/main/src/assets/images/project-previews/project-preview-4.png?raw=true)
+
 ## Key Features
 Fetch and display movie data from the [MovieDB API](https://developers.themoviedb.org/).
 Render different outputs conditionally, depending on the availability of data.
