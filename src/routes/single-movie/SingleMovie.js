@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './singleMovie.css'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
@@ -20,29 +20,7 @@ const SingleMovie = ({
   getCastDetails
 }) => {
 
-  // const [movieId, setMovieId] = useState([])
-
-  // const searchViaHref = (targetName) => {
-  //   fetch(
-  //     `https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-USquery=${targetName}`,
-  //   )
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log('done')
-  //     })
-  //     .catch((err) => console.log(err))
-  // }
-
-
-
   useEffect(() => {
-    // console.log(movieId)
-    // searchViaHref(movieId);
-    // console.log(window.location.href)
-    // setMovieId(singleMovie.title);
-    // to = {`/movies/${movie.title.toLowerCase().replace(/ /g, '-')}`
-    // }
-    // getMovie(movie.title.toLowerCase().replace(/ /g, '-'));
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [])
   return (

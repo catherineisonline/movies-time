@@ -21,7 +21,6 @@ import Cast from './routes/cast/Cast.js'
 import SingleCast from './routes/single-cast/SingleCast.js'
 
 const App = () => {
-  // const [apiData, setApiData] = useState();
   const [movieList, setMovieList] = useState([])
   const [genreList, setGenreList] = useState([])
   const [currentGenre, setCurrentGenre] = useState('')
@@ -118,7 +117,6 @@ const App = () => {
       .then((response) => response.json())
       .then((data) => {
         localStorage.setItem('apiData', JSON.stringify(data));
-        // setApiData(data);
         setSingleMovie({
           ...data,
           title: data.title,
