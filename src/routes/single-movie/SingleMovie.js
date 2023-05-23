@@ -156,7 +156,7 @@ const SingleMovie = ({
             {picturesPreview.id.map((img, index) => (
               <img
                 alt=''
-                width={450}
+                // width={490}
                 key={index}
                 className="pictures-preview"
                 src={`https://image.tmdb.org/t/p/original/${img.file_path}`}
@@ -193,6 +193,7 @@ const SingleMovie = ({
       {cast.length > 0 ? (
         <section className="cast-section">
           <Link
+            className='cast-preview-grid-link'
             to={`/cast/${singleMovie.title.toLowerCase().replace(/ /g, '-')}`}
           >
             See cast ({cast.length})<img src={ArrowRight} alt='' aria-hidden="true" />
@@ -201,6 +202,7 @@ const SingleMovie = ({
             {castPreview.map((person, index) => (
               <li key={index}>
                 <Link
+
                   onClick={() => getCastDetails(person.id)}
                   to={`/actors/${person.name.toLowerCase().replace(/ /g, '-')}`}
                 >
@@ -214,8 +216,8 @@ const SingleMovie = ({
                   ) : (
                     <img key={index} className="cast-preview" src={NoImage} alt='' aria-hidden="true" />
                   )}
-                  <p>{person.name}</p>
-                  <em>{person.character}</em>
+                  <h5>{person.name}</h5>
+                  <p>{person.character}</p>
                 </Link>
               </li>
             ))}

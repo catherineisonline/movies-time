@@ -187,7 +187,7 @@ const App = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        setSimilarMovies([...data.results].slice(0, 6))
+        setSimilarMovies([...data.results].slice(0, 5))
       })
 
     fetch(
@@ -197,7 +197,7 @@ const App = () => {
       .then((data) => {
         setCast([...data.cast])
 
-        setCastPreview([...data.cast].slice(0, 4))
+        setCastPreview([...data.cast].slice(0, 5))
 
         // console.log([...data.cast].slice(0, 4))
       })
