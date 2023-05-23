@@ -1,6 +1,6 @@
-# Movie Time
+# Movies Time
 
-Welcome to the Movie Time project! This project was created as a way for me to showcase my skills as a Junior Web Developer. The project uses React to build a movie database application, styled with CSS, and utilizing the MovieDB API.
+Welcome to the Movies Time project! This project was created as a way for me to showcase my skills as a Junior Web Developer. The project uses React to build a movie database application, styled with CSS, and utilizing the MovieDB API.
 
 ## Key Features
 Fetch and display movie data from the [MovieDB API](https://developers.themoviedb.org/).
