@@ -127,6 +127,20 @@ nav ul li button img {
     background-color: var(--lighter-blue);
     padding: 2rem 4rem;
 }
+
+@media (max-width: 1000px) {
+    .navigation-two {
+        padding: 2rem 1rem;
+    }
+}
+
+@media (max-width: 800px) {
+    .navigation-two {
+        flex-direction: column;
+        height: max-content;
+        gap: 1rem;
+    }
+}
 .header-actions {
     display: flex;
     flex-direction: row;

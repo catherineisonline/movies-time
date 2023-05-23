@@ -87,10 +87,10 @@ h6 {
     display: flex;
     flex-direction: row;
     list-style: none;
-    width: max-content;
+    /* width: max-content; */
     gap: 3rem;
     padding: 2rem;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     margin-top: 3rem;
 }
 .movies-pagination li {
@@ -128,5 +128,20 @@ h6 {
     }
     .movies-pagination li a:hover {
         color: var(--orange);
+    }
+}
+
+@media (max-width: 1200px) {
+    .movies-pagination {
+        gap: 1rem;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 800px) {
+    .movies-pagination {
+        /* gap: 1rem; */
+        flex-wrap: wrap !important;
+        /* padding: 0; */
     }
 }
