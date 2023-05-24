@@ -30,7 +30,7 @@
 }
 .single-movie-header .movie-cover {
     max-width: 18rem;
-    height: 100%;
+    height: auto;
     object-fit: cover;
 }
 .header-description {
