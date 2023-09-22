@@ -3,7 +3,7 @@ import {
   Route,
   BrowserRouter,
 
-} from 'react-router-dom'
+} from 'react-router-dom';
 import React, { useState, useEffect, useCallback } from 'react'
 import './core-ui/index.css'
 import './core-ui/light-mode.css'
@@ -21,8 +21,8 @@ import HeaderTwo from './components/HeaderTwo.js'
 import Cast from './routes/cast/Cast.js'
 import SingleCast from './routes/single-cast/SingleCast.js'
 
-const baseUrl = "https://api.themoviedb.org/3";
-const apiKey = "b71bcab3d07039b32d23c21d747e9d40";
+const baseUrl = process.env.REACT_APP_BASE_URL;
+const apiKey = process.env.REACT_APP_API_KEY;
 
 const App = () => {
   const [theme, setTheme] = useState('dark');
@@ -253,9 +253,9 @@ const App = () => {
   }
 
   useEffect(() => {
-    if (localStorage.getItem('currentMovie') !== null) {
-      //getting data from the stoarge, transofrming back to json and calling getMovie api again
-      const data = { ...JSON.parse(window.localStorage.getItem('currentMovie')) };
+    const storedMovieData = localStorage.getItem('currentMovie');
+    if (storedMovieData) {
+      const data = JSON.parse(storedMovieData);
       getMovie(data.id);
     }
   }, []);
