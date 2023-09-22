@@ -19,6 +19,15 @@ const SingleMovie = ({
   getMovie,
   getCastDetails
 }) => {
+  // Saving movie in local to keep API call persistent
+  // useEffect(() => {
+  //   // console.log(localStorage.getItem('currentMovie') !== null)
+  //   if (localStorage.getItem('currentMovie') !== null) {
+  //     //getting data from the stoarge, transofrming back to json and calling getMovie api again
+  //     const data = { ...JSON.parse(window.localStorage.getItem('currentMovie')) };
+  //     getMovie(data.id);
+  //   }
+  // }, []);
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })

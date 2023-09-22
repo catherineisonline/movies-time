@@ -4,7 +4,7 @@ import {
   BrowserRouter,
 
 } from 'react-router-dom'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import './core-ui/index.css'
 import './core-ui/light-mode.css'
 import Homepage from './routes/homepage/Homepage.js'
@@ -20,6 +20,9 @@ import Pictures from './routes/pictures/Pictures.js'
 import HeaderTwo from './components/HeaderTwo.js'
 import Cast from './routes/cast/Cast.js'
 import SingleCast from './routes/single-cast/SingleCast.js'
+
+const baseUrl = "https://api.themoviedb.org/3";
+const apiKey = "b71bcab3d07039b32d23c21d747e9d40";
 
 const App = () => {
   const [theme, setTheme] = useState('dark');
@@ -82,201 +85,226 @@ const App = () => {
     document.body.className = theme;
   }, [theme]);
 
-  const findMovies = (currentPage) => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/top_rated?api_key=b71bcab3d07039b32d23c21d747e9d40&language=en-US&page=${currentPage}`,
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setPageAmount(499)
-        setMovieList([...data.results])
-      })
-  }
-  const findGenres = () => {
-    fetch(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=b71bcab3d07039b32d23c21d747e9d40&language=en-US`,
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setGenreList([...data.genres])
-      })
+  const fetchJSON = async (url) => {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Response issue with url: ${url}`);
+    }
+    return response.json();
   }
 
-  const findByGenres = (genreId) => {
-    fetch(
-      `https://api.themoviedb.org/3/discover/movie/?api_key=b71bcab3d07039b32d23c21d747e9d40&language=en-US&with_genres=${genreId}&page=${currentPage}`,
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setPageAmount(499)
-        setGenreListMovies([...data.results])
-      })
-  }
+  const findMovies = useCallback(async (currentPage) => {
+    try {
+      const url = `${baseUrl}/movie/top_rated?api_key=${apiKey}&language=en-US&page=${currentPage}`;
+      const data = await fetchJSON(url);
+      setPageAmount(499);
+      setMovieList([...data.results]);
+    } catch (err) {
+      console.error('Error in findMovies:', err);
+    }
+  }, [])
 
-  const getTrending = () => {
-    fetch(
-      `https://api.themoviedb.org/3/trending/movie/day?api_key=b71bcab3d07039b32d23c21d747e9d40`,
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setTrendingMovies([...data.results].slice(0, 6))
-      })
-  }
-
-  const getMovie = (movieId) => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-    fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=b71bcab3d07039b32d23c21d747e9d40&language=en-US`,
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        localStorage.setItem('apiData', JSON.stringify(data));
-        setSingleMovie({
-          ...data,
-          title: data.title,
-          cover: data.poster_path,
-          budget: data.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
-          revenue: data.revenue
-            .toString()
-            .replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
-          overview: data.overview,
-          tagline: data.tagline,
-          release_year: data.release_date.slice(0, 4),
-          release: data.release_date,
-          imdb_id: data.imdb_id,
-          votes: data.vote_count,
-          voteavg: data.vote_average.toFixed(1),
-          genres: [...data.genres],
-          countries: [...data.production_countries],
-          duration: data.runtime,
-          original_lang: data.original_language.toUpperCase(),
-          status: data.status,
-          backdrop_path: data.backdrop_path,
-        })
-      })
-
-    fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=b71bcab3d07039b32d23c21d747e9d40&language=en-US`,
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        const splitVids = data.results.filter((key, index) => index <= 1)
-        setVideos({
-          ...videos,
-          id: [...data.results],
-          size: [...data.results].length,
-        })
-        setVideosPreview({
-          ...videos,
-          id: splitVids,
-        })
-      })
-
-    fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}/images?api_key=b71bcab3d07039b32d23c21d747e9d40`,
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        const splitVids = data.backdrops.filter((key, index) => index <= 1)
-        setPictures({
-          ...pictures,
-          id: [...data.backdrops],
-          size: [...data.backdrops].length,
-        })
-        setPicturesPreview({
-          ...pictures,
-          id: splitVids,
-        })
-      })
-
-    fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}/keywords?api_key=b71bcab3d07039b32d23c21d747e9d40`,
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setKeywords({ ...keywords, keyword: [...data.keywords] })
-      })
-    fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=b71bcab3d07039b32d23c21d747e9d40&language=en-US&page=1`,
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setSimilarMovies([...data.results].slice(0, 5))
-      })
-
-    fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=b71bcab3d07039b32d23c21d747e9d40&language=en-US`,
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setCast([...data.cast])
-        setCastPreview([...data.cast].slice(0, 5))
-      })
-  }
-
-
-  // Saving movie in local to keep API call persistent
   useEffect(() => {
-    if (window.localStorage !== undefined) {
+    findMovies(currentPage);
+  }, [findMovies, currentPage]);
+
+
+  const findGenres = useCallback(async () => {
+    try {
+      const url = `${baseUrl}/genre/movie/list?api_key=${apiKey}&language=en-US`;
+      const data = await fetchJSON(url);
+      setGenreList([...data.genres]);
+    } catch (err) {
+      console.error('Error in findGenres:', err);
+    }
+  }, [])
+
+  useEffect(() => {
+    findGenres();
+  }, [findGenres]);
+
+  const findByGenres = useCallback(async (genreId, currentPage) => {
+    try {
+      const url = `${baseUrl}/discover/movie/?api_key=${apiKey}&language=en-US&with_genres=${genreId}&page=${currentPage}`;
+      const data = await fetchJSON(url);
+      setPageAmount(499);
+      setGenreListMovies([...data.results]);
+    } catch (err) {
+      console.error('Error in findByGenres:', err);
+    }
+  }, []);
+
+  useEffect(() => {
+    findByGenres(genreId)
+  }, [findByGenres, genreId]);
+
+
+  const getTrending = useCallback(async () => {
+    try {
+      const url = `${baseUrl}/trending/movie/day?api_key=${apiKey}`;
+      const data = await fetchJSON(url);
+      setTrendingMovies([...data.results].slice(0, 6))
+    } catch (err) {
+      console.log("Erro in getTrening:", err)
+    }
+  }, []);
+
+  useEffect(() => {
+    getTrending();
+  }, [getTrending])
+
+  const getMovie = async (movieId) => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    // single movie
+    try {
+      const url = `${baseUrl}/movie/${movieId}?api_key=${apiKey}&language=en-US`;
+      const data = await fetchJSON(url);
+      localStorage.setItem('currentMovie', JSON.stringify(data));
+      setSingleMovie({
+        ...data,
+        title: data.title,
+        cover: data.poster_path,
+        budget: data.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
+        revenue: data.revenue
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
+        overview: data.overview,
+        tagline: data.tagline,
+        release_year: data.release_date.slice(0, 4),
+        release: data.release_date,
+        imdb_id: data.imdb_id,
+        votes: data.vote_count,
+        voteavg: data.vote_average.toFixed(1),
+        genres: [...data.genres],
+        countries: [...data.production_countries],
+        duration: data.runtime,
+        original_lang: data.original_language.toUpperCase(),
+        status: data.status,
+        backdrop_path: data.backdrop_path,
+      })
+    }
+    catch (err) {
+      console.log('Error in getMovie:', err);
+    }
+    // movie similar movies
+    try {
+      const url = `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=b71bcab3d07039b32d23c21d747e9d40&language=en-US&page=1`;
+      const data = await fetchJSON(url);
+      setSimilarMovies([...data.results].slice(0, 5));
+    }
+    catch (err) {
+      console.log('Error in similar movies:', err);
+    }
+    // movie videos
+    try {
+      const url = `${baseUrl}/movie/${movieId}/videos?api_key=${apiKey}&language=en-US`;
+      const data = await fetchJSON(url);
+      const splitVids = data.results.filter((key, index) => index <= 1);
+      setVideos({
+        ...videos,
+        id: [...data.results],
+        size: [...data.results].length,
+      })
+      setVideosPreview({
+        ...videos,
+        id: splitVids,
+      })
+    }
+    catch (err) {
+      console.log('Error in getMovie videos:', err);
+    }
+    // movie images
+    try {
+      const url = `${baseUrl}/movie/${movieId}/images?api_key=${apiKey}`;
+      const data = await fetchJSON(url);
+      const splitImgs = data.backdrops.filter((key, index) => index <= 1)
+      setPictures({
+        ...pictures,
+        id: [...data.backdrops],
+        size: [...data.backdrops].length,
+      })
+      setPicturesPreview({
+        ...pictures,
+        id: splitImgs,
+      })
+    }
+    catch (err) {
+      console.log('Error in getMovie images:', err);
+    }
+    // movie keywords
+    try {
+      const url = `${baseUrl}/movie/${movieId}/keywords?api_key=${apiKey}`;
+      const data = await fetchJSON(url);
+      setKeywords({ ...keywords, keyword: [...data.keywords] });
+    }
+    catch (err) {
+      console.log('Error in getMovie keywords:', err);
+    }
+    // movie credits
+    try {
+      const url = `${baseUrl}/movie/${movieId}/credits?api_key=${apiKey}&language=en-US`;
+      const data = await fetchJSON(url);
+      setCast([...data.cast]);
+      setCastPreview([...data.cast].slice(0, 5));
+    }
+    catch (err) {
+      console.log('Error in getMovie credits:', err);
+    }
+  }
+
+  useEffect(() => {
+    if (localStorage.getItem('currentMovie') !== null) {
       //getting data from the stoarge, transofrming back to json and calling getMovie api again
-      const data = { ...JSON.parse(window.localStorage.getItem('apiData')) };
+      const data = { ...JSON.parse(window.localStorage.getItem('currentMovie')) };
       getMovie(data.id);
     }
   }, []);
 
-
-
-
-  const getCastDetails = (personId) => {
-    fetch(
-      `https://api.themoviedb.org/3/person/${personId}?api_key=b71bcab3d07039b32d23c21d747e9d40&language=en-US`,
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setCastDetails({
-          ...data,
-          name: data.name,
-          biography: data.biography,
-          birthday: data.birthday,
-          known_for_department: data.known_for_department,
-          place_of_birth: data.place_of_birth,
-          profile_path: data.profile_path,
-        })
+  const getCastDetails = async (personId) => {
+    // person
+    try {
+      const url = `${baseUrl}/person/${personId}?api_key=${apiKey}&language=en-US`;
+      const data = await fetchJSON(url);
+      setCastDetails({
+        ...data,
+        name: data.name,
+        biography: data.biography,
+        birthday: data.birthday,
+        known_for_department: data.known_for_department,
+        place_of_birth: data.place_of_birth,
+        profile_path: data.profile_path,
       })
-      .catch((err) => setSearchResults([]))
-
-
-    fetch(
-      `https://api.themoviedb.org/3/person/${personId}/movie_credits?api_key=b71bcab3d07039b32d23c21d747e9d40&language=en-US`,
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setActedIn([...data.cast].slice(0, 19))
-      })
-      .catch((err) => setSearchResults([]))
+    }
+    catch (err) {
+      console.log('Error in getCastDetails:', err);
+    }
+    // movie credits
+    try {
+      const url = `${baseUrl}/person/${personId}/movie_credits?api_key=${apiKey}&language=en-US`;
+      const data = await fetchJSON(url);
+      setActedIn([...data.cast].slice(0, 19))
+    }
+    catch (err) {
+      console.log('Error in getCastDetails movie credicts:', err);
+    }
   }
 
-  const getSearch = (query) => {
+  const getSearch = useCallback((query) => {
     if (query === '') setSearchResults([])
     fetch(
-      `https://api.themoviedb.org/3/search/multi?api_key=b71bcab3d07039b32d23c21d747e9d40&language=en-US&query=${query}&page=1`,
+      `${baseUrl}/search/multi?api_key=${apiKey}&language=en-US&query=${query}&page=1`,
     )
       .then((response) => response.json())
       .then((data) => {
         setSearchResults([...data.results].slice(0, 4));
       })
       .catch((err) => setSearchResults([]))
-  }
+  }, [])
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-    findMovies(currentPage)
-    findGenres()
-    findByGenres(genreId)
-    getTrending()
-    getSearch(query)
-
-  }, [genreId, currentPage, query])
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    getSearch(query);
+  }, [getSearch, query]);
   return (
     <BrowserRouter>
       <Header
@@ -344,7 +372,7 @@ const App = () => {
           }
         />
         <Route
-          path={`/movies/:id`}
+          exact path={`/movies/:id`}
           element={
             <SingleMovie
               singleMovie={singleMovie}
@@ -357,6 +385,7 @@ const App = () => {
               castPreview={castPreview}
               cast={cast}
               getMovie={getMovie}
+
               getCastDetails={getCastDetails}
               theme={theme}
             />
