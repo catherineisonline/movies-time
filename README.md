@@ -12,11 +12,6 @@ Fetch and display movie data from the [MovieDB API](https://developers.themovied
 Render different outputs conditionally, depending on the availability of data.
 Handle data when it's not available, to ensure a smooth user experience.
 
-## Progress
-
-I am not done with the project yet and it's not the final version!
-
-
 ## Project Goals
 The main goals of this project are to:
 
@@ -37,9 +32,12 @@ Run npm start to start the development server.
 - [Framer Motion](https://www.framer.com/motion/)
 - [React Router Dom](https://www.npmjs.com/package/react-router-dom)
 - [React Responsive Carousel](https://www.npmjs.com/package/react-responsive-carousel)
+- [Movies API](https://developer.themoviedb.org/docs)
+- [dotenv](https://www.npmjs.com/package/dotenv)
 
-##  License
-This project is open source and available under [the MIT License](https://opensource.org/licenses/MIT).
+## Contribution <a id="contribution"></a>
 
-## Contact
-If you have any questions or comments about the project, please feel free to reach out to me. I would love to hear from you!
+This project serves as a personal portfolio website to show off my personal skills. I do not accept any contributions like pull requests to this project however if you have any suggestions or ideas feel free to contact me or submit an idea in the [discussions](https://github.com/catherineisonline/movies-time/discussions). Otherwise, you are free to fork this project and change it for your own purposes. 
+
+## License  <a id="license"></a>
+This project is released under the MIT [LICENSE](https://github.com/catherineisonline/movies-time/blob/main/LICENSE). You can find the specific terms and conditions outlined in the LICENSE file. This means you're free to utilize, modify, and distribute the project according to the terms of the MIT License.
