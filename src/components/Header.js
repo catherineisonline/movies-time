@@ -23,14 +23,15 @@ const Header = ({
   const toggleGenres = () => {
     enabled ? setEnabled(false) : setEnabled(true)
   }
-  const getUpcoming = () => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/upcoming?api_key=b71bcab3d07039b32d23c21d747e9d40&language=en-US&page=1`,
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setUpcomingMovies([...data.results].slice(0, 6))
-      })
+  const getUpcoming = async () => {
+    try {
+      const response = await fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=b71bcab3d07039b32d23c21d747e9d40&language=en-US&page=1`);
+      const data = await response.json();
+      setUpcomingMovies([...data.results].slice(0, 6))
+    }
+    catch (err) {
+      console.log("Error in getUpcoming:", err)
+    }
   }
   useEffect(() => {
     getUpcoming()
