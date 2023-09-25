@@ -20,6 +20,7 @@ import Pictures from './routes/pictures/Pictures.js'
 import HeaderTwo from './components/HeaderTwo.js'
 import Cast from './routes/cast/Cast.js'
 import SingleCast from './routes/single-cast/SingleCast.js'
+import NotFound from './routes/not-found/NotFound';
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 const apiKey = process.env.REACT_APP_API_KEY;
@@ -405,6 +406,7 @@ const App = () => {
           element={<Pictures pictures={pictures} theme={theme} />}
         />
         <Route path="/about" element={<About theme={theme} />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   )

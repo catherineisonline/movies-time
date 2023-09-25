@@ -1,0 +1,11 @@
+.not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--rubik-font);
+}
+
+.not-found img {
+    width: 15rem;
+    height: auto;
+}

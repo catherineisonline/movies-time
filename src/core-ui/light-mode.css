@@ -71,3 +71,7 @@
 .light .enabled-chevron img {
     content: url("../assets/images/chevron-dark.png");
 }
+
+.light .search-btn svg {
+    fill: black;
+}
