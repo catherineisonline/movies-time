@@ -1,7 +1,6 @@
 import {
   Routes,
   Route,
-  Router,
   useLocation,
 
 } from 'react-router-dom';
@@ -30,11 +29,9 @@ const App = () => {
   const [theme, setTheme] = useState('dark');
   const [movieList, setMovieList] = useState([])
   const [genreList, setGenreList] = useState([])
-  const [currentGenre, setCurrentGenre] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const [pageAmount, setPageAmount] = useState(0)
   const [genreListMovies, setGenreListMovies] = useState([])
-  const [genreId, setGenreId] = useState(0)
   const [trendingMovies, setTrendingMovies] = useState([])
   const [similarMovies, setSimilarMovies] = useState([])
   const [videos, setVideos] = useState({ id: [], size: 0 })
@@ -130,17 +127,20 @@ const App = () => {
       const url = `${baseUrl}/discover/movie/?api_key=${apiKey}&language=en-US&with_genres=${genreId}&page=${currentPage}`;
       const data = await fetchJSON(url);
       setPageAmount(499);
+      localStorage.setItem('genreId', JSON.stringify([...data.results]));
       setGenreListMovies([...data.results]);
     } catch (err) {
       console.error('Error in findByGenres:', err);
     }
   }, []);
 
+
   useEffect(() => {
-    findByGenres(genreId)
-  }, [findByGenres, genreId]);
-
-
+    if (localStorage.getItem('genreId') !== null) {
+      const data = JSON.parse(localStorage.getItem('genreId'));
+      setGenreListMovies(data);
+    }
+  }, []);
   const getTrending = useCallback(async () => {
     try {
       const url = `${baseUrl}/trending/movie/day?api_key=${apiKey}`;
@@ -314,12 +314,11 @@ const App = () => {
     <>
       <Header
         genreList={genreList}
-        setGenreId={setGenreId}
-        setCurrentGenre={setCurrentGenre}
         getMovie={getMovie}
         disabledMenu={disabledMenu}
         setDisabledMenu={setDisabledMenu}
         theme={theme}
+        findByGenres={findByGenres}
 
       />
       <HeaderTwo
@@ -364,7 +363,6 @@ const App = () => {
           element={
             <Genres
               genreListMovies={genreListMovies}
-              currentGenre={currentGenre}
               getMovie={getMovie}
               theme={theme}
               PaginatedItems={

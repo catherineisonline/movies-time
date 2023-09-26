@@ -35,11 +35,10 @@ const menuVariant = {
 
 const Header = ({
   genreList,
-  setGenreId,
-  setCurrentGenre,
   getMovie,
   disabledMenu,
-  setDisabledMenu
+  setDisabledMenu,
+  findByGenres
 }) => {
   const [upcomingMovies, setUpcomingMovies] = useState([])
 
@@ -103,8 +102,7 @@ const Header = ({
                 <li key={genre.id}>
                   <NavLink
                     onClick={() => {
-                      setGenreId(genre.id)
-                      setCurrentGenre(genre.name)
+                      findByGenres(genre.id, genre.name);
                       setDisabledMenu(true)
                       setEnabled(false)
                     }}
