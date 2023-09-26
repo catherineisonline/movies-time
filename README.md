@@ -1,32 +1,30 @@
 # Movies Time
-
-Welcome to the Movies Time project! This project was created as a way for me to showcase my skills as a Junior Web Developer. The project uses React to build a movie database application, styled with CSS, and utilizing the MovieDB API.
+Welcome to Movies Time! This project was created for movie enthusiasts to explore a vast collection of movie-related data from the MovieDB API. Designed with scratch using Framer Motion for awesome animations and CSS for an appealing user interface, this website offers an immersive cinematic experience.
 
 ![Movies Time](https://github.com/catherineisonline/movies-time/blob/main/src/assets/images/project-previews/project-preview-1.png?raw=true)
 ![Movies Time](https://github.com/catherineisonline/movies-time/blob/main/src/assets/images/project-previews/project-preview-2.png?raw=true)
 ![Movies Time](https://github.com/catherineisonline/movies-time/blob/main/src/assets/images/project-previews/project-preview-3.png?raw=true)
 ![Movies Time](https://github.com/catherineisonline/movies-time/blob/main/src/assets/images/project-previews/project-preview-4.png?raw=true)
 
-## Key Features
-Fetch and display movie data from the [MovieDB API](https://developers.themoviedb.org/).
-Render different outputs conditionally, depending on the availability of data.
-Handle data when it's not available, to ensure a smooth user experience.
+## Features
 
-## Project Goals
-The main goals of this project are to:
+1. Explore Movies
+Discover a wide selection of movies from different genres, time periods, and cultures.
 
-Learn to manually create React without the CRA
-Learn how to handle different types of data received from an API.
-Practice working with React, CSS, and API's.
-Enhance my skills in creating dynamic and responsive user interfaces.
+2. Stay Up-to-Date
+Keep in the loop with the latest movie trends. The "Trending Movies" section highlights the most popular movies people are buzzing about.
 
+3. Easy Movie Search
+Looking for a specific movie? The search tool lets you find movies by their title, keywords, or even by the names of the actors or directors, making it simple to find your favorite films.
 
-## Usage
-To run this project locally, follow these steps:
+4. Filter by Category
+Customize your movie discovery by sorting films into categories like action, drama, comedy, sci-fi, and more. It's a great way to find new favorites within your favorite movie genres.
 
-Clone or download the repository.
-Run npm install to install the necessary dependencies.
-Run npm start to start the development server.
+5. Get Detailed Movie Info
+Get a closer look at your chosen movies. Find comprehensive details including plot summaries, trailers, high-quality images, and a full cast list.
+
+6. Explore Actor and Actress Profiles
+Learn more about your favorite actors and actresses. Dive into their life stories, see the movies they've been a part of, and discover the different characters they've portrayed over time.
 
 ## Dependencies
 - [Framer Motion](https://www.framer.com/motion/)
@@ -34,6 +32,54 @@ Run npm start to start the development server.
 - [React Responsive Carousel](https://www.npmjs.com/package/react-responsive-carousel)
 - [Movies API](https://developer.themoviedb.org/docs)
 - [dotenv](https://www.npmjs.com/package/dotenv)
+
+## Getting Started with Create React App <a id="gettingStarted"></a>
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+To get started you need to:
+
+1. Clone the project
+2. npm install
+3. Install listed dependencies
+4. Use available scripts, like npm start
+
+## Available Scripts <a id="scripts"></a>
+
+In the project directory, you can run:
+
+### `npm start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
+
+### `npm test`
+
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `npm run build`
+
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single-build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point, you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However, we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
 ## Contribution <a id="contribution"></a>
 
