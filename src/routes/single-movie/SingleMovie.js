@@ -6,9 +6,43 @@ import ArrowRight from '../../assets/images/arrow-right.png'
 import NoImage from '../../assets/images/no-image.png'
 import NoImageCover from '../../assets/images/no-image-two.png'
 import { motion } from "framer-motion";
-import { pageVariant } from '../homepage/Homepage'
 
+const singlePageVariant = {
+  initial: {
+    x: "100vw"
+  },
+  visible: {
+    x: 0,
+    transition: {
+      type: "spring",
+      stiffness: 80,
+      delay: 0.5
+    }
+  },
+  exit: {
+    x: "-100vw",
+    transition: {
+      ease: "easeInOut"
+    }
+  },
 
+}
+
+const sectionVariant = {
+  initial: {
+    x: "-100vw"
+  },
+  visible: {
+    x: 0,
+    transition: {
+      delay: 0.5,
+      type: "spring",
+      stiffness: 50,
+      duration: 3,
+      ease: "easeIn"
+    }
+  }
+}
 
 const SingleMovie = ({
   singleMovie,
@@ -29,14 +63,14 @@ const SingleMovie = ({
   }, [])
   return (
     <motion.main
-      variants={pageVariant}
+      variants={singlePageVariant}
       initial="initial"
       animate="visible"
       exit="exit"
-      className="single-movie" >
+      className="single-movie"
+    >
       {singleMovie.backdrop_path ? (
         <img
-
           className="header-bg"
           alt='' aria-hidden="true"
           src={`https://image.tmdb.org/t/p/original/${singleMovie.backdrop_path ? singleMovie.backdrop_path : singleMovie.cover}`}
@@ -48,7 +82,9 @@ const SingleMovie = ({
       />
       }
 
-      <section className="single-movie-header">
+      <section className="single-movie-header"
+
+      >
         {singleMovie.backdrop_path ?
           <motion.img
             whileTap={{ scale: 1.5, y: "-10rem" }}
@@ -90,7 +126,7 @@ const SingleMovie = ({
             </section>
           ) : null}
         </section>
-        <section className="additional-info">
+        <section className="additional-info" >
           <h4>
             Status: {singleMovie.status ? <span>{singleMovie.status}</span> : <span>N/A</span>}
           </h4>
@@ -116,7 +152,8 @@ const SingleMovie = ({
         </section>
       </section>
 
-      <section className="overview">
+      <section
+        className="overview">
         {singleMovie.overview ?
           <section>
             <h3>Overview</h3>
@@ -133,14 +170,21 @@ const SingleMovie = ({
         ) : null}
       </section>
       {videos.size && videos.size > 0 ? (
-        <section className="videos">
+        <motion.section
+          className="videos"
+          variants={sectionVariant}
+          whileInView="visible"
+          initial="initial"
+        >
           <Link
             to={`/movies/${singleMovie.title
               .toLowerCase()
               .replace(/ /g, '-')}/videos`}>
             Watch videos ({videos.size})<img src={ArrowRight} alt='' aria-hidden="true" />
           </Link>
-          <section className="videos-preview-grid">
+          <section
+            className="videos-preview-grid"
+          >
             {videosPreview.id.map((id) => (
               <iframe
                 key={id.name}
@@ -149,60 +193,81 @@ const SingleMovie = ({
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 title={id.name}
+                sandbox="allow-scripts allow-same-origin allow-forms allow-presentation"
+                loading="lazy"
               />
             ))}
           </section>
-        </section>
+        </motion.section>
       ) : null
       }
-      {pictures.size && pictures.size > 0 ? (
-        <section className="pictures">
-          <Link
-            to={`/movies/${singleMovie.title
-              .toLowerCase()
-              .replace(/ /g, '-')}/pictures`}
+      {
+        pictures.size && pictures.size > 0 ? (
+          <motion.section
+            className="pictures"
+            variants={sectionVariant}
+            whileInView="visible"
+            initial="initial"
+          // viewport={{ root: scrollRef }}
           >
-            See pictures ({pictures.size})<img alt='' aria-hidden="true" src={ArrowRight} />
-          </Link>
-          <section className="pictures-preview-grid">
-            {picturesPreview.id.map((img, index) => (
-              <img
-                alt={`${singleMovie.title}`}
-                key={index}
-                className="pictures-preview"
-                src={`https://image.tmdb.org/t/p/original/${img.file_path}`}
-              />
-            ))}
-          </section>
-        </section>
-      ) : null
+            <Link
+              to={`/movies/${singleMovie.title
+                .toLowerCase()
+                .replace(/ /g, '-')}/pictures`}
+            >
+              See pictures ({pictures.size})<img alt='' aria-hidden="true" src={ArrowRight} />
+            </Link>
+            <section className="pictures-preview-grid">
+              {picturesPreview.id.map((img, index) => (
+                <img
+                  alt={`${singleMovie.title}`}
+                  key={index}
+                  className="pictures-preview"
+                  src={`https://image.tmdb.org/t/p/original/${img.file_path}`}
+                />
+              ))}
+            </section>
+          </motion.section>
+        ) : null
       }
-      {similarMovies && similarMovies.length > 0 ? <section className="similar-movies-section">
-        <h3>Similar movies</h3>
-        <ul className="similar-movies">
-          {similarMovies.map((movie) => (
-            <li key={movie.id} className="similar-movie">
-              <Link
-                onClick={() => getMovie(movie.id)}
-                to={`/movies/${movie.title.toLowerCase().replace(/ /g, '-')}`}
-              >
-                {movie.poster_path ? (
-                  <img
-                    alt=''
-                    src={`https://image.tmdb.org/t/p/original/${movie.poster_path ? movie.poster_path : movie.backdrop_path}`}
-                  />
-                ) : (
-                  <img src={NoImage} alt='' aria-hidden="true" />
-                )}
-              </Link>
-              <h5>{movie.title}</h5>
-            </li>
-          ))}
-        </ul>
-      </section> : null}
+      {
+        similarMovies && similarMovies.length > 0 ?
+          <motion.section className="similar-movies-section"
+            variants={sectionVariant}
+            whileInView="visible"
+            initial="initial"
+
+          >
+            <h3>Similar movies</h3>
+            <ul className="similar-movies">
+              {similarMovies.map((movie) => (
+                <li key={movie.id} className="similar-movie">
+                  <Link
+                    onClick={() => getMovie(movie.id)}
+                    to={`/movies/${movie.title.toLowerCase().replace(/ /g, '-')}`}
+                  >
+                    {movie.poster_path ? (
+                      <img
+                        alt=''
+                        src={`https://image.tmdb.org/t/p/original/${movie.poster_path ? movie.poster_path : movie.backdrop_path}`}
+                      />
+                    ) : (
+                      <img src={NoImage} alt='' aria-hidden="true" />
+                    )}
+                  </Link>
+                  <h5>{movie.title}</h5>
+                </li>
+              ))}
+            </ul>
+          </motion.section> : null
+      }
 
       {cast.length > 0 ? (
-        <section className="cast-section">
+        <motion.section
+          variants={sectionVariant}
+          whileInView="visible"
+          initial="initial"
+          className="cast-section">
           <Link
             className='cast-preview-grid-link'
             to={`/cast/${singleMovie.title.toLowerCase().replace(/ /g, '-')}`}
@@ -233,7 +298,7 @@ const SingleMovie = ({
               </li>
             ))}
           </ul>
-        </section>
+        </motion.section>
       ) : null
       }
     </motion.main>
