@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import NoImage from '../../assets/images/no-image.png'
 import { motion } from 'framer-motion'
+import { pageVariant } from '../homepage/Homepage'
 
 
 const Cast = ({ cast, getCastDetails }) => {
@@ -11,7 +12,12 @@ const Cast = ({ cast, getCastDetails }) => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [])
   return (
-    <main className="cast-route" >
+    <motion.main
+      variants={pageVariant}
+      initial="initial"
+      animate="visible"
+      exit="exit"
+      className="cast-route" >
       <h2>Cast</h2>
       <section className="cast-grid">
         {cast.map((person, index) => (
@@ -39,7 +45,7 @@ const Cast = ({ cast, getCastDetails }) => {
           </motion.div>
         ))}
       </section>
-    </main>
+    </motion.main>
   )
 }
 

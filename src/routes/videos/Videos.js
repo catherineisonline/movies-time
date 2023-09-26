@@ -1,13 +1,19 @@
 import React from 'react'
 import './videos.css'
 import { useEffect } from 'react'
-
+import { motion } from "framer-motion";
+import { pageVariant } from '../homepage/Homepage';
 const Videos = ({ videos }) => {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [])
   return (
-    <main className="videos-route" >
+    <motion.main
+      variants={pageVariant}
+      initial="initial"
+      animate="visible"
+      exit="exit"
+      className="videos-route" >
       <h2>Videos</h2>
       <section className="videos-grid">
         {videos.id.map((id) => (
@@ -23,7 +29,7 @@ const Videos = ({ videos }) => {
           </div>
         ))}
       </section>
-    </main>
+    </motion.main>
   )
 }
 

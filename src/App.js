@@ -1,7 +1,8 @@
 import {
   Routes,
   Route,
-  BrowserRouter,
+  Router,
+  useLocation,
 
 } from 'react-router-dom';
 import React, { useState, useEffect, useCallback } from 'react'
@@ -306,8 +307,11 @@ const App = () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     getSearch(query);
   }, [getSearch, query]);
+
+  const location = useLocation();
+
   return (
-    <BrowserRouter>
+    <>
       <Header
         genreList={genreList}
         setGenreId={setGenreId}
@@ -330,7 +334,7 @@ const App = () => {
         theme={theme}
         setThemeMode={setThemeMode}
       />
-      <Routes>
+      <Routes location={location} key={location.key}>
         <Route
           path="/"
           element={
@@ -408,7 +412,7 @@ const App = () => {
         <Route path="/about" element={<About theme={theme} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </BrowserRouter>
+    </>
   )
 }
 

@@ -1,9 +1,15 @@
 import React from 'react'
 import './about.css'
-
+import { motion } from "framer-motion"
+import { pageVariant } from '../homepage/Homepage'
 const About = ({ theme }) => {
   return (
-    <section className={`about ${theme}`}>
+    <motion.main
+      variants={pageVariant}
+      initial="initial"
+      animate="visible"
+      exit="exit"
+      className={`about ${theme}`}>
       <h2>About us</h2>
       <p>
         Welcome to Movies Time, founded in 2023 with the goal of providing
@@ -42,7 +48,7 @@ const About = ({ theme }) => {
         information about the movie industry. Thank you for visiting and we hope
         you enjoy exploring our website.
       </p>
-    </section>
+    </motion.main>
   )
 }
 

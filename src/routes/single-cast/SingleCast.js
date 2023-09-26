@@ -4,14 +4,20 @@ import './singleCast.css'
 import NoImageCover from '../../assets/images/no-image-two.png'
 import NoImage from '../../assets/images/no-image.png'
 import { Link } from 'react-router-dom'
-
+import { motion } from "framer-motion"
+import { pageVariant } from '../homepage/Homepage'
 
 const SingleCast = ({ castDetails, actedIn, getMovie }) => {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [])
   return (
-    <section className='single-cast' >
+    <motion.main
+      variants={pageVariant}
+      initial="initial"
+      animate="visible"
+      exit="exit"
+      className='single-cast' >
       <section className='single-cast-section'>
         {/* cast image */}
         {castDetails.profile_path ? <img alt={castDetails.name} src={`https://image.tmdb.org/t/p/original/${castDetails.profile_path}`} /> :
@@ -69,7 +75,7 @@ const SingleCast = ({ castDetails, actedIn, getMovie }) => {
           </ul>
         </section> : null}
       </section>
-    </section>
+    </motion.main>
   )
 
 }

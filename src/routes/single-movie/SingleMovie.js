@@ -5,6 +5,10 @@ import { Link } from 'react-router-dom'
 import ArrowRight from '../../assets/images/arrow-right.png'
 import NoImage from '../../assets/images/no-image.png'
 import NoImageCover from '../../assets/images/no-image-two.png'
+import { motion } from "framer-motion";
+import { pageVariant } from '../homepage/Homepage'
+
+
 
 const SingleMovie = ({
   singleMovie,
@@ -24,7 +28,12 @@ const SingleMovie = ({
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [])
   return (
-    <section className="single-movie" >
+    <motion.main
+      variants={pageVariant}
+      initial="initial"
+      animate="visible"
+      exit="exit"
+      className="single-movie" >
       {singleMovie.backdrop_path ? (
         <img
           className="header-bg"
@@ -224,7 +233,7 @@ const SingleMovie = ({
         </section>
       ) : null
       }
-    </section>
+    </motion.main>
   )
 }
 

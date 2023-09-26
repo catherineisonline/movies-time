@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './genres.css'
 import { motion } from 'framer-motion'
+import { pageVariant } from '../homepage/Homepage'
 
 const Genres = ({
   genreListMovies,
@@ -13,7 +14,12 @@ const Genres = ({
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [])
   return (
-    <main className="genres-route" >
+    <motion.main
+      variants={pageVariant}
+      initial="initial"
+      animate="visible"
+      exit="exit"
+      className="genres-route" >
       <h2>{currentGenre}</h2>
       <ul className="genres-grid">
         {genreListMovies.map((movie) => (
@@ -40,7 +46,7 @@ const Genres = ({
         ))}
       </ul>
       {PaginatedItems}
-    </main>
+    </motion.main>
   )
 }
 
