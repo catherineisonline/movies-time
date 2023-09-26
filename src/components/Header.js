@@ -9,6 +9,21 @@ import MovieLight from '../assets/images/movie-light.png'
 import { motion } from "framer-motion"
 
 
+const genreVariant = {
+  initial: {
+    x: "-100vw",
+    opacity: 0
+  },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 50
+    }
+  }
+}
+
 const Header = ({
   genreList,
   setGenreId,
@@ -37,7 +52,7 @@ const Header = ({
     getUpcoming()
   }, [])
   return (
-    <>
+    <React.Fragment>
       {!disabled ? (
         <motion.nav
           initial={{ opacity: 0, x: "-100%" }}
@@ -71,7 +86,11 @@ const Header = ({
               </li>
             </ul>
             {enabled ? (
-              <ul className="genres-menu">
+              <motion.ul
+                variants={genreVariant}
+                initial="initial"
+                animate="visible"
+                className="genres-menu">
                 {genreList.map((genre) => (
                   <li key={genre.id}>
                     <NavLink
@@ -87,7 +106,8 @@ const Header = ({
                     </NavLink>
                   </li>
                 ))}
-              </ul>
+              </motion.ul>
+
             ) : null}
           </nav>
           <section className="nav-socials">
@@ -168,7 +188,7 @@ const Header = ({
 
         <Upcoming upcomingMovies={upcomingMovies} getMovie={getMovie} setDisabled={setDisabled} />
       </motion.nav>}
-    </>
+    </React.Fragment>
   )
 }
 
