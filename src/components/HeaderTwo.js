@@ -12,7 +12,7 @@ const HeaderTwo = ({
   setQuery,
   searchResults,
   toggleMenu,
-  disabled,
+  disabledMenu,
   getMovie,
   setSearchResults,
   getCastDetails,
@@ -35,7 +35,7 @@ const HeaderTwo = ({
 
   return (
     <nav className={`navigation-two `}>
-      {disabled ? (
+      {disabledMenu ? (
         <img alt='open menu button' className="ham" src={HamLight} onClick={toggleMenu} />
       ) : (
         <img alt='close menu button' className="ham opened" src={CloseLight} onClick={toggleMenu} />

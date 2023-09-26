@@ -36,6 +36,7 @@ const SingleMovie = ({
       className="single-movie" >
       {singleMovie.backdrop_path ? (
         <img
+
           className="header-bg"
           alt='' aria-hidden="true"
           src={`https://image.tmdb.org/t/p/original/${singleMovie.backdrop_path ? singleMovie.backdrop_path : singleMovie.cover}`}
@@ -49,12 +50,14 @@ const SingleMovie = ({
 
       <section className="single-movie-header">
         {singleMovie.backdrop_path ?
-          <img
+          <motion.img
+            whileTap={{ scale: 1.5, y: "-10rem" }}
             alt='' aria-hidden="true"
             className="movie-cover"
             src={`https://image.tmdb.org/t/p/original/${singleMovie.cover ? singleMovie.cover : singleMovie.backdrop_path}`}
           /> :
-          <img
+          <motion.img
+            whileTap={{ scale: 1.5, y: "-10rem" }}
             className="header-bg"
             alt='' aria-hidden="true"
             src={NoImageCover}

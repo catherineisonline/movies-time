@@ -69,10 +69,10 @@ const App = () => {
     countries: [],
   })
 
-  const [disabled, setDisabled] = useState(true)
+  const [disabledMenu, setDisabledMenu] = useState(true);
 
   const toggleMenu = () => {
-    disabled ? setDisabled(false) : setDisabled(true)
+    disabledMenu ? setDisabledMenu(false) : setDisabledMenu(true);
   }
 
   const setThemeMode = () => {
@@ -317,8 +317,8 @@ const App = () => {
         setGenreId={setGenreId}
         setCurrentGenre={setCurrentGenre}
         getMovie={getMovie}
-        disabled={disabled}
-        setDisabled={setDisabled}
+        disabledMenu={disabledMenu}
+        setDisabledMenu={setDisabledMenu}
         theme={theme}
 
       />
@@ -327,7 +327,7 @@ const App = () => {
         query={query}
         searchResults={searchResults}
         toggleMenu={toggleMenu}
-        disabled={disabled}
+        disabledMenu={disabledMenu}
         getMovie={getMovie}
         setSearchResults={setSearchResults}
         getCastDetails={getCastDetails}

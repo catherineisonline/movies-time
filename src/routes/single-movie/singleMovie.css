@@ -32,6 +32,7 @@
     max-width: 18rem;
     height: auto;
     object-fit: cover;
+    cursor: pointer;
 }
 .header-description {
     display: flex;

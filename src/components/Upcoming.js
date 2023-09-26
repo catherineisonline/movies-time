@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Upcoming = ({ upcomingMovies, getMovie, setDisabled }) => {
+const Upcoming = ({ upcomingMovies, getMovie, setDisabledMenu }) => {
   return (
     <section className="upcoming-movies-section">
       <h3>Upcoming movies</h3>
       <ul className="upcoming-movies">
         {upcomingMovies.map((movie) => (
-          <li key={movie.id} className="upcoming-movie" onClick={() => setDisabled(true)} >
+          <li key={movie.id} className="upcoming-movie" onClick={() => setDisabledMenu(true)} >
             <Link
               onClick={() => { getMovie(movie.id); }}
               to={`/movies/${movie.title.toLowerCase().replace(/ /g, '-')}`}
