@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import "./not-found.css";
 import { motion } from "framer-motion";
-import { pageVariant } from "../single-movie/SingleMovie";
+import { pageVariant } from '../homepage/Homepage'
 
 const NotFound = () => {
     useEffect(() => {
