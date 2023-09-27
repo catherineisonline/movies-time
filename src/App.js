@@ -267,6 +267,7 @@ const App = () => {
     try {
       const url = `${baseUrl}/person/${personId}?api_key=${apiKey}&language=en-US`;
       const data = await fetchJSON(url);
+      localStorage.setItem('castInfo', JSON.stringify(data));
       setCastDetails({
         ...data,
         name: data.name,
@@ -290,6 +291,22 @@ const App = () => {
       console.log('Error in getCastDetails movie credicts:', err);
     }
   }
+
+  useEffect(() => {
+    const castInfo = localStorage.getItem('castInfo');
+    if (castInfo) {
+      const data = JSON.parse(castInfo);
+      setCastDetails({
+        ...data,
+        name: data.name,
+        biography: data.biography,
+        birthday: data.birthday,
+        known_for_department: data.known_for_department,
+        place_of_birth: data.place_of_birth,
+        profile_path: data.profile_path,
+      })
+    }
+  }, []);
 
   const getSearch = useCallback((query) => {
     if (query === '') setSearchResults([])
