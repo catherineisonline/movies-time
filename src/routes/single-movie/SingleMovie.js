@@ -57,7 +57,8 @@ const SingleMovie = ({
 }) => {
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    console.log(singleMovie)
   }, [])
   return (
     <motion.main
@@ -99,7 +100,7 @@ const SingleMovie = ({
         <section className="header-description">
           <section className="title-section">
             <h3 className="title">
-              {singleMovie.title} ({singleMovie.release_year})
+              {singleMovie.title} {singleMovie.release_year.length !== 0 ? `(${singleMovie.release_year})` : null}
             </h3>
             <p>{singleMovie.tagline}</p>
 
