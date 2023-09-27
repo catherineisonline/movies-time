@@ -30,16 +30,14 @@ const singlePageVariant = {
 
 const sectionVariant = {
   initial: {
-    x: "-100vw"
+    x: "100vw"
   },
   visible: {
     x: 0,
     transition: {
-      delay: 0.5,
       type: "spring",
-      stiffness: 50,
-      duration: 3,
-      ease: "easeIn"
+      stiffness: 40,
+      delay: 0.5
     }
   }
 }
