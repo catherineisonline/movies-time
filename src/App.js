@@ -122,9 +122,9 @@ const App = () => {
     findGenres();
   }, [findGenres]);
 
-  const findByGenres = useCallback(async (genreId, currentPage) => {
+  const findByGenres = useCallback(async (genreName) => {
     try {
-      const url = `${baseUrl}/discover/movie/?api_key=${apiKey}&language=en-US&with_genres=${genreId}&page=${currentPage}`;
+      const url = `${baseUrl}/discover/movie?api_key=${apiKey}&language=en-US&with_genres=${genreName}&page=${currentPage}`;
       const data = await fetchJSON(url);
       setPageAmount(499);
       localStorage.setItem('genreId', JSON.stringify([...data.results]));
@@ -132,7 +132,7 @@ const App = () => {
     } catch (err) {
       console.error('Error in findByGenres:', err);
     }
-  }, []);
+  }, [currentPage]);
 
 
   useEffect(() => {

@@ -98,17 +98,17 @@ const Header = ({
               variants={menuVariant}
               exit="exit"
               className="genres-menu">
-              {genreList.map((genre) => (
-                <li key={genre.id}>
+              {genreList && genreList.map((genre) => (
+                <li key={genre?.id}>
                   <NavLink
                     onClick={() => {
-                      findByGenres(genre.id, genre.name);
+                      findByGenres(genre?.name);
                       setDisabledMenu(true)
                       setEnabled(false)
                     }}
-                    to={`/genres/${genre.name.toLowerCase()}`}
+                    to={`/genres/${genre?.name.toLowerCase()}`}
                   >
-                    {genre.name}
+                    {genre?.name}
                   </NavLink>
                 </li>
               ))}
