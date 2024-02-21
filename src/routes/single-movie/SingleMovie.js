@@ -99,7 +99,7 @@ const SingleMovie = ({
         <section className="header-description">
           <section className="title-section">
             <h3 className="title">
-              {singleMovie.title} {singleMovie.release_year.length !== 0 ? `(${singleMovie.release_year})` : null}
+              {singleMovie.title} {singleMovie.release_year?.length !== 0 ? `(${singleMovie.release_year})` : null}
             </h3>
             <p>{singleMovie.tagline}</p>
 
@@ -113,7 +113,7 @@ const SingleMovie = ({
             <h3 className="votes">{singleMovie.voteavg}</h3>
             <p>({singleMovie.votes} votes)</p>
           </section>
-          {singleMovie && singleMovie.countries && singleMovie.countries.length > 0 ? (
+          {singleMovie && singleMovie.countries && singleMovie.countries?.length > 0 ? (
             <section>
               <h4>Production countries:</h4>
               <ul className="countries">
@@ -158,7 +158,7 @@ const SingleMovie = ({
             <p>{singleMovie.overview}</p>
           </section> :
           <section>No review available</section>}
-        {keywords && keywords.keyword.length > 0 ? (
+        {keywords && keywords.keyword?.length > 0 ? (
           <ul>
             <h3>Tags: </h3>
             {keywords.keyword.map((keyword, index) => (
@@ -206,7 +206,6 @@ const SingleMovie = ({
             variants={sectionVariant}
             whileInView="visible"
             initial="initial"
-          // viewport={{ root: scrollRef }}
           >
             <Link
               to={`/movies/${singleMovie.title
@@ -229,7 +228,7 @@ const SingleMovie = ({
         ) : null
       }
       {
-        similarMovies && similarMovies.length > 0 ?
+        similarMovies && similarMovies?.length > 0 ?
           <motion.section className="similar-movies-section"
             variants={sectionVariant}
             whileInView="visible"
@@ -270,7 +269,7 @@ const SingleMovie = ({
             className='cast-preview-grid-link'
             to={`/cast/${singleMovie.title.toLowerCase().replace(/ /g, '-')}`}
           >
-            See cast ({cast.length})<img src={ArrowRight} alt='' aria-hidden="true" />
+            See cast ({cast?.length})<img src={ArrowRight} alt='' aria-hidden="true" />
           </Link>
           <ul className="cast-preview-grid">
             {castPreview.map((person, index) => (
