@@ -190,7 +190,7 @@ const App = () => {
     }
     // movie similar movies
     try {
-      const url = `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=b71bcab3d07039b32d23c21d747e9d40&language=en-US&page=1`;
+      const url = `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${apiKey}&language=en-US&page=1`;
       const data = await fetchJSON(url);
       setSimilarMovies([...data.results].slice(0, 5));
     }

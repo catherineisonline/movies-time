@@ -8,6 +8,8 @@ import GitLight from '../assets/images/github-dark.png'
 import MovieLight from '../assets/images/movie-light.png'
 import { AnimatePresence, motion } from "framer-motion"
 
+const baseUrl = process.env.REACT_APP_BASE_URL;
+const apiKey = process.env.REACT_APP_API_KEY;
 
 const menuVariant = {
   initial: {
@@ -48,7 +50,7 @@ const Header = ({
   }
   const getUpcoming = async () => {
     try {
-      const response = await fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=b71bcab3d07039b32d23c21d747e9d40&language=en-US&page=1`);
+      const response = await fetch(`${baseUrl}/movie/upcoming?api_key=${apiKey}&language=en-US&page=1`);
       const data = await response.json();
       setUpcomingMovies([...data.results].slice(0, 6))
     }
