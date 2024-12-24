@@ -176,7 +176,7 @@ const App = () => {
         release: data.release_date,
         imdb_id: data.imdb_id,
         votes: data.vote_count,
-        voteavg: data.vote_average.toFixed(1),
+        voteavg: data.vote_average.toFixed(2),
         genres: [...data.genres],
         countries: [...data.production_countries],
         duration: data.runtime,

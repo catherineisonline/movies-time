@@ -33,7 +33,7 @@ const AllMovies = ({ movieList, PaginatedItems, getMovie }) => {
               <h3 className="movie-title">{movie?.title}</h3>
               <section className="homepage-movie-meta-title">
                 <p>{movie?.release_date.slice(0, 4)}</p>
-                <h3 className="all-movies-rating">{movie?.vote_average}</h3>
+                <h3 className="all-movies-rating">{movie.vote_average && movie.vote_average.toFixed(2)}</h3>
               </section>
             </section>
           </motion.li>
