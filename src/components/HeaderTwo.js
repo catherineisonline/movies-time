@@ -1,11 +1,12 @@
-import React, { useEffect, useRef } from 'react'
 import './header.css'
+import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import DarkWhite from '../assets/images/dark-theme-white.png'
 import LightWhite from '../assets/images/light-theme-white.png'
 import HamLight from '../assets/images/ham-light.png'
 import NoImage from '../assets/images/no-image-two.png'
 import CloseLight from '../assets/images/close-light.png'
+import { FallbackImage } from './FallbackImage'
 
 const HeaderTwo = ({
   query,
@@ -21,6 +22,28 @@ const HeaderTwo = ({
 }) => {
   const ref = useRef();
 
+  const viewLink = (result) => {
+    if (result.media_type === 'movie') {
+      getMovie(result.id);
+    }
+    else if (result.media_type === 'person') {
+      getCastDetails(result.id)
+    }
+    setSearchResults([]); setQuery('')
+  }
+  const targetLink = (result) => {
+    if (result.media_type === 'movie') {
+      return `/movies/${result.title?.toLowerCase().replace(/ /g, '-')}`;
+    } else {
+      return `/actors/${result.name?.toLowerCase().replace(/ /g, '-')}`;
+    }
+
+  };
+
+  const getYear = (result) => {
+    return result.first_air_date?.slice(0, 4) || result.release_date?.slice(0, 4) || null;
+  };
+
   useEffect(() => {
     const handleOutsideClick = (e) => {
       if (ref.current && !ref.current.contains(e.target)) {
@@ -31,7 +54,7 @@ const HeaderTwo = ({
     return () => {
       document.removeEventListener('click', handleOutsideClick);
     };
-  }, [setQuery]);
+  }, [setQuery, setSearchResults]);
 
   return (
     <nav className={`navigation-two `}>
@@ -47,7 +70,7 @@ const HeaderTwo = ({
       </h1>
       <section className='header-actions'>
         <section className="search">
-          <section className='search-section'>
+          <section className='search-section' ref={ref}>
             <input
               type="text"
               placeholder="Search..."
@@ -77,46 +100,18 @@ const HeaderTwo = ({
               </button>
             }
           </section>
-
           {searchResults && searchResults.length > 0 ? (
-            <ul className="search-results" ref={ref}>
+            <ul className="search-results">
               {searchResults.map((result, index) => (
                 <li key={index}>
-                  <Link onClick={() => {
-                    if (result.media_type === 'movie') { getMovie(result.id); } if (result.media_type === 'person') {
-                      getCastDetails(result.id)
-                    } setSearchResults([]); setQuery('')
-                  }}
-                    to={result.media_type === 'movie' ? `/movies/${result.title?.toLowerCase().replace(/ /g, '-')}` : `/actors/${result.name?.toLowerCase().replace(/ /g, '-')}`}
-                  >
-                    {result.poster_path ? (
-                      <img
-                        alt={`${result.title}`}
-                        src={`https://image.tmdb.org/t/p/original/${result.poster_path}`}
-                      />
-                    ) : result.backdrop_path ? (
-                      <img
-                        alt={`${result.title}`}
-                        src={`https://image.tmdb.org/t/p/original/${result.backdrop_path}`}
-                      />
-                    ) : (
-                      <img
-                        alt={`${result.title}`}
-                        src={NoImage}
-                      />
-                    )}
-                    <section>
-
-                      <h3>
-                        {result.title ? `${result.title}` : `${result.name}`}
-                      </h3>
-                      <p>
-                        {result.first_air_date && result.first_air_date.length > 0
-                          ? result.first_air_date.slice(0, 4)
-                          : result.release_date && result.release_date.length > 0
-                            ? result.release_date.slice(0, 4)
-                            : null}
-                      </p>
+                  <Link to={targetLink(result)} onClick={() => viewLink(result)}>
+                    <FallbackImage
+                      alt={result.title}
+                      src={result.poster_path ? `https://image.tmdb.org/t/p/original/${result.profile_path}` : result.backdrop_path ? `https://image.tmdb.org/t/p/original/${result.backdrop_path}` : null}
+                      fallback={NoImage} />
+                    <section className='search-results__info'>
+                      <h3>{result.title || result.name}</h3>
+                      <p>{getYear(result)}</p>
                     </section>
                   </Link>
                 </li>
@@ -135,7 +130,7 @@ const HeaderTwo = ({
           </button>
         </section>
       </section>
-    </nav >
+    </nav>
   )
 }
 

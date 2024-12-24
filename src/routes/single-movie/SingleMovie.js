@@ -1,11 +1,12 @@
-import React from 'react'
 import './singleMovie.css'
+import React from 'react'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import ArrowRight from '../../assets/images/arrow-right.png'
 import NoImage from '../../assets/images/no-image.png'
 import NoImageCover from '../../assets/images/no-image-two.png'
 import { motion } from "framer-motion";
+import { FallbackImage } from '../../components/FallbackImage'
 
 const singlePageVariant = {
   initial: {
@@ -55,7 +56,24 @@ const SingleMovie = ({
   getMovie,
   getCastDetails
 }) => {
-
+const {
+  title,
+  cover,
+  backdrop_path,
+  release_year,
+  tagline,
+  voteavg,
+  status,
+  release,
+  duration,
+  budget,
+  votes,
+  original_lang,
+  overview,
+  revenue,
+  genres,
+  countries,
+} = singleMovie;
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, [])
@@ -67,57 +85,38 @@ const SingleMovie = ({
       exit="exit"
       className="single-movie"
     >
-      {singleMovie.backdrop_path ? (
-        <img
-          className="header-bg"
+     <FallbackImage
+          className="movie-cover"
           alt='' aria-hidden="true"
-          src={`https://image.tmdb.org/t/p/original/${singleMovie.backdrop_path ? singleMovie.backdrop_path : singleMovie.cover}`}
-        />
-      ) : <img
-        className="header-bg"
-        alt='' aria-hidden="true"
-        src={NoImageCover}
-      />
-      }
-
-      <section className="single-movie-header"
-
-      >
-        {singleMovie.backdrop_path ?
-          <motion.img
-            whileTap={{ scale: 1.5, y: "-10rem" }}
-            alt='' aria-hidden="true"
-            className="movie-cover"
-            src={`https://image.tmdb.org/t/p/original/${singleMovie.cover ? singleMovie.cover : singleMovie.backdrop_path}`}
-          /> :
-          <motion.img
-            whileTap={{ scale: 1.5, y: "-10rem" }}
-            className="header-bg"
-            alt='' aria-hidden="true"
-            src={NoImageCover}
-          />}
+          src={backdrop_path ? `https://image.tmdb.org/t/p/original/${backdrop_path}` : cover ? `https://image.tmdb.org/t/p/original/${cover}` : null}
+          fallback={null} />
+      <section className="single-movie-header">
+        <FallbackImage
+          className="movie-cover"
+          alt='' aria-hidden="true"
+          src={backdrop_path ? `https://image.tmdb.org/t/p/original/${backdrop_path}` : cover ? `https://image.tmdb.org/t/p/original/${cover}` : null}
+          fallback={NoImageCover} />
         <section className="header-description">
           <section className="title-section">
             <h3 className="title">
-              {singleMovie.title} {singleMovie.release_year?.length !== 0 ? `(${singleMovie.release_year})` : null}
+              {title} {release_year?.length !== 0 ? `(${release_year})` : null}
             </h3>
-            <p>{singleMovie.tagline}</p>
-
+            <p>{tagline}</p>
             <ul className="genres">
-              {singleMovie.genres.map((genre) => (
+              {genres.map((genre) => (
                 <li key={genre.name}>{genre.name}</li>
               ))}
             </ul>
           </section>
           <section className="voting">
-            <h3 className="votes">{singleMovie.voteavg}</h3>
-            <p>({singleMovie.votes} votes)</p>
+            <h3 className="votes">{voteavg}</h3>
+            <p>({votes} votes)</p>
           </section>
-          {singleMovie && singleMovie.countries && singleMovie.countries?.length > 0 ? (
+          {singleMovie && countries && countries?.length > 0 ? (
             <section>
               <h4>Production countries:</h4>
               <ul className="countries">
-                {singleMovie.countries.map((country) => (
+                {countries.map((country) => (
                   <li key={country.name}>{country.name}</li>
                 ))}
               </ul>
@@ -126,36 +125,36 @@ const SingleMovie = ({
         </section>
         <section className="additional-info" >
           <h4>
-            Status: {singleMovie.status ? <span>{singleMovie.status}</span> : <span>N/A</span>}
+            Status: {status ? <span>{status}</span> : <span>N/A</span>}
           </h4>
           <h4>
-            Release date:  {singleMovie.release ? <span>{singleMovie.release}</span> : <span>N/A</span>}
-          </h4>
-
-          <h4>
-            Duration: {singleMovie.duration ? <span>{singleMovie.duration} mins</span> : <span>N/A</span>}
+            Release date:  {release ? <span>{release}</span> : <span>N/A</span>}
           </h4>
 
           <h4>
-            Budget: {singleMovie.budget ? <span>${singleMovie.budget}</span> : <span>N/A</span>}
+            Duration: {duration ? <span>{duration} mins</span> : <span>N/A</span>}
           </h4>
 
           <h4>
-            Revenue: {singleMovie.revenue ? <span>${singleMovie.revenue}</span> : <span>N/A</span>}
+            Budget: {budget ? <span>${budget}</span> : <span>N/A</span>}
           </h4>
 
           <h4>
-            Language: {singleMovie.original_lang ? <span>{singleMovie.original_lang}</span> : <span>N/A</span>}
+            Revenue: {revenue ? <span>${revenue}</span> : <span>N/A</span>}
+          </h4>
+
+          <h4>
+            Language: {original_lang ? <span>{original_lang}</span> : <span>N/A</span>}
           </h4>
         </section>
       </section>
 
       <section
         className="overview">
-        {singleMovie.overview ?
+        {overview ?
           <section>
             <h3>Overview</h3>
-            <p>{singleMovie.overview}</p>
+            <p>{overview}</p>
           </section> :
           <section>No review available</section>}
         {keywords && keywords.keyword?.length > 0 ? (
@@ -175,7 +174,7 @@ const SingleMovie = ({
           initial="initial"
         >
           <Link
-            to={`/movies/${singleMovie.title
+            to={`/movies/${title
               .toLowerCase()
               .replace(/ /g, '-')}/videos`}>
             Watch videos ({videos.size})<img src={ArrowRight} alt='' aria-hidden="true" />
@@ -208,7 +207,7 @@ const SingleMovie = ({
             initial="initial"
           >
             <Link
-              to={`/movies/${singleMovie.title
+              to={`/movies/${title
                 .toLowerCase()
                 .replace(/ /g, '-')}/pictures`}
             >
@@ -217,7 +216,7 @@ const SingleMovie = ({
             <section className="pictures-preview-grid">
               {picturesPreview.id.map((img, index) => (
                 <img
-                  alt={`${singleMovie.title}`}
+                  alt={`${title}`}
                   key={index}
                   className="pictures-preview"
                   src={`https://image.tmdb.org/t/p/original/${img.file_path}`}
@@ -267,7 +266,7 @@ const SingleMovie = ({
           className="cast-section">
           <Link
             className='cast-preview-grid-link'
-            to={`/cast/${singleMovie.title.toLowerCase().replace(/ /g, '-')}`}
+            to={`/cast/${title.toLowerCase().replace(/ /g, '-')}`}
           >
             See cast ({cast?.length})<img src={ArrowRight} alt='' aria-hidden="true" />
           </Link>
