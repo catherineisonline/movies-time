@@ -263,32 +263,17 @@ const App = () => {
   }, []);
 
   const getCastDetails = async (personId) => {
-    // person
     try {
-      const url = `${baseUrl}/person/${personId}?api_key=${apiKey}&language=en-US`;
-      const data = await fetchJSON(url);
-      localStorage.setItem('castInfo', JSON.stringify(data));
-      setCastDetails({
-        ...data,
-        name: data.name,
-        biography: data.biography,
-        birthday: data.birthday,
-        known_for_department: data.known_for_department,
-        place_of_birth: data.place_of_birth,
-        profile_path: data.profile_path,
-      })
-    }
-    catch (err) {
+      const personUrl = `${baseUrl}/person/${personId}?api_key=${apiKey}&language=en-US`;
+      const personData = await fetchJSON(personUrl);
+      localStorage.setItem('castInfo', JSON.stringify(personData));
+      setCastDetails(personData);
+
+      const creditsUrl = `${baseUrl}/person/${personId}/movie_credits?api_key=${apiKey}&language=en-US`;
+      const creditsData = await fetchJSON(creditsUrl);
+      setActedIn([...creditsData.cast].slice(0, 19));
+    } catch (err) {
       console.log('Error in getCastDetails:', err);
-    }
-    // movie credits
-    try {
-      const url = `${baseUrl}/person/${personId}/movie_credits?api_key=${apiKey}&language=en-US`;
-      const data = await fetchJSON(url);
-      setActedIn([...data.cast].slice(0, 19))
-    }
-    catch (err) {
-      console.log('Error in getCastDetails movie credicts:', err);
     }
   }
 
@@ -307,17 +292,17 @@ const App = () => {
       })
     }
   }, []);
-
-  const getSearch = useCallback((query) => {
-    if (query === '') setSearchResults([])
-    fetch(
-      `${baseUrl}/search/multi?api_key=${apiKey}&language=en-US&query=${query}&page=1`,
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setSearchResults([...data.results].slice(0, 4));
-      })
-      .catch((err) => setSearchResults([]))
+  const getSearch = useCallback(async (query) => {
+    if (query === '') setSearchResults([]);
+    try {
+      const searchUrl = `${baseUrl}/search/multi?api_key=${apiKey}&language=en-US&query=${query}&page=1`;
+      const { results } = await fetchJSON(searchUrl);
+      setSearchResults(results.filter(item => item.media_type === 'movie' || item.media_type === 'person'));
+    }
+    catch (err) {
+      setSearchResults([]);
+      console.log('Error in getSearch', err)
+    }
   }, [])
 
   useEffect(() => {
@@ -405,7 +390,6 @@ const App = () => {
               castPreview={castPreview}
               cast={cast}
               getMovie={getMovie}
-
               getCastDetails={getCastDetails}
               theme={theme}
             />
@@ -414,7 +398,7 @@ const App = () => {
         <Route path={`/cast/:id`} element={<Cast cast={cast} getCastDetails={getCastDetails} theme={theme} />} />
         <Route
           path={`/actors/:id`}
-          element={<SingleCast cast={cast} singleMovie={singleMovie} castDetails={castDetails} actedIn={actedIn} getMovie={getMovie} theme={theme} />}
+          element={<SingleCast castDetails={castDetails} actedIn={actedIn} getMovie={getMovie} theme={theme} />}
         />
         <Route
           path={`/movies/:id/videos`}
