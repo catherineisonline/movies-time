@@ -1,82 +1,77 @@
-import {
-  Routes,
-  Route,
-  useLocation,
+import { Routes, Route, useLocation } from "react-router-dom";
+import { useState, useEffect, useCallback } from "react";
+import "./core-ui/index.css";
+import "./core-ui/light-mode.css";
+import Homepage from "./routes/homepage/Homepage";
+import About from "./routes/about/About";
+import Header from "./components/Header";
+import AllMovies from "./routes/homepage/AllMovies";
+import SingleMovie from "./routes/single-movie/SingleMovie";
+import Genres from "./routes/genres/Genres";
+import ReactPaginate from "react-paginate";
+import Hero from "./routes/homepage/Hero";
+import Videos from "./routes/videos/Videos";
+import Pictures from "./routes/pictures/Pictures";
+import HeaderTwo from "./components/HeaderTwo";
+import Cast from "./routes/cast/Cast";
+import SingleCast from "./routes/single-cast/SingleCast";
+import NotFound from "./routes/not-found/NotFound";
 
-} from 'react-router-dom';
-import React, { useState, useEffect, useCallback } from 'react'
-import './core-ui/index.css'
-import './core-ui/light-mode.css'
-import Homepage from './routes/homepage/Homepage.js'
-import About from './routes/about/About.js'
-import Header from './components/Header.js'
-import AllMovies from './routes/homepage/AllMovies.js'
-import SingleMovie from './routes/single-movie/SingleMovie.js'
-import Genres from './routes/genres/Genres.js'
-import ReactPaginate from 'react-paginate'
-import Hero from './routes/homepage/Hero.js'
-import Videos from './routes/videos/Videos.js'
-import Pictures from './routes/pictures/Pictures.js'
-import HeaderTwo from './components/HeaderTwo.js'
-import Cast from './routes/cast/Cast.js'
-import SingleCast from './routes/single-cast/SingleCast.js'
-import NotFound from './routes/not-found/NotFound';
-
-const baseUrl = process.env.REACT_APP_BASE_URL;
-const apiKey = process.env.REACT_APP_API_KEY;
+const baseUrl = import.meta.env.VITE_BASE_URL;
+const apiKey = import.meta.env.VITE_API_KEY;
 
 const App = () => {
-  const [theme, setTheme] = useState('dark');
-  const [movieList, setMovieList] = useState([])
-  const [genreList, setGenreList] = useState([])
-  const [currentPage, setCurrentPage] = useState(1)
-  const [pageAmount, setPageAmount] = useState(0)
-  const [genreListMovies, setGenreListMovies] = useState([])
-  const [trendingMovies, setTrendingMovies] = useState([])
-  const [similarMovies, setSimilarMovies] = useState([])
-  const [videos, setVideos] = useState({ id: [], size: 0 })
-  const [videosPreview, setVideosPreview] = useState({ id: [] })
-  const [pictures, setPictures] = useState({ id: [], size: 0 })
-  const [picturesPreview, setPicturesPreview] = useState({ id: [] })
-  const [cast, setCast] = useState([])
+  const [theme, setTheme] = useState("dark");
+  const [movieList, setMovieList] = useState([]);
+  const [genreList, setGenreList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageAmount, setPageAmount] = useState(0);
+  const [genreListMovies, setGenreListMovies] = useState([]);
+  const [trendingMovies, setTrendingMovies] = useState([]);
+  const [similarMovies, setSimilarMovies] = useState([]);
+  const [videos, setVideos] = useState({ id: [], size: 0 });
+  const [videosPreview, setVideosPreview] = useState({ id: [] });
+  const [pictures, setPictures] = useState({ id: [], size: 0 });
+  const [picturesPreview, setPicturesPreview] = useState({ id: [] });
+  const [cast, setCast] = useState([]);
   const [castDetails, setCastDetails] = useState({
-    name: '',
-    biography: '',
-    birthday: '',
-    known_for_department: '',
-    place_of_birth: '',
-    profile_path: '',
-  })
-  const [actedIn, setActedIn] = useState([])
-  const [castPreview, setCastPreview] = useState([])
-  const [keywords, setKeywords] = useState({ keyword: [] })
-  const [query, setQuery] = useState('')
-  const [searchResults, setSearchResults] = useState([])
+    name: "",
+    biography: "",
+    birthday: "",
+    known_for_department: "",
+    place_of_birth: "",
+    profile_path: "",
+  });
+  const [actedIn, setActedIn] = useState([]);
+  const [castPreview, setCastPreview] = useState([]);
+  const [keywords, setKeywords] = useState({ keyword: [] });
+  const [query, setQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
   const [singleMovie, setSingleMovie] = useState({
-    title: '',
-    cover: '',
-    budget: '',
-    overview: '',
-    tagline: '',
-    release: '',
-    imdb_id: '',
-    votes: '',
-    voteavg: '',
+    title: "",
+    cover: "",
+    budget: "",
+    overview: "",
+    tagline: "",
+    release: "",
+    imdb_id: "",
+    votes: "",
+    voteavg: "",
     genres: [],
     countries: [],
-  })
+  });
 
   const [disabledMenu, setDisabledMenu] = useState(true);
 
   const toggleMenu = () => {
     disabledMenu ? setDisabledMenu(false) : setDisabledMenu(true);
-  }
+  };
 
   const setThemeMode = () => {
-    if (theme === 'light') {
-      setTheme('dark');
+    if (theme === "light") {
+      setTheme("dark");
     } else {
-      setTheme('light');
+      setTheme("light");
     }
   };
 
@@ -90,7 +85,7 @@ const App = () => {
       throw new Error(`Response issue with url: ${url}`);
     }
     return response.json();
-  }
+  };
 
   const findMovies = useCallback(async (currentPage) => {
     try {
@@ -99,14 +94,13 @@ const App = () => {
       setPageAmount(499);
       setMovieList([...data.results]);
     } catch (err) {
-      console.error('Error in findMovies:', err);
+      console.error("Error in findMovies:", err);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     findMovies(currentPage);
   }, [findMovies, currentPage]);
-
 
   const findGenres = useCallback(async () => {
     try {
@@ -114,30 +108,32 @@ const App = () => {
       const data = await fetchJSON(url);
       setGenreList([...data.genres]);
     } catch (err) {
-      console.error('Error in findGenres:', err);
+      console.error("Error in findGenres:", err);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     findGenres();
   }, [findGenres]);
 
-  const findByGenres = useCallback(async (genreName) => {
-    try {
-      const url = `${baseUrl}/discover/movie?api_key=${apiKey}&language=en-US&with_genres=${genreName}&page=${currentPage}`;
-      const data = await fetchJSON(url);
-      setPageAmount(499);
-      localStorage.setItem('genreId', JSON.stringify([...data.results]));
-      setGenreListMovies([...data.results]);
-    } catch (err) {
-      console.error('Error in findByGenres:', err);
-    }
-  }, [currentPage]);
-
+  const findByGenres = useCallback(
+    async (genreName) => {
+      try {
+        const url = `${baseUrl}/discover/movie?api_key=${apiKey}&language=en-US&with_genres=${genreName}&page=${currentPage}`;
+        const data = await fetchJSON(url);
+        setPageAmount(499);
+        localStorage.setItem("genreId", JSON.stringify([...data.results]));
+        setGenreListMovies([...data.results]);
+      } catch (err) {
+        console.error("Error in findByGenres:", err);
+      }
+    },
+    [currentPage]
+  );
 
   useEffect(() => {
-    if (localStorage.getItem('genreId') !== null) {
-      const data = JSON.parse(localStorage.getItem('genreId'));
+    if (localStorage.getItem("genreId") !== null) {
+      const data = JSON.parse(localStorage.getItem("genreId"));
       setGenreListMovies(data);
     }
   }, []);
@@ -145,31 +141,29 @@ const App = () => {
     try {
       const url = `${baseUrl}/trending/movie/day?api_key=${apiKey}`;
       const data = await fetchJSON(url);
-      setTrendingMovies([...data.results].slice(0, 6))
+      setTrendingMovies([...data.results].slice(0, 6));
     } catch (err) {
-      console.log("Erro in getTrening:", err)
+      console.log("Erro in getTrening:", err);
     }
   }, []);
 
   useEffect(() => {
     getTrending();
-  }, [getTrending])
+  }, [getTrending]);
 
   const getMovie = async (movieId) => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     // single movie
     try {
       const url = `${baseUrl}/movie/${movieId}?api_key=${apiKey}&language=en-US`;
       const data = await fetchJSON(url);
-      localStorage.setItem('currentMovie', JSON.stringify(data));
+      localStorage.setItem("currentMovie", JSON.stringify(data));
       setSingleMovie({
         ...data,
         title: data.title,
         cover: data.poster_path,
-        budget: data.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
-        revenue: data.revenue
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
+        budget: data.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."),
+        revenue: data.revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."),
         overview: data.overview,
         tagline: data.tagline,
         release_year: data.release_date.slice(0, 4),
@@ -183,19 +177,17 @@ const App = () => {
         original_lang: data.original_language.toUpperCase(),
         status: data.status,
         backdrop_path: data.backdrop_path,
-      })
-    }
-    catch (err) {
-      console.log('Error in getMovie:', err);
+      });
+    } catch (err) {
+      console.log("Error in getMovie:", err);
     }
     // movie similar movies
     try {
       const url = `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${apiKey}&language=en-US&page=1`;
       const data = await fetchJSON(url);
       setSimilarMovies([...data.results].slice(0, 5));
-    }
-    catch (err) {
-      console.log('Error in similar movies:', err);
+    } catch (err) {
+      console.log("Error in similar movies:", err);
     }
     // movie videos
     try {
@@ -206,41 +198,38 @@ const App = () => {
         ...videos,
         id: [...data.results],
         size: [...data.results].length,
-      })
+      });
       setVideosPreview({
         ...videos,
         id: splitVids,
-      })
-    }
-    catch (err) {
-      console.log('Error in getMovie videos:', err);
+      });
+    } catch (err) {
+      console.log("Error in getMovie videos:", err);
     }
     // movie images
     try {
       const url = `${baseUrl}/movie/${movieId}/images?api_key=${apiKey}`;
       const data = await fetchJSON(url);
-      const splitImgs = data.backdrops.filter((key, index) => index <= 1)
+      const splitImgs = data.backdrops.filter((key, index) => index <= 1);
       setPictures({
         ...pictures,
         id: [...data.backdrops],
         size: [...data.backdrops].length,
-      })
+      });
       setPicturesPreview({
         ...pictures,
         id: splitImgs,
-      })
-    }
-    catch (err) {
-      console.log('Error in getMovie images:', err);
+      });
+    } catch (err) {
+      console.log("Error in getMovie images:", err);
     }
     // movie keywords
     try {
       const url = `${baseUrl}/movie/${movieId}/keywords?api_key=${apiKey}`;
       const data = await fetchJSON(url);
       setKeywords({ ...keywords, keyword: [...data.keywords] });
-    }
-    catch (err) {
-      console.log('Error in getMovie keywords:', err);
+    } catch (err) {
+      console.log("Error in getMovie keywords:", err);
     }
     // movie credits
     try {
@@ -248,14 +237,13 @@ const App = () => {
       const data = await fetchJSON(url);
       setCast([...data.cast]);
       setCastPreview([...data.cast].slice(0, 5));
+    } catch (err) {
+      console.log("Error in getMovie credits:", err);
     }
-    catch (err) {
-      console.log('Error in getMovie credits:', err);
-    }
-  }
+  };
 
   useEffect(() => {
-    const storedMovieData = localStorage.getItem('currentMovie');
+    const storedMovieData = localStorage.getItem("currentMovie");
     if (storedMovieData) {
       const data = JSON.parse(storedMovieData);
       getMovie(data.id);
@@ -266,19 +254,19 @@ const App = () => {
     try {
       const personUrl = `${baseUrl}/person/${personId}?api_key=${apiKey}&language=en-US`;
       const personData = await fetchJSON(personUrl);
-      localStorage.setItem('castInfo', JSON.stringify(personData));
+      localStorage.setItem("castInfo", JSON.stringify(personData));
       setCastDetails(personData);
 
       const creditsUrl = `${baseUrl}/person/${personId}/movie_credits?api_key=${apiKey}&language=en-US`;
       const creditsData = await fetchJSON(creditsUrl);
       setActedIn([...creditsData.cast].slice(0, 19));
     } catch (err) {
-      console.log('Error in getCastDetails:', err);
+      console.log("Error in getCastDetails:", err);
     }
-  }
+  };
 
   useEffect(() => {
-    const castInfo = localStorage.getItem('castInfo');
+    const castInfo = localStorage.getItem("castInfo");
     if (castInfo) {
       const data = JSON.parse(castInfo);
       setCastDetails({
@@ -289,24 +277,27 @@ const App = () => {
         known_for_department: data.known_for_department,
         place_of_birth: data.place_of_birth,
         profile_path: data.profile_path,
-      })
+      });
     }
   }, []);
   const getSearch = useCallback(async (query) => {
-    if (query === '') setSearchResults([]);
+    if (query === "") setSearchResults([]);
     try {
       const searchUrl = `${baseUrl}/search/multi?api_key=${apiKey}&language=en-US&query=${query}&page=1`;
       const { results } = await fetchJSON(searchUrl);
-      setSearchResults(results.filter(item => item.media_type === 'movie' || item.media_type === 'person'));
-    }
-    catch (err) {
+      setSearchResults(
+        results.filter(
+          (item) => item.media_type === "movie" || item.media_type === "person"
+        )
+      );
+    } catch (err) {
       setSearchResults([]);
-      console.log('Error in getSearch', err)
+      console.log("Error in getSearch", err);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     getSearch(query);
   }, [getSearch, query]);
 
@@ -321,7 +312,6 @@ const App = () => {
         setDisabledMenu={setDisabledMenu}
         theme={theme}
         findByGenres={findByGenres}
-
       />
       <HeaderTwo
         setQuery={setQuery}
@@ -377,7 +367,8 @@ const App = () => {
           }
         />
         <Route
-          exact path={`/movies/:id`}
+          exact
+          path={`/movies/:id`}
           element={
             <SingleMovie
               singleMovie={singleMovie}
@@ -395,10 +386,22 @@ const App = () => {
             />
           }
         />
-        <Route path={`/cast/:id`} element={<Cast cast={cast} getCastDetails={getCastDetails} theme={theme} />} />
+        <Route
+          path={`/cast/:id`}
+          element={
+            <Cast cast={cast} getCastDetails={getCastDetails} theme={theme} />
+          }
+        />
         <Route
           path={`/actors/:id`}
-          element={<SingleCast castDetails={castDetails} actedIn={actedIn} getMovie={getMovie} theme={theme} />}
+          element={
+            <SingleCast
+              castDetails={castDetails}
+              actedIn={actedIn}
+              getMovie={getMovie}
+              theme={theme}
+            />
+          }
         />
         <Route
           path={`/movies/:id/videos`}
@@ -412,13 +415,13 @@ const App = () => {
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
-  )
-}
+  );
+};
 
 function PaginatedItems({ setCurrentPage, pageAmount }) {
   const handlePageClick = (event) => {
-    setCurrentPage(event.selected + 1)
-  }
+    setCurrentPage(event.selected + 1);
+  };
 
   return (
     <>
@@ -427,7 +430,7 @@ function PaginatedItems({ setCurrentPage, pageAmount }) {
         breakLabel="..."
         nextLabel="next >"
         onPageChange={(e) => {
-          handlePageClick(e)
+          handlePageClick(e);
         }}
         pageRangeDisplayed={5}
         pageCount={pageAmount}
@@ -435,6 +438,6 @@ function PaginatedItems({ setCurrentPage, pageAmount }) {
         renderOnZeroPageCount={null}
       />
     </>
-  )
+  );
 }
-export default App
+export default App;
