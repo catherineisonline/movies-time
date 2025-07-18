@@ -47,6 +47,7 @@ const App = () => {
   const [keywords, setKeywords] = useState({ keyword: [] });
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+
   const [singleMovie, setSingleMovie] = useState({
     title: "",
     cover: "",

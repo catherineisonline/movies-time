@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./header.css";
 import Upcoming from "./Upcoming";
@@ -22,15 +22,16 @@ const menuVariant = {
     transition: {
       type: "spring",
       stiffness: 20,
-      duration: 1,
+      duration: 0.7,
     },
   },
   exit: {
     x: "-100vw",
     opacity: 0,
     transition: {
-      delay: 0.1,
-      duration: 3,
+      type: "spring",
+      stiffness: 20,
+      duration: 0.7,
     },
   },
 };

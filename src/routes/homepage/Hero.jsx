@@ -1,8 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
-import { Carousel } from 'react-responsive-carousel'
-import './hero.css'
+import { Link } from "react-router-dom";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
+import "./hero.css";
 
 const Hero = ({ trendingMovies, getMovie }) => {
   return (
@@ -22,15 +21,16 @@ const Hero = ({ trendingMovies, getMovie }) => {
             <p>{movie.overview}</p>
             <Link
               onClick={() => getMovie(movie.id)}
-              to={`/movies/${movie.title.toLowerCase().replace(/ |\/|#/g, '-')}`}
-            >
+              to={`/movies/${movie.title
+                .toLowerCase()
+                .replace(/ |\/|#/g, "-")}`}>
               Watch now
             </Link>
           </section>
         </section>
       ))}
     </Carousel>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;
