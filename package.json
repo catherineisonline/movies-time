@@ -2,20 +2,15 @@
   "name": "movies-time",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "dotenv-extended": "^2.9.0",
     "framer-motion": "^12.23.6",
     "npm-check": "^6.0.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-paginate": "^8.2.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-paginate": "^8.3.0",
     "react-responsive-carousel": "^3.2.23",
-    "react-router": "^6.11.2",
-    "react-router-dom": "^6.11.2",
-    "web-vitals": "^2.1.4"
+    "react-router-dom": "^7.7.0"
   },
   "scripts": {
     "dev": "vite",
@@ -24,9 +19,8 @@
     "check-deps": "npm-check"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.6.0",
-    "dotenv": "^16.3.1",
+    "@vitejs/plugin-react": "^4.7.0",
     "eslint-plugin-jest": "^27.4.0",
-    "vite": "^6.3.5"
+    "vite": "^7.0.5"
   }
 }
