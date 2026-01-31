@@ -4,13 +4,13 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "framer-motion": "^12.23.6",
+    "framer-motion": "^12.29.2",
     "npm-check": "^6.0.1",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "react-paginate": "^8.3.0",
     "react-responsive-carousel": "^3.2.23",
-    "react-router-dom": "^7.7.0"
+    "react-router-dom": "^7.13.0"
   },
   "scripts": {
     "dev": "vite",
@@ -19,8 +19,8 @@
     "check-deps": "npm-check"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.7.0",
+    "@vitejs/plugin-react": "^5.1.2",
     "eslint-plugin-jest": "^27.4.0",
-    "vite": "^7.0.5"
+    "vite": "^7.3.1"
   }
 }
