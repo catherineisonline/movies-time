@@ -1,5 +1,4 @@
 import "./singleMovie.css";
-import React from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import ArrowRight from "../../assets/images/arrow-right.png";
@@ -30,13 +29,13 @@ const singlePageVariant = {
 
 const sectionVariant = {
   initial: {
-    x: "100vw",
+    opacity: 0.1,
   },
   visible: {
-    x: 0,
+    opacity: 1,
     transition: {
       type: "spring",
-      stiffness: 20,
+      stiffness: 12,
       delay: 0.5,
     },
   },
@@ -77,25 +76,7 @@ const SingleMovie = ({
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, []);
   return (
-    <motion.main
-      variants={singlePageVariant}
-      initial="initial"
-      animate="visible"
-      exit="exit"
-      className="single-movie">
-      {/* <FallbackImage
-        className="movie-header-cover"
-        alt=""
-        aria-hidden="true"
-        src={
-          backdrop_path
-            ? `https://image.tmdb.org/t/p/original/${backdrop_path}`
-            : cover
-            ? `https://image.tmdb.org/t/p/original/${cover}`
-            : null
-        }
-        fallback={null}
-      /> */}
+    <motion.main variants={singlePageVariant} initial="initial" animate="visible" exit="exit" className="single-movie">
       <section className="single-movie-header">
         <FallbackImage
           alt=""
@@ -104,8 +85,8 @@ const SingleMovie = ({
             backdrop_path
               ? `https://image.tmdb.org/t/p/original/${backdrop_path}`
               : cover
-              ? `https://image.tmdb.org/t/p/original/${cover}`
-              : null
+                ? `https://image.tmdb.org/t/p/original/${cover}`
+                : null
           }
           fallback={NoImageCover}
         />
@@ -125,7 +106,7 @@ const SingleMovie = ({
             <h3 className="votes">{voteavg}</h3>
             <p>({votes} votes)</p>
           </section>
-          {singleMovie && countries && countries?.length > 0 ? (
+          {singleMovie && countries && countries?.length > 0 && (
             <section>
               <h4>Production countries:</h4>
               <ul className="countries">
@@ -134,29 +115,19 @@ const SingleMovie = ({
                 ))}
               </ul>
             </section>
-          ) : null}
+          )}
         </section>
         <section className="additional-info">
           <h4>Status: {status ? <span>{status}</span> : <span>N/A</span>}</h4>
-          <h4>
-            Release date: {release ? <span>{release}</span> : <span>N/A</span>}
-          </h4>
+          <h4>Release date: {release ? <span>{release}</span> : <span>N/A</span>}</h4>
 
-          <h4>
-            Duration:{" "}
-            {duration ? <span>{duration} mins</span> : <span>N/A</span>}
-          </h4>
+          <h4>Duration: {duration ? <span>{duration} mins</span> : <span>N/A</span>}</h4>
 
           <h4>Budget: {budget ? <span>${budget}</span> : <span>N/A</span>}</h4>
 
-          <h4>
-            Revenue: {revenue ? <span>${revenue}</span> : <span>N/A</span>}
-          </h4>
+          <h4>Revenue: {revenue ? <span>${revenue}</span> : <span>N/A</span>}</h4>
 
-          <h4>
-            Language:{" "}
-            {original_lang ? <span>{original_lang}</span> : <span>N/A</span>}
-          </h4>
+          <h4>Language: {original_lang ? <span>{original_lang}</span> : <span>N/A</span>}</h4>
         </section>
       </section>
 
@@ -169,21 +140,17 @@ const SingleMovie = ({
         ) : (
           <section>No review available</section>
         )}
-        {keywords && keywords.keyword?.length > 0 ? (
+        {keywords && keywords.keyword?.length > 0 && (
           <ul>
             <h3>Tags: </h3>
             {keywords.keyword.map((keyword, index) => (
               <li key={index}>{keyword.name}</li>
             ))}
           </ul>
-        ) : null}
+        )}
       </section>
-      {videos.size && videos.size > 0 ? (
-        <motion.section
-          className="videos"
-          variants={sectionVariant}
-          whileInView="visible"
-          initial="initial">
+      {videos.size && videos.size > 0 && (
+        <motion.section className="videos" variants={sectionVariant} whileInView="visible" initial="initial">
           <Link to={`/movies/${title.toLowerCase().replace(/ /g, "-")}/videos`}>
             Watch videos ({videos.size})
             <img src={ArrowRight} alt="" aria-hidden="true" />
@@ -203,15 +170,10 @@ const SingleMovie = ({
             ))}
           </section>
         </motion.section>
-      ) : null}
-      {pictures.size && pictures.size > 0 ? (
-        <motion.section
-          className="pictures"
-          variants={sectionVariant}
-          whileInView="visible"
-          initial="initial">
-          <Link
-            to={`/movies/${title.toLowerCase().replace(/ /g, "-")}/pictures`}>
+      )}
+      {pictures.size && pictures.size > 0 && (
+        <motion.section className="pictures" variants={sectionVariant} whileInView="visible" initial="initial">
+          <Link to={`/movies/${title.toLowerCase().replace(/ /g, "-")}/pictures`}>
             See pictures ({pictures.size})
             <img alt="" aria-hidden="true" src={ArrowRight} />
           </Link>
@@ -226,8 +188,8 @@ const SingleMovie = ({
             ))}
           </section>
         </motion.section>
-      ) : null}
-      {similarMovies && similarMovies?.length > 0 ? (
+      )}
+      {similarMovies && similarMovies?.length > 0 && (
         <motion.section
           className="similar-movies-section"
           variants={sectionVariant}
@@ -237,18 +199,12 @@ const SingleMovie = ({
           <ul className="similar-movies">
             {similarMovies.map((movie) => (
               <li key={movie.id} className="similar-movie">
-                <Link
-                  onClick={() => getMovie(movie.id)}
-                  to={`/movies/${movie.title
-                    .toLowerCase()
-                    .replace(/ /g, "-")}`}>
+                <Link onClick={() => getMovie(movie.id)} to={`/movies/${movie.title.toLowerCase().replace(/ /g, "-")}`}>
                   {movie.poster_path ? (
                     <img
                       alt=""
                       src={`https://image.tmdb.org/t/p/original/${
-                        movie.poster_path
-                          ? movie.poster_path
-                          : movie.backdrop_path
+                        movie.poster_path ? movie.poster_path : movie.backdrop_path
                       }`}
                     />
                   ) : (
@@ -260,17 +216,11 @@ const SingleMovie = ({
             ))}
           </ul>
         </motion.section>
-      ) : null}
+      )}
 
-      {cast.length > 0 ? (
-        <motion.section
-          variants={sectionVariant}
-          whileInView="visible"
-          initial="initial"
-          className="cast-section">
-          <Link
-            className="cast-preview-grid-link"
-            to={`/cast/${title.toLowerCase().replace(/ /g, "-")}`}>
+      {cast.length > 0 && (
+        <motion.section variants={sectionVariant} whileInView="visible" initial="initial" className="cast-section">
+          <Link className="cast-preview-grid-link" to={`/cast/${title.toLowerCase().replace(/ /g, "-")}`}>
             See cast ({cast?.length})
             <img src={ArrowRight} alt="" aria-hidden="true" />
           </Link>
@@ -279,9 +229,7 @@ const SingleMovie = ({
               <li key={index}>
                 <Link
                   onClick={() => getCastDetails(person.id)}
-                  to={`/actors/${person.name
-                    .toLowerCase()
-                    .replace(/ /g, "-")}`}>
+                  to={`/actors/${person.name.toLowerCase().replace(/ /g, "-")}`}>
                   {person.profile_path ? (
                     <img
                       key={index}
@@ -290,13 +238,7 @@ const SingleMovie = ({
                       alt={`${person.name}`}
                     />
                   ) : (
-                    <img
-                      key={index}
-                      className="cast-preview"
-                      src={NoImage}
-                      alt=""
-                      aria-hidden="true"
-                    />
+                    <img key={index} className="cast-preview" src={NoImage} alt="" aria-hidden="true" />
                   )}
                   <h5>{person.name}</h5>
                   <p>{person.character}</p>
@@ -305,7 +247,7 @@ const SingleMovie = ({
             ))}
           </ul>
         </motion.section>
-      ) : null}
+      )}
     </motion.main>
   );
 };
