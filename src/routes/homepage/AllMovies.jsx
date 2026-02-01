@@ -1,6 +1,6 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import React from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const movieCardVariant = {
   hover: {
@@ -8,11 +8,10 @@ const movieCardVariant = {
     transition: {
       duration: 1,
       repeat: Infinity,
-      repeatType: "reverse"
-    }
-  }
-
-}
+      repeatType: "reverse",
+    },
+  },
+};
 
 const AllMovies = ({ movieList, PaginatedItems, getMovie }) => {
   return (
@@ -21,13 +20,11 @@ const AllMovies = ({ movieList, PaginatedItems, getMovie }) => {
         {movieList.map((movie) => (
           <motion.li variants={movieCardVariant} whileHover="hover" key={movie?.id} className="homepage-movie">
             <Link
-              onClick={() => { getMovie(movie.id); }}
-              to={`/movies/${movie?.title?.toLowerCase().replace(/ /g, '-')}`}
-            >
-              <img
-                alt={`${movie.title}`}
-                src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`}
-              />
+              onClick={() => {
+                getMovie(movie.id);
+              }}
+              to={`/movies/${movie?.title?.toLowerCase().replace(/ /g, "-")}`}>
+              <img alt={`${movie.title}`} src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`} />
             </Link>
             <section className="homepage-movie-meta">
               <h3 className="movie-title">{movie?.title}</h3>
@@ -41,7 +38,7 @@ const AllMovies = ({ movieList, PaginatedItems, getMovie }) => {
       </motion.ul>
       {PaginatedItems}
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default AllMovies
+export default AllMovies;
