@@ -129,7 +129,7 @@ const App = () => {
         console.error("Error in findByGenres:", err);
       }
     },
-    [currentPage]
+    [currentPage],
   );
 
   useEffect(() => {
@@ -154,7 +154,7 @@ const App = () => {
 
   const getMovie = async (movieId) => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-    // single movie
+
     try {
       const url = `${baseUrl}/movie/${movieId}?api_key=${apiKey}&language=en-US`;
       const data = await fetchJSON(url);
@@ -182,7 +182,7 @@ const App = () => {
     } catch (err) {
       console.log("Error in getMovie:", err);
     }
-    // movie similar movies
+
     try {
       const url = `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${apiKey}&language=en-US&page=1`;
       const data = await fetchJSON(url);
@@ -190,7 +190,7 @@ const App = () => {
     } catch (err) {
       console.log("Error in similar movies:", err);
     }
-    // movie videos
+
     try {
       const url = `${baseUrl}/movie/${movieId}/videos?api_key=${apiKey}&language=en-US`;
       const data = await fetchJSON(url);
@@ -207,7 +207,7 @@ const App = () => {
     } catch (err) {
       console.log("Error in getMovie videos:", err);
     }
-    // movie images
+
     try {
       const url = `${baseUrl}/movie/${movieId}/images?api_key=${apiKey}`;
       const data = await fetchJSON(url);
@@ -224,7 +224,7 @@ const App = () => {
     } catch (err) {
       console.log("Error in getMovie images:", err);
     }
-    // movie keywords
+
     try {
       const url = `${baseUrl}/movie/${movieId}/keywords?api_key=${apiKey}`;
       const data = await fetchJSON(url);
@@ -232,7 +232,7 @@ const App = () => {
     } catch (err) {
       console.log("Error in getMovie keywords:", err);
     }
-    // movie credits
+
     try {
       const url = `${baseUrl}/movie/${movieId}/credits?api_key=${apiKey}&language=en-US`;
       const data = await fetchJSON(url);
@@ -286,11 +286,7 @@ const App = () => {
     try {
       const searchUrl = `${baseUrl}/search/multi?api_key=${apiKey}&language=en-US&query=${query}&page=1`;
       const { results } = await fetchJSON(searchUrl);
-      setSearchResults(
-        results.filter(
-          (item) => item.media_type === "movie" || item.media_type === "person"
-        )
-      );
+      setSearchResults(results.filter((item) => item.media_type === "movie" || item.media_type === "person"));
     } catch (err) {
       setSearchResults([]);
       console.log("Error in getSearch", err);
@@ -337,17 +333,10 @@ const App = () => {
                   movieList={movieList}
                   findByGenres={findByGenres}
                   getMovie={getMovie}
-                  PaginatedItems={
-                    <PaginatedItems
-                      setCurrentPage={setCurrentPage}
-                      pageAmount={pageAmount}
-                    />
-                  }
+                  PaginatedItems={<PaginatedItems setCurrentPage={setCurrentPage} pageAmount={pageAmount} />}
                 />
               }
-              hero={
-                <Hero trendingMovies={trendingMovies} getMovie={getMovie} />
-              }
+              hero={<Hero trendingMovies={trendingMovies} getMovie={getMovie} />}
             />
           }
         />
@@ -358,12 +347,7 @@ const App = () => {
               genreListMovies={genreListMovies}
               getMovie={getMovie}
               theme={theme}
-              PaginatedItems={
-                <PaginatedItems
-                  setCurrentPage={setCurrentPage}
-                  pageAmount={pageAmount}
-                />
-              }
+              PaginatedItems={<PaginatedItems setCurrentPage={setCurrentPage} pageAmount={pageAmount} />}
             />
           }
         />
@@ -387,31 +371,13 @@ const App = () => {
             />
           }
         />
-        <Route
-          path={`/cast/:id`}
-          element={
-            <Cast cast={cast} getCastDetails={getCastDetails} theme={theme} />
-          }
-        />
+        <Route path={`/cast/:id`} element={<Cast cast={cast} getCastDetails={getCastDetails} theme={theme} />} />
         <Route
           path={`/actors/:id`}
-          element={
-            <SingleCast
-              castDetails={castDetails}
-              actedIn={actedIn}
-              getMovie={getMovie}
-              theme={theme}
-            />
-          }
+          element={<SingleCast castDetails={castDetails} actedIn={actedIn} getMovie={getMovie} theme={theme} />}
         />
-        <Route
-          path={`/movies/:id/videos`}
-          element={<Videos videos={videos} theme={theme} />}
-        />
-        <Route
-          path={`/movies/:id/pictures`}
-          element={<Pictures pictures={pictures} theme={theme} />}
-        />
+        <Route path={`/movies/:id/videos`} element={<Videos videos={videos} theme={theme} />} />
+        <Route path={`/movies/:id/pictures`} element={<Pictures pictures={pictures} theme={theme} />} />
         <Route path="/about" element={<About theme={theme} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

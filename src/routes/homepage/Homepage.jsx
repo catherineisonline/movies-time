@@ -23,11 +23,7 @@ export const pageVariant = {
 
 const Homepage = ({ allMovies, hero }) => {
   return (
-    <motion.main
-      variants={pageVariant}
-      initial="initial"
-      animate="visible"
-      exit="exit">
+    <motion.main variants={pageVariant} initial="initial" animate="visible" exit="exit">
       {hero}
       <section className="all-movies">
         <h2>Top Rated Movies</h2>
